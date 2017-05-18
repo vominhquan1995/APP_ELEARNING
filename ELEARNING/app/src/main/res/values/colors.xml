@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#222222</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#fff07837</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRed700">#D32F2F</color>
+    <color name="colorOrange500">#FF9800</color>
+    <color name="colorBg">#FFFFFF</color>
+    <color name="colorYellow600">#FDD835</color>
+
+    <!-- primary color from old project -->
+    <color name="color_bg_nav_menu">#4d5969</color>
+    <color name="color_bg_nav_background">#454f5d</color>
+    <color name="color_bg_nav_header">#5d6878</color>
+    <color name="color_home_text">#47a69c</color>
+    <color name="color_blood_pressure_text">#e35d68</color>
+    <color name="color_background_button">#f07937</color>
+    <color name="color_notice_text">#c960a4</color>
+    <color name="color_weight_text">#8ebe51</color>
+    <color name="color_target_weight_text">#e0a32c</color>
+    <color name="color_setting_text">#b2b2b2</color>
+    <color name="color_device_setting_text">#b2b2b2</color>
+    <color name="color_term_text">#b2b2b2</color>
+    <color name="color_transparent">#ff000000</color>
+    <color name="color_7c7c7c">#7c7c7c</color>
+    <color name="color_888888">#888888</color>
+    <color name="color_ffffff">#ffffffff</color>
+    <color name="color_ffffffff">#ffffffff</color>
+    <color name="color_22ffffff">#22ffffff</color>
+    <color name="text_color_basic">#ff555555</color>
+    <color name="text_color_grey">#ffaaaaaa</color>
+    <color name="text_color_highlight">#ff000000</color>
+    <color name="text_color">#ff444444</color>
+    <color name="list_even_row">#ffeeeae3</color>
+    <color name="list_focus_over">#fffafafa</color>
+    <color name="list_focus_out">#ffffffff</color>
+    <color name="text_color_white">#ffffffff</color>
+    <color name="text_color_alert">#ffe35d66</color>
+    <color name="color_bright_orange">#fff07837</color>
+    <color name="color_dark_orange">#ffe37134</color>
+    <color name="color_bp_red">#ffe35d68</color>
+    <color name="color_red">#ffe35d68</color>
+    <color name="color_blue">#ff01afd1</color>
+    <color name="color_violet">#ffca5ea8</color>
+    <color name="color_green">#ff808a43</color>
+    <color name="color_brown">#ff8f7a66</color>
+    <color name="color_eden">#ff77cca4</color>
+    <color name="color_light_green">#ff8ebe51</color>
+    <color name="colorGrey">#9E9E9E</color>>
+
+    <color name="colorBlack">#000000</color>
+
+
+    <!-- Custom theme -->
+    <color name="colorBlue500">#0F75BD</color>
+    <color name="colorBlue700">#1565C0</color>
+    <color name="colorAmber500">#FFC107</color>
+    <color name="colorAmber700">#FFA000</color>
+    <color name="colorGreen500">#4CAF50</color>
+    <color name="colorGreen700">#388E3C</color>
+
+    <color name="historySelector">#E8F5E9</color>
+    <color name="foodSelector">#FFEBEE</color>
+    <color name="colorFBBackground">#3c5A96</color>
+    <color name="colorGGBackground">#D80027</color>
+
+
 </resources>
+

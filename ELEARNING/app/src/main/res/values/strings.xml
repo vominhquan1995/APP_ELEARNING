@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ELEARNING</string>
+    <string name="userName">Tên đăng nhập</string>
+    <string name="passWord">Mật khẩu</string>
+    <string name="signIn">Đăng nhập</string>
+    <string name="forgotPassword">Quên mật khẩu</string>
+    <string name="savePass">Nhớ mật khẩu</string>
+    <string name="signUp">Đăng kí</string>
+    <string name="loginFB">Facebook</string>
+    <string name="loginGG">Google</string>
+    <string name="or_login">Hay đăng nhập bằng</string>
+    <string name="createAccount">Tạo tài khoản mới</string>
 </resources>
