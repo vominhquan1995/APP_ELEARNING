@@ -27,7 +27,7 @@ public class API {
     public static void login(final String username,final String password, OnAPIListener onAPIListener) {
         listener = onAPIListener;
         AndroidNetworking.post(APIConstant.LOGIN_URL)
-                .addBodyParameter("email","vominhquasdsn.vc@gmail.com")
+                .addBodyParameter("email","vominhquan.hutech@gmail.com")
                 .addBodyParameter("password","123456")
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()
@@ -43,7 +43,7 @@ public class API {
                     }@Override
                     public void onError(ANError error) {
                         listener.onError(error.getMessage());
-                        Log.d("Login fail",(error.getErrorBody()));
+                        Log.d("Login fail",(error.getMessage()));
                     }
                 });
     }

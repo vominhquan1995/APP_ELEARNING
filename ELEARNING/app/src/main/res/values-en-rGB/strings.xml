@@ -9,4 +9,14 @@
     <string name="signUp">Sign Up</string>
     <string name="or_login">Or login with</string>
     <string name="createAccount">Create Account</string>
+    <string name="email">Email</string>
+    <string name="lastName">Last Name</string>
+    <string name="firstName">First Name</string>
+    <string name="brithday">Brithday</string>
+    <string name="numberPhone">Number Phone</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="save">Save</string>
+    <string name="cancle">Cancle</string>
 </resources>

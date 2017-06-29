@@ -10,4 +10,14 @@
     <string name="loginGG">Google</string>
     <string name="or_login">Hay đăng nhập bằng</string>
     <string name="createAccount">Tạo tài khoản mới</string>
+    <string name="email">Email</string>
+    <string name="lastName">Họ</string>
+    <string name="firstName">Tên</string>
+    <string name="brithday">Ngày sinh</string>
+    <string name="numberPhone">Số điện thoại</string>
+    <string name="gender">Giới tính</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="save">Lưu</string>
+    <string name="cancle">Hủy</string>
 </resources>
