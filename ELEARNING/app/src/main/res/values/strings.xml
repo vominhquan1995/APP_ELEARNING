@@ -20,4 +20,11 @@
     <string name="female">Nữ</string>
     <string name="save">Lưu</string>
     <string name="cancle">Hủy</string>
+    <string name="login_success">Đăng nhập thành công</string>
+    <string name="login_fail">Sai thông tin đăng nhập</string>
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_home">Trang Chủ</string>
+    <string name="nav_notifications">Thông báo</string>
+    <string name="nav_settings">Cài đặt</string>
+    <string name="nav_about_us">Thông tin</string>
 </resources>

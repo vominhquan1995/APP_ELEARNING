@@ -1,10 +1,13 @@
 package com.elearning.elearning.activity.signin_signup;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.elearning.elearning.R;
+import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.base.BaseFragment;
 import com.elearning.elearning.mvp.presenter.LoginPresenter;
 import com.elearning.elearning.mvp.view.LoginView;
@@ -16,16 +19,17 @@ import com.elearning.elearning.mvp.view.LoginView;
 public class LoginFragment extends BaseFragment implements LoginView, View.OnClickListener {
 
     private LoginPresenter loginPresenter;
-    private EditText txtEmail,txtPass;
+    private EditText txtEmail, txtPass;
+
     @Override
     public void initView() {
-        txtEmail=(EditText) view.findViewById(R.id.txtEmail);
-        txtPass=(EditText) view.findViewById(R.id.txtPass);
+        txtEmail = (EditText) view.findViewById(R.id.txtEmail);
+        txtPass = (EditText) view.findViewById(R.id.txtPass);
     }
 
     @Override
     public void initValue() {
-        loginPresenter=new LoginPresenter(this);
+        loginPresenter = new LoginPresenter(this);
     }
 
     @Override
@@ -40,19 +44,22 @@ public class LoginFragment extends BaseFragment implements LoginView, View.OnCli
 
     @Override
     public void onLoginSuccess() {
-        Log.d("Login","Success");
+        Toast.makeText(getContext(),R.string.login_success,Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getContext(), MainActivity.class));
+        Log.d("Login", "Success");
     }
 
     @Override
     public void onLoginFail(String message) {
-        Log.d("Login","Fail");
+        Toast.makeText(getContext(),R.string.login_fail, Toast.LENGTH_SHORT ).show();
+        Log.d("Login", "Fail");
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btnLogin:
-                loginPresenter.login(txtEmail.getText().toString(),txtPass.getText().toString());
+                loginPresenter.login(txtEmail.getText().toString(), txtPass.getText().toString());
                 break;
         }
     }
