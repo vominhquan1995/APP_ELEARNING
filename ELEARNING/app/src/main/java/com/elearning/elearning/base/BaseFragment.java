@@ -1,12 +1,16 @@
 package com.elearning.elearning.base;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.elearning.elearning.activity.MainActivity;
+import com.elearning.elearning.activity.signin_signup.SignInSignUpActivity;
 
 /**
  * Created by MinhQuan on 22/05/2017.
@@ -29,6 +33,18 @@ public abstract class BaseFragment extends Fragment implements Init {
         return view;
 
     }
-
+    protected SignInSignUpActivity getSignInSignUpActivity() {
+        return ((SignInSignUpActivity) getActivity());
+    }
+    protected MainActivity getMainActivity() {
+        return ((MainActivity) getActivity());
+    }
+    protected SharedPreferences getSharePreferences() {
+        return getMainActivity().sharedPreferences;
+    }
+    protected void onBackPressed() {
+//        SystemHelper.hideKeyboard(context);
+        getMainActivity().onBackPressed();
+    }
     public abstract int setFragmentView();
 }

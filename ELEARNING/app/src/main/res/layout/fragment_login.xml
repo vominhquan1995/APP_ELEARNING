@@ -1,60 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_login"
     android:layout_margin="@dimen/margin_5dp"
+    android:padding="@dimen/padding_10dp"
     android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1">
             <LinearLayout
                 android:id="@+id/viewBody"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="0.6"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_3dp">
+                <include
+                    android:id="@+id/vgEmail"
+                    layout="@layout/viewgroup_input_text"></include>
 
-                    <EditText
-                        android:id="@+id/txtEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/userName"
-                        android:inputType="textEmailAddress"
-                        android:maxLines="1" />
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_3dp">
-
-                    <EditText
-                        android:id="@+id/txtPass"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/passWord"
-                        android:inputType="textPassword"
-                        android:maxLines="1" />
-
-                </android.support.design.widget.TextInputLayout>
-
+                <include
+                    android:id="@+id/vgPassWord"
+                    layout="@layout/viewgroup_input_text"></include>
                 <CheckBox
+                    android:id="@+id/cbAuto"
                     style="@style/checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|start"
-                    android:layout_margin="@dimen/margin_3dp"
-                    android:layout_marginLeft="@dimen/margin_50dp"
-                    android:layout_marginRight="@dimen/margin_50dp"
+                    android:layout_margin="@dimen/margin_5dp"
                     android:text="@string/savePass" />
 
                 <Button
@@ -72,13 +45,9 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_5dp"
                     android:text="@string/forgotPassword"
-                    android:textColor="@color/colorBlue700"
+                    android:textColor="@color/color_background_main_blue"
                     android:textStyle="italic" />
-
-
             </LinearLayout>
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -87,42 +56,42 @@
                 android:gravity="top|center"
                 android:orientation="vertical">
 
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0dp"-->
+                    <!--android:layout_weight="0.2"-->
+                    <!--android:orientation="horizontal">-->
+
+                    <!--<View-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="0.5dp"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:background="@color/colorSecondaryText" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:textSize="@dimen/text_size_12"-->
+                        <!--android:text="@string/or_login"-->
+                        <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+                        <!--android:textColor="@color/colorSecondaryText" />-->
+
+                    <!--<View-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="0.5dp"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:background="@color/colorSecondaryText" />-->
+                <!--</LinearLayout>-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.2"
-                    android:orientation="horizontal">
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0.5dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@color/colorSecondaryText" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textSize="@dimen/text_size_12"
-                        android:text="@string/or_login"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/colorSecondaryText" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0.5dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:background="@color/colorSecondaryText" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.8"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -148,5 +117,4 @@
                         android:textColor="@color/colorGGBackground" />
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-</FrameLayout>
+</LinearLayout>

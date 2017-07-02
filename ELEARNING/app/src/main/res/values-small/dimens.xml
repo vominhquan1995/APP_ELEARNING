@@ -2,4 +2,7 @@
 <resources>
     <dimen name="margin_3sp">2sp</dimen>
     <dimen name="text_size_12">10sp</dimen>
+    <dimen name="text_size_15">13sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="txt_size_24sp">20sp</dimen>
 </resources>

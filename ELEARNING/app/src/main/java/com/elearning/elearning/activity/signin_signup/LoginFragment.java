@@ -1,9 +1,15 @@
 package com.elearning.elearning.activity.signin_signup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.elearning.elearning.R;
@@ -11,6 +17,7 @@ import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.base.BaseFragment;
 import com.elearning.elearning.mvp.presenter.LoginPresenter;
 import com.elearning.elearning.mvp.view.LoginView;
+import com.elearning.elearning.prefs.Constant;
 
 /**
  * Created by vomin on 18/05/2017.
@@ -19,12 +26,30 @@ import com.elearning.elearning.mvp.view.LoginView;
 public class LoginFragment extends BaseFragment implements LoginView, View.OnClickListener {
 
     private LoginPresenter loginPresenter;
-    private EditText txtEmail, txtPass;
+    private CheckBox chkAutoLogin;
+    private boolean autoLogin = false;
+    private LinearLayout vgEmail, vgPass;
+    private ImageView iconEmail, iconPass;
+    private EditText edtEmail, edtPass;
 
     @Override
     public void initView() {
-        txtEmail = (EditText) view.findViewById(R.id.txtEmail);
-        txtPass = (EditText) view.findViewById(R.id.txtPass);
+        vgEmail = (LinearLayout) view.findViewById(R.id.vgEmail);
+        vgPass= (LinearLayout) view.findViewById(R.id.vgPassWord);
+        edtEmail = (EditText) vgEmail.findViewById(R.id.editText);
+        edtPass = (EditText) vgPass.findViewById(R.id.editText);
+        //icon
+        iconEmail = (ImageView) vgEmail.findViewById(R.id.imgIcon);
+        iconPass = (ImageView) vgPass.findViewById(R.id.imgIcon);
+        chkAutoLogin = (CheckBox) view.findViewById(R.id.cbAuto);
+        iconEmail.setBackground(context.getResources().getDrawable(R.drawable.profile_email));
+        iconPass.setBackground(context.getResources().getDrawable(R.drawable.password));
+        //set hint text
+        edtEmail.setHint(context.getResources().getString(R.string.email));
+        edtPass.setHint(context.getResources().getString(R.string.passWord));
+        //validate type input
+        edtEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        edtPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
     }
 
     @Override
@@ -35,6 +60,16 @@ public class LoginFragment extends BaseFragment implements LoginView, View.OnCli
     @Override
     public void initAction() {
         view.findViewById(R.id.btnLogin).setOnClickListener(this);
+        chkAutoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    autoLogin = true;
+                } else {
+                    autoLogin = false;
+                }
+            }
+        });
     }
 
     @Override
@@ -44,14 +79,17 @@ public class LoginFragment extends BaseFragment implements LoginView, View.OnCli
 
     @Override
     public void onLoginSuccess() {
-        Toast.makeText(getContext(),R.string.login_success,Toast.LENGTH_SHORT).show();
+        checkAutoLogin();
+        Toast.makeText(getContext(), R.string.login_success, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getContext(), MainActivity.class));
         Log.d("Login", "Success");
     }
 
     @Override
     public void onLoginFail(String message) {
-        Toast.makeText(getContext(),R.string.login_fail, Toast.LENGTH_SHORT ).show();
+        checkAutoLogin();
+        autoLogin = false;
+        Toast.makeText(getContext(), R.string.login_fail, Toast.LENGTH_SHORT).show();
         Log.d("Login", "Fail");
     }
 
@@ -59,8 +97,23 @@ public class LoginFragment extends BaseFragment implements LoginView, View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogin:
-                loginPresenter.login(txtEmail.getText().toString(), txtPass.getText().toString());
+                loginPresenter.login(edtEmail.getText().toString(), edtPass.getText().toString());
                 break;
+        }
+    }
+
+    /**
+     * Save data check auto login
+     */
+    private void checkAutoLogin() {
+        //Save auto login
+        getSignInSignUpActivity().sharedPreferences.edit().putBoolean(Constant.AUTO_LOGIN, autoLogin).apply();
+        if (autoLogin) {
+            getSignInSignUpActivity().sharedPreferences.edit().putString(Constant.USER_EMAIL, edtEmail.getText().toString()).apply();
+            getSignInSignUpActivity().sharedPreferences.edit().putString(Constant.USER_PW, edtPass.getText().toString()).apply();
+        } else {
+            getSignInSignUpActivity().sharedPreferences.edit().putString(Constant.USER_EMAIL, "").apply();
+            getSignInSignUpActivity().sharedPreferences.edit().putString(Constant.USER_PW, "").apply();
         }
     }
 }

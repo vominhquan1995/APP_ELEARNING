@@ -1,10 +1,13 @@
 package com.elearning.elearning.activity.signin_signup;
 
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.elearning.elearning.R;
@@ -22,32 +25,58 @@ import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;
  */
 
 public class SignUpFragment extends BaseFragment implements RegistrationView, View.OnClickListener {
-    private EditText edtBrithday, edtEmail, edtLastName, edtFirstName, edtPhone, edtPassword;
-    private ViewGroup vgGender;
+    private LinearLayout vgEmail, vgFirstName, vgLastName, vgPassword, vgPasswordConfirm;
+    private ImageView iconEmail, iconFirstName, iconLastName, iconPassword, iconPasswordConfirm;
+    private EditText edtEmail, edtFirstName, edtLastName, edtPassword,edtPasswordConfirm;
     private RadioGroup rgChoiceGender;
     private Button btnSignup;
     private RegistrationPresenter registrationPresenter;
 
     @Override
     public void initView() {
-        edtBrithday = (EditText) view.findViewById(R.id.edtBrithday);
-        edtEmail = (EditText) view.findViewById(R.id.edtEmail);
-        edtLastName = (EditText) view.findViewById(R.id.edtLastName);
-        edtFirstName = (EditText) view.findViewById(R.id.edtFirstName);
-        edtPhone = (EditText) view.findViewById(R.id.edtPhone);
-        edtPassword = (EditText) view.findViewById(R.id.edtPassword);
-        vgGender = (ViewGroup) view.findViewById(R.id.vgGender);
-        rgChoiceGender = (RadioGroup) vgGender.findViewById(R.id.rgChoice);
-        edtBrithday.setOnClickListener(this);
-        btnSignup = (Button) view.findViewById(R.id.btnSignUp);
-        btnSignup.setOnClickListener(this);
+        vgEmail = (LinearLayout) view.findViewById(R.id.vgEmail);
+        vgFirstName = (LinearLayout) view.findViewById(R.id.vgFirstName);
+        vgLastName = (LinearLayout) view.findViewById(R.id.vgLastName);
+        vgPassword = (LinearLayout) view.findViewById(R.id.vgPassword);
+        vgPasswordConfirm = (LinearLayout) view.findViewById(R.id.vgPasswordConfirm);
+        //icon
+        iconEmail = (ImageView) vgEmail.findViewById(R.id.imgIcon);
+        iconFirstName = (ImageView) vgFirstName.findViewById(R.id.imgIcon);
+        iconLastName = (ImageView) vgLastName.findViewById(R.id.imgIcon);
+        iconPassword = (ImageView) vgPassword.findViewById(R.id.imgIcon);
+        iconPasswordConfirm = (ImageView)  vgPasswordConfirm.findViewById(R.id.imgIcon);
+        //edit text
+        edtEmail = (EditText) vgEmail.findViewById(R.id.editText);
+        edtFirstName = (EditText) vgFirstName.findViewById(R.id.editText);
+        edtLastName = (EditText) vgLastName.findViewById(R.id.editText);
+        edtPassword = (EditText) vgPassword.findViewById(R.id.editText);
+        edtPasswordConfirm = (EditText) vgPasswordConfirm .findViewById(R.id.editText);
+        //set hint text
+        edtEmail.setHint(context.getResources().getString(R.string.email));
+        edtFirstName.setHint(context.getResources().getString(R.string.firstName));
+        edtLastName.setHint(context.getResources().getString(R.string.lastName));
+        edtPassword.setHint(context.getResources().getString(R.string.passWord));
+        edtPasswordConfirm.setHint(context.getResources().getString(R.string.passWordConfirm));
+        //set icon
+        iconEmail.setBackground(context.getResources().getDrawable(R.drawable.profile_email));
+        iconFirstName.setBackground(context.getResources().getDrawable(R.drawable.profile_name));
+        iconLastName.setBackground(context.getResources().getDrawable(R.drawable.profile_name));
+        iconPassword.setBackground(context.getResources().getDrawable(R.drawable.password));
+        iconPasswordConfirm.setBackground(context.getResources().getDrawable(R.drawable.password));
+        //validate type input
+        edtEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        edtPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        edtPasswordConfirm.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//        edtBrithday.setOnClickListener(this);
+//        btnSignup = (Button) view.findViewById(R.id.btnSignUp);
+//        btnSignup.setOnClickListener(this);
         //set style date picker on style.xml
-        DatetimeHelper.addDatePicker(edtBrithday, DATE_FORMAT, getResources().getString(R.string.save), getResources().getString(R.string.cancle));
+//        DatetimeHelper.addDatePicker(edtBrithday, DATE_FORMAT, getResources().getString(R.string.save), getResources().getString(R.string.cancle));
     }
 
     @Override
     public void initValue() {
-        edtBrithday.setText(DATE_FORMAT.format(new Date()));
+//        edtBrithday.setText(DATE_FORMAT.format(new Date()));
     }
 
     @Override
@@ -58,11 +87,11 @@ public class SignUpFragment extends BaseFragment implements RegistrationView, Vi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnSignUp:
-                registrationPresenter.registration("a", "b", "c", "d");
-                break;
-            case R.id.edtBrithday:
-                break;
+//            case R.id.btnSignUp:
+//                registrationPresenter.registration("a", "b", "c", "d");
+//                break;
+//            case R.id.edtBrithday:
+//                break;
         }
     }
 

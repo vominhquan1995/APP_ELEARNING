@@ -17,6 +17,22 @@
         <item name="cardElevation">@dimen/cardview_default_elevation</item>
     </style>
 
+    <style name="HomeCardView">
+        <item name="cardBackgroundColor">@android:color/transparent</item>
+        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="cardElevation">@dimen/cardview_elevation_0dp</item>
+        <item name="cardMaxElevation">@dimen/cardview_elevation_0dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:layout_margin">@dimen/cardview_default_margin</item>
+    </style>
+    <style name="UserInfoCardView">
+        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="cardElevation">@dimen/cardview_elevation_0dp</item>
+        <item name="cardMaxElevation">@dimen/cardview_elevation_0dp</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="android:layout_margin">@dimen/margin_15dp</item>
+    </style>
+
     <style name="FacebookLoginButton">
         <item name="android:textSize">@dimen/text_size_12</item>
         <item name="android:background">@drawable/icon_login_fb</item>
@@ -35,11 +51,13 @@
         <item name="android:button">@drawable/custom_checkbox_background</item>
         <item name="android:padding">@dimen/margin_5dp</item>
     </style>
+
     <style name="radio">
         <item name="android:button">@drawable/custom_radio</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:padding">@dimen/margin_3dp</item>
     </style>
+
     <style name="SpinnerDatepicker" parent="android:Widget.Material.Light.DatePicker">
         <item name="android:datePickerMode">spinner</item>
     </style>

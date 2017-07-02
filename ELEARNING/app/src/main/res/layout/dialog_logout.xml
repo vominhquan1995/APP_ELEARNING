@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:alpha="0.7"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/dialog_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_margin="@dimen/dialog_margin"
+            android:text="@string/cap_log_out"
+            android:textColor="@color/color_bright_orange"
+            android:textStyle="bold"
+            android:textSize="@dimen/txt_size_24sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_1dp"
+            android:background="@color/color_brown"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/txtContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_margin="@dimen/dialog_margin"
+            android:text="@string/cap_logout_ask"
+            android:textSize="@dimen/text_size_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_3dp"
+                android:layout_weight="5"
+                android:background="@color/color_no"
+                android:textColor="@color/colorWhite"
+                android:text="@string/cap_no"
+                tools:ignore="NestedWeights" />
+
+            <Button
+                android:id="@+id/btnConfirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_3dp"
+                android:layout_weight="5"
+                android:background="@color/color_yes"
+                android:textColor="@color/colorWhite"
+                android:text="@string/cap_yes" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

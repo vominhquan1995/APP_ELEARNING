@@ -10,16 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
-            android:configChanges="keyboardHidden|orientation"
+            android:name=".activity.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".activity.MainActivity"-->
-            <!--android:screenOrientation="sensorPortrait"></activity>-->
+        <activity
+            android:name=".activity.signin_signup.SignInSignUpActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:screenOrientation="sensorPortrait"></activity>
+        <activity android:name=".activity.MainActivity"
+            android:screenOrientation="sensorPortrait"></activity>
     </application>
 
 </manifest>

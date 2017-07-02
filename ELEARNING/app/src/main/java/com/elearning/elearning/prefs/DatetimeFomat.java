@@ -8,4 +8,5 @@ import java.text.SimpleDateFormat;
 
 public final class DatetimeFomat {
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+    public static final SimpleDateFormat DATE_FORMAT_YYYYMMDD = new SimpleDateFormat("yyyy-MM-dd");
 }

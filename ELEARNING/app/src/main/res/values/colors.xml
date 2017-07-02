@@ -43,7 +43,7 @@
     <color name="color_dark_orange">#ffe37134</color>
     <color name="color_bp_red">#ffe35d68</color>
     <color name="color_red">#ffe35d68</color>
-    <color name="color_blue">#ff01afd1</color>
+    <color name="color_blue">#00BFFF</color>
     <color name="color_violet">#ffca5ea8</color>
     <color name="color_green">#ff808a43</color>
     <color name="color_brown">#ff8f7a66</color>
@@ -52,21 +52,28 @@
     <color name="colorGrey">#9E9E9E</color>>
 
     <color name="colorBlack">#000000</color>
-    <color name="WhiteSmoke">#C0C0C0</color>
 
 
     <!-- Custom theme -->
     <color name="colorBlue500">#0F75BD</color>
-    <color name="colorBlue700">#1565C0</color>
+    <!--<color name="colorBlue700">#1565C0</color>-->
     <color name="colorAmber500">#FFC107</color>
     <color name="colorAmber700">#FFA000</color>
     <color name="colorGreen500">#4CAF50</color>
     <color name="colorGreen700">#388E3C</color>
 
+
+    <color name="color_background_main_blue">#1565C0</color>
     <color name="historySelector">#E8F5E9</color>
     <color name="foodSelector">#FFEBEE</color>
     <color name="colorFBBackground">#3c5A96</color>
     <color name="colorGGBackground">#D80027</color>
+    <color name="color_selected_menu">#EEEEEE</color>
+    <color name="color_padding">#b2b2b2</color>
+    <color name="color_background_main">#f0f0f0</color>
+    <color name="color_yes">#1565C0</color>
+    <color name="color_no">#1565C0</color>
+    <color name="color_tab_selected">#c4def9</color>
 
 
 </resources>

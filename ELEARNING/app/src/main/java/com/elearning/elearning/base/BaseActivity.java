@@ -29,7 +29,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Init {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         initProgressDialog();
     }
-
     private void initProgressDialog() {
         ViewGroup layout = (ViewGroup) findViewById(android.R.id.content).getRootView();
     }

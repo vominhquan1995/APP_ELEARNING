@@ -2,6 +2,7 @@
     <string name="app_name">ELEARNING</string>
     <string name="userName">Tên đăng nhập</string>
     <string name="passWord">Mật khẩu</string>
+    <string name="passWordConfirm">Xác Nhận Mật khẩu</string>
     <string name="signIn">Đăng nhập</string>
     <string name="forgotPassword">Quên mật khẩu</string>
     <string name="savePass">Nhớ mật khẩu</string>
@@ -23,8 +24,25 @@
     <string name="login_success">Đăng nhập thành công</string>
     <string name="login_fail">Sai thông tin đăng nhập</string>
     <!-- Navigation Drawer menu labels -->
-    <string name="nav_home">Trang Chủ</string>
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_exam">Kiểm tra</string>
+    <string name="nav_history">Lịch sử học tập</string>
     <string name="nav_notifications">Thông báo</string>
     <string name="nav_settings">Cài đặt</string>
     <string name="nav_about_us">Thông tin</string>
+    <string name="nav_logout">Đăng xuất</string>
+    <string name="nav_support">Hỗ trợ</string>
+    <string name="nav_hotline">Holine : 1900 1000</string>
+    <string name="nav_email">Email : elearning@gmail.com</string>
+    <string name="home_course_new">Mới nhất</string>
+    <string name="home_course_most">Phổ biến nhất</string>
+    <string name="home_course_top_view">Xem nhiều nhất</string>
+    <string name="home_more">Xem thêm</string>
+    <string name="title_cancel">Hủy</string>
+    <string name="title_yes">Lưu</string>
+    <string name="title_change_avatar">Đổi ảnh đại diện</string>
+    <string name="cap_log_out">Đăng xuất</string>
+    <string name="cap_yes">Có</string>
+    <string name="cap_no">Không</string>
+    <string name="cap_logout_ask">Bạn có chắc chắn thoát không ?</string>
 </resources>
