@@ -227,5 +227,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         } else {
             super.onBackPressed();
         }
+        onCloseDrawer();
+        mainPresenter.onBackPressed();
     }
 }

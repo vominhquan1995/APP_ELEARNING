@@ -42,6 +42,7 @@ public class NavAdapter extends BaseRecyclerAdapter<NavAdapter.Item> {
 
     public void setSelectedId(String selectedId) {
         this.selectedId = selectedId;
+        notifyDataSetChanged();
     }
 
 

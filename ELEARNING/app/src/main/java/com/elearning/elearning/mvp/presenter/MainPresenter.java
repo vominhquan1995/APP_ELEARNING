@@ -51,6 +51,7 @@ public class MainPresenter {
         });
         fragmentNavigator.setRootFragment(new HomeFragment());
     }
+
     public void switchFragment(Fragment fragment) {
         fragmentNavigator.goToRoot();
         fragmentNavigator.goTo(fragment);
@@ -59,12 +60,19 @@ public class MainPresenter {
     private void goToFragment(String id) {
         if (id.equals(context.getString(R.string.nav_home))) {
             fragmentNavigator.goToRoot();
-            mainView.updateToolbar(false,false,id);
+            mainView.updateToolbar(false, false, id);
         } else if (id.equals(context.getString(R.string.nav_settings))) {
-            mainView.updateToolbar(true,false,id);
+            mainView.updateToolbar(true, false, id);
             switchFragment(new UserInfoFragment());
         } else if (id.equals(context.getString(R.string.nav_logout))) {
             mainView.onLogout();
+        }
+    }
+
+    public void onBackPressed() {
+        if (fragmentNavigator.getActiveFragment() instanceof HomeFragment) {
+            fragmentNavigator.goToRoot();
+            mainView.setItemSelected(context.getString(R.string.nav_home));
         }
     }
 
@@ -72,7 +80,7 @@ public class MainPresenter {
         return this.onItemMenuListener;
     }
 
-    public  void search(String keyword){
+    public void search(String keyword) {
         API.searchListCourse(keyword, new API.OnAPIListener() {
             @Override
             public void onSuccessObject(JSONObject response) throws JSONException {
@@ -81,7 +89,7 @@ public class MainPresenter {
 
             @Override
             public void onSuccessArray(JSONArray response) throws JSONException {
-                    mainView.onSearchResult(Course.getListCourse(response));
+                mainView.onSearchResult(Course.getListCourse(response));
             }
 
             @Override
