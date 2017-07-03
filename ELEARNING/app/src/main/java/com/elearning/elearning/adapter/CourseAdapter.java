@@ -13,6 +13,7 @@ import com.elearning.elearning.R;
 import com.elearning.elearning.base.BaseRecyclerAdapter;
 import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.network.APIConstant;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
@@ -42,8 +43,11 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
     @Override
     protected void onBindViewHolder(RecyclerView.ViewHolder holder, int position, Course item) {
         CourseAdapter.CourseViewHolder courseViewHolder = (CourseViewHolder) holder;
-//        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE + item.getUrlImage()).into(courseViewHolder.image);
-        courseViewHolder.image.setBackground(context.getResources().getDrawable(R.drawable.default_course));
+        Picasso.with(context)
+                .load(APIConstant.HOST_NAME_IMAGE + item.getUrlImage())
+                .resize(200,200)
+                .into(courseViewHolder.image);
+//        courseViewHolder.image.setBackground(context.getResources().getDrawable(R.drawable.default_course));
         courseViewHolder.name.setText(item.getNameCourses());
         courseViewHolder.credits.setText(String.valueOf(item.getNumberCredits()));
         courseViewHolder.donor.setText(item.getDonors());
