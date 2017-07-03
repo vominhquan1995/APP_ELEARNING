@@ -9,8 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+        <!--two nav-->
         <LinearLayout
+            android:id="@+id/lnActivity"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.08"
@@ -33,6 +34,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lnSearch"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -48,14 +50,12 @@
                     android:layout_margin="7sp"
                     android:layout_weight="0.1"
                     android:background="@drawable/searching" />
-
-                <TextView
+                <SearchView
+                    android:id="@+id/edtSearch"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.8"
-                    android:gravity="center"
-                    android:text="Tìm kiếm khóa học..."
-                    android:textSize="@dimen/text_size_12" />
+                    android:queryHint="@string/title_search"
+                    android:layout_weight="0.8"></SearchView>
 
                 <ImageView
                     android:layout_width="0dp"
@@ -67,6 +67,59 @@
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/lnFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.08"
+            android:background="@color/color_background_main_blue"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/btnBack"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center|left">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/back" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_5dp"
+                android:layout_weight="0.8"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9"
+                    android:gravity="center"
+                    android:text="Cài đặt"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_18"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/elogo_el" />
+            </LinearLayout>
+        </LinearLayout>
+        <!--two body-->
         <LinearLayout
             android:id="@+id/lnContainer"
             android:layout_width="match_parent"
@@ -84,6 +137,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lnSearchContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.92"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtTitleSearch"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1"
+                android:gravity="center|top"
+                android:text="@string/cap_search_result"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txt_size_24sp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerSearchResult"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.9"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>
 

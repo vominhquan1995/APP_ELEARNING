@@ -1,5 +1,9 @@
 package com.elearning.elearning.mvp.view;
 
+import com.elearning.elearning.mvp.model.Course;
+
+import java.util.List;
+
 /**
  * Created by MinhQuan on 30/06/2017.
  */
@@ -7,9 +11,13 @@ package com.elearning.elearning.mvp.view;
 public interface MainView {
     void exitApp();
 
-    void setChecked(String id);
-
     void onCloseDrawer();
 
     void onLogout();
+
+    void updateToolbar(boolean isFragment,boolean isSearch, String title);
+
+    void onSearchResult(List<Course> courseList);
+
+    void setItemSelected(String id);
 }

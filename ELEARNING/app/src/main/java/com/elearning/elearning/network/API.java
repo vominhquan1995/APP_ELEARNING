@@ -16,6 +16,8 @@ import org.json.JSONObject;
 
 import okhttp3.Response;
 
+import static com.elearning.elearning.network.APIConstant.CONTENTTYPE;
+import static com.elearning.elearning.network.APIConstant.HEADERFORM;
 import static com.elearning.elearning.network.APIConstant.USER_EDIT_INFO_URL;
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 
@@ -82,11 +84,12 @@ public class API {
                 });
     }
 
-    //get list new course
-    public static void listNewCourse(final String numberItem, OnAPIListener onAPIListener) {
+    //search list course
+    public static void searchListCourse(final String keyword, OnAPIListener onAPIListener) {
         listener = onAPIListener;
-        AndroidNetworking.get(APIConstant.NEW_COURSE_HEADER_URL + numberItem + APIConstant.NEW_COURSE_FOOTER_URL)
-                .addHeaders(APIConstant.BEARER, User.get().getToken())
+        AndroidNetworking.post(APIConstant.COURSE_SEARCH)
+                .addBodyParameter(APIConstant.SEARCH,keyword)
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()
                 .getAsJSONArray(new JSONArrayRequestListener() {
@@ -98,7 +101,6 @@ public class API {
                             e.printStackTrace();
                         }
                     }
-
                     @Override
                     public void onError(ANError anError) {
                         listener.onError(anError.getMessage());
@@ -153,7 +155,7 @@ public class API {
         Log.d("API", String.valueOf(jsonObject));
         AndroidNetworking.put(USER_EDIT_INFO_URL)
                 .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
-                .addHeaders(APIConstant.CONTENTTYPE, APIConstant.HEADERJSON)
+                .addHeaders(CONTENTTYPE, APIConstant.HEADERJSON)
                 .addJSONObjectBody(jsonObject)
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()
@@ -168,6 +170,31 @@ public class API {
                             }
                         } else {
                             listener.onError(null);
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
+
+    //get list new course
+    public static void listNewCourse(final String numberItem, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.NEW_COURSE_HEADER_URL + numberItem + APIConstant.NEW_COURSE_FOOTER_URL)
+                .addHeaders(APIConstant.BEARER, User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
 

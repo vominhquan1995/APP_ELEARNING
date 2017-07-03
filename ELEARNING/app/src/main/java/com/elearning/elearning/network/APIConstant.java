@@ -22,6 +22,8 @@ public interface APIConstant {
     //New Course
     String NEW_COURSE_HEADER_URL = HOST_NAME + "/courses/";
     String NEW_COURSE_FOOTER_URL = "/newcourses";
+    //Search Course
+    String COURSE_SEARCH = HOST_NAME + "/courses/search";
     //User Information
     String USER_INFORMATION_URL = HOST_NAME + "/students/";
     //Edit Information
@@ -31,6 +33,7 @@ public interface APIConstant {
     String AUTHORIZATION = "Authorization";
     String CONTENTTYPE = "Content-Type";
     String HEADERJSON = "application/json";
+    String HEADERFORM = "application/x-www-form-urlencoded";
     /**
      * User params
      */
@@ -71,4 +74,9 @@ public interface APIConstant {
     String COURSE_ID = "id";
     String COURSE_ADDTIME = "addTime";
     String COURSE_EDITTIME = "editTime";
+
+    /**
+     * Search
+     */
+    String SEARCH="search";
 }

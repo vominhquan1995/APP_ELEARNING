@@ -40,6 +40,11 @@ public class NavAdapter extends BaseRecyclerAdapter<NavAdapter.Item> {
         initMenu();
     }
 
+    public void setSelectedId(String selectedId) {
+        this.selectedId = selectedId;
+    }
+
+
     private Drawable getIcon(int id) {
         return context.getResources().getDrawable(id);
     }

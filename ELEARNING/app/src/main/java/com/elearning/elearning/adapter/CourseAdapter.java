@@ -29,15 +29,21 @@ import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 
 public class CourseAdapter extends BaseRecyclerAdapter<Course> {
     private Context context;
+    private int layout;
 
-    public CourseAdapter(Context context, List<Course> listCourse) {
+    public CourseAdapter(Context context, List<Course> listCourse, int layout) {
         this.context = context;
         this.items = listCourse;
+        this.layout = layout;
     }
+
+//    public void setLayout(int layout) {
+//        this.layout = layout;
+//    }
 
     @Override
     protected int getItemLayout() {
-        return R.layout.item_course;
+        return layout;
     }
 
     @Override
@@ -45,14 +51,14 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
         CourseAdapter.CourseViewHolder courseViewHolder = (CourseViewHolder) holder;
         Picasso.with(context)
                 .load(APIConstant.HOST_NAME_IMAGE + item.getUrlImage())
-                .resize(200,200)
+                .resize(200, 200)
                 .into(courseViewHolder.image);
 //        courseViewHolder.image.setBackground(context.getResources().getDrawable(R.drawable.default_course));
         courseViewHolder.name.setText(item.getNameCourses());
-        courseViewHolder.credits.setText(String.valueOf(item.getNumberCredits()));
-        courseViewHolder.donor.setText(item.getDonors());
-        courseViewHolder.dateStart.setText(DATE_FORMAT_YYYYMMDD.format(item.getDateStart()));
-        courseViewHolder.dateEnd.setText(DATE_FORMAT_YYYYMMDD.format(item.getDateEnd()));
+        courseViewHolder.credits.setText(String.format(context.getResources().getString(R.string.course_creadits), String.valueOf(item.getNumberCredits())));
+        courseViewHolder.donor.setText(String.format(context.getResources().getString(R.string.course_donor), item.getDonors()));
+        courseViewHolder.dateStart.setText(String.format(context.getResources().getString(R.string.course_date_start), DATE_FORMAT_YYYYMMDD.format(item.getDateStart())));
+        courseViewHolder.dateEnd.setText(String.format(context.getResources().getString(R.string.course_date_end), DATE_FORMAT_YYYYMMDD.format(item.getDateEnd())));
     }
 
     @Override

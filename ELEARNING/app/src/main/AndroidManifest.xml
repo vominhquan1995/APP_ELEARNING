@@ -22,6 +22,7 @@
             android:windowSoftInputMode="adjustPan|adjustResize"
             android:screenOrientation="sensorPortrait"></activity>
         <activity android:name=".activity.MainActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:screenOrientation="sensorPortrait"></activity>
     </application>
 

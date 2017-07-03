@@ -46,7 +46,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     public void initValue() {
         //init presenter home
         homePresenter = new HomePresenter(this);
-        mCourseAdapter = new CourseAdapter(context, listNewCourse);
+        mCourseAdapter = new CourseAdapter(context, listNewCourse,R.layout.item_course);
         mRecyclerNew.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerNew.setAdapter(mCourseAdapter);
         mRecyclerMost.setAdapter(mCourseAdapter);

@@ -10,7 +10,13 @@ import com.elearning.elearning.adapter.NavAdapter;
 import com.elearning.elearning.fragment.HomeFragment;
 import com.elearning.elearning.fragment.UserInfoFragment;
 import com.elearning.elearning.helper.FragmentNavigator;
+import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.mvp.view.MainView;
+import com.elearning.elearning.network.API;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by MinhQuan on 30/06/2017.
@@ -45,7 +51,6 @@ public class MainPresenter {
         });
         fragmentNavigator.setRootFragment(new HomeFragment());
     }
-
     public void switchFragment(Fragment fragment) {
         fragmentNavigator.goToRoot();
         fragmentNavigator.goTo(fragment);
@@ -54,7 +59,9 @@ public class MainPresenter {
     private void goToFragment(String id) {
         if (id.equals(context.getString(R.string.nav_home))) {
             fragmentNavigator.goToRoot();
+            mainView.updateToolbar(false,false,id);
         } else if (id.equals(context.getString(R.string.nav_settings))) {
+            mainView.updateToolbar(true,false,id);
             switchFragment(new UserInfoFragment());
         } else if (id.equals(context.getString(R.string.nav_logout))) {
             mainView.onLogout();
@@ -63,5 +70,29 @@ public class MainPresenter {
 
     public NavAdapter.OnItemMenuListener getOnItemMenuListener() {
         return this.onItemMenuListener;
+    }
+
+    public  void search(String keyword){
+        API.searchListCourse(keyword, new API.OnAPIListener() {
+            @Override
+            public void onSuccessObject(JSONObject response) throws JSONException {
+
+            }
+
+            @Override
+            public void onSuccessArray(JSONArray response) throws JSONException {
+                    mainView.onSearchResult(Course.getListCourse(response));
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+
+            }
+        });
     }
 }

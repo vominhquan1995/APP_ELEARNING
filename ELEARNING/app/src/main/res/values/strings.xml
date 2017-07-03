@@ -45,6 +45,8 @@
     <string name="cap_yes">Có</string>
     <string name="cap_no">Không</string>
     <string name="cap_logout_ask">Bạn có chắc chắn thoát không ?</string>
+    <string name="cap_search_result">Kết quả tìm kiếm</string>
+    <string name="title_search">Tìm kiếm khóa học</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>
@@ -55,4 +57,10 @@
     <string name="validate_confirmpass_error">Mật khẩu không khớp</string>
     <string name="cap_signup_success">Đăng kí thành công</string>
     <string name="cap_signup_fail">Đăng kí không thành công</string>
+    <!--item course-->
+    <string name="course_creadits">Số tín chỉ: %s</string>
+    <string name="course_donor">Tài trợ: %s</string>
+    <string name="course_date_start">Bắt đầu: %s</string>
+    <string name="course_date_end">Kết thúc: %s</string>
+
 </resources>
