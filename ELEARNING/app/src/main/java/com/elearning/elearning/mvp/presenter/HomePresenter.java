@@ -32,6 +32,11 @@ public class HomePresenter {
             }
 
             @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
+            @Override
             public void onError(String errorMessage) {
                 homeView.onGetNewCourseFail(errorMessage);
             }

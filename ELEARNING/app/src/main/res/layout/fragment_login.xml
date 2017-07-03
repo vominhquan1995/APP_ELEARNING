@@ -20,7 +20,7 @@
 
                 <include
                     android:id="@+id/vgPassWord"
-                    layout="@layout/viewgroup_input_text"></include>
+                    layout="@layout/viewgroup_input_pass"></include>
                 <CheckBox
                     android:id="@+id/cbAuto"
                     style="@style/checkBox"
@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_3dp"
-                    android:background="@color/color_background_button"
+                    android:background="@color/color_blue"
                     android:text="@string/signIn"
                     android:textColor="@color/colorWhite" />
 

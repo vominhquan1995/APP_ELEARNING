@@ -32,6 +32,11 @@ public class UserInfoPresenter {
             }
 
             @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
+            @Override
             public void onError(String errorMessage) {
                 userInfoView.getInfoFail(errorMessage);
             }
@@ -46,6 +51,11 @@ public class UserInfoPresenter {
 
             @Override
             public void onSuccessArray(JSONArray response) throws JSONException {
+
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
 
             }
 

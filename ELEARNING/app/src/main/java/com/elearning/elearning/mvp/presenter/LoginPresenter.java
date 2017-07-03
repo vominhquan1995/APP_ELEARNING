@@ -34,6 +34,11 @@ public class LoginPresenter {
             }
 
             @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
+            @Override
             public void onError(String errorMessage) {
                 loginView.onLoginFail(errorMessage);
             }

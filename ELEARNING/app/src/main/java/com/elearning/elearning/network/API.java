@@ -31,8 +31,8 @@ public class API {
     public static void login(final String username, final String password, OnAPIListener onAPIListener) {
         listener = onAPIListener;
         AndroidNetworking.post(APIConstant.LOGIN_URL)
-                .addBodyParameter("email", "vominhquan.hutech@gmail.com")
-                .addBodyParameter("password", "123456")
+                .addBodyParameter(APIConstant.EMAIL, username)
+                .addBodyParameter(APIConstant.PASSWORD, password)
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -55,31 +55,29 @@ public class API {
     }
 
     //sign up
-    public static void registration(final String username, final String password, final String firstName, final String lastName, OnAPIListener onAPIListener) {
+    public static void registration(final String email, final String password, final String firstName, final String lastName, OnAPIListener onAPIListener) {
         listener = onAPIListener;
         Log.d("Link", APIConstant.SIGNUP_URL);
         AndroidNetworking.post(APIConstant.SIGNUP_URL)
-                .addBodyParameter("email", "vominhquan.vcdsdcc@gmail.com")
-                .addBodyParameter("password", "123456")
-                .addBodyParameter("lastname", "Võ")
-                .addBodyParameter("firstname", "Quân")
+                .addBodyParameter(APIConstant.EMAIL, email)
+                .addBodyParameter(APIConstant.PASSWORD, password)
+                .addBodyParameter(APIConstant.FIRSTNAME, firstName)
+                .addBodyParameter(APIConstant.LASTNAME, lastName)
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
+                .getAsString(new StringRequestListener() {
                     @Override
-                    public void onResponse(final JSONObject response) {
+                    public void onResponse(String response) {
                         try {
-                            Log.d("Login result", String.valueOf(response));
-                            listener.onSuccessObject(response);
+                            listener.onString(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
 
                     @Override
-                    public void onError(ANError error) {
-                        listener.onError(error.getMessage());
-                        Log.d("Login fail", (error.getErrorBody()));
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
                     }
                 });
     }
@@ -146,13 +144,13 @@ public class API {
             jsonObject.put(APIConstant.ADDRESS, user.getAddress());
             jsonObject.put(APIConstant.PHONE, user.getPhone());
             jsonObject.put(APIConstant.INFOMATION, user.getInfomation());
-            jsonObject.put(APIConstant.DATEOFBIRTH,DATE_FORMAT_YYYYMMDD.format(user.getDateOfBirth()));
-            jsonObject.put(APIConstant.ROLEID,user.getRole());
-            jsonObject.put(APIConstant.GENDER,user.isGender());
+            jsonObject.put(APIConstant.DATEOFBIRTH, DATE_FORMAT_YYYYMMDD.format(user.getDateOfBirth()));
+            jsonObject.put(APIConstant.ROLEID, user.getRole());
+            jsonObject.put(APIConstant.GENDER, user.isGender());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("API",String.valueOf(jsonObject));
+        Log.d("API", String.valueOf(jsonObject));
         AndroidNetworking.put(USER_EDIT_INFO_URL)
                 .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
                 .addHeaders(APIConstant.CONTENTTYPE, APIConstant.HEADERJSON)
@@ -168,10 +166,11 @@ public class API {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        }else{
+                        } else {
                             listener.onError(null);
                         }
                     }
+
                     @Override
                     public void onError(ANError anError) {
                         listener.onError(anError.getMessage());
@@ -183,6 +182,8 @@ public class API {
         void onSuccessObject(final JSONObject response) throws JSONException;
 
         void onSuccessArray(final JSONArray response) throws JSONException;
+
+        void onString(final String response) throws JSONException;
 
         void onError(String errorMessage);
     }

@@ -22,12 +22,17 @@ public class RegistrationPresenter {
         API.registration(username, password, firstName, lastName, new API.OnAPIListener() {
             @Override
             public void onSuccessObject(JSONObject response) throws JSONException {
-                registrationView.onRegistrationSuccess();
+
             }
 
             @Override
             public void onSuccessArray(JSONArray response) throws JSONException {
 
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
+                registrationView.onRegistrationSuccess(response);
             }
 
             @Override

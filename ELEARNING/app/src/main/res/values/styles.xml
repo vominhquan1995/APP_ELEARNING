@@ -51,6 +51,10 @@
         <item name="android:button">@drawable/custom_checkbox_background</item>
         <item name="android:padding">@dimen/margin_5dp</item>
     </style>
+    <style name="checkPass">
+        <item name="android:button">@drawable/custom_checkbox_password</item>
+        <item name="android:padding">@dimen/margin_5dp</item>
+    </style>
 
     <style name="radio">
         <item name="android:button">@drawable/custom_radio</item>

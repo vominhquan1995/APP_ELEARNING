@@ -45,4 +45,14 @@
     <string name="cap_yes">Có</string>
     <string name="cap_no">Không</string>
     <string name="cap_logout_ask">Bạn có chắc chắn thoát không ?</string>
+
+    <!--validate_input-->
+    <string name="validate_email">Vui lòng nhập email</string>
+    <string name="validate_firstName">Vui lòng nhập tên</string>
+    <string name="validate_lastName">Vui lòng nhập họ</string>
+    <string name="validate_pass">Vui lòng nhập mật khẩu</string>
+    <string name="validate_pass_confirm">Vui lòng xác nhận mật khẩu</string>
+    <string name="validate_confirmpass_error">Mật khẩu không khớp</string>
+    <string name="cap_signup_success">Đăng kí thành công</string>
+    <string name="cap_signup_fail">Đăng kí không thành công</string>
 </resources>

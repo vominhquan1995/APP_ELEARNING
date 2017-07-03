@@ -5,7 +5,7 @@ package com.elearning.elearning.mvp.view;
  */
 
 public interface RegistrationView {
-    void onRegistrationSuccess();
+    void onRegistrationSuccess(String email);
 
     void onRegistrationFail();
 }

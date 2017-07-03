@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/margin_5dp"
+    android:background="@drawable/stroke_color"
+    android:padding="@dimen/padding_5dp"
+    android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_3dp"
+            android:padding="@dimen/padding_5dp"
+            android:layout_weight="0.1"
+            android:background="@drawable/password" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_3dp"
+            android:background="@color/color_blue"></View>
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:layout_gravity="center"
+            android:padding="@dimen/padding_3dp"
+            android:inputType="textPassword"
+            android:background="@android:color/transparent"/>
+        <CheckBox
+            style="@style/checkPass"
+            android:id="@+id/cbShowHidePass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/margin_3dp"
+            android:padding="@dimen/padding_5dp"
+            android:checked="true"
+            android:layout_weight="0.1" />
+</LinearLayout>

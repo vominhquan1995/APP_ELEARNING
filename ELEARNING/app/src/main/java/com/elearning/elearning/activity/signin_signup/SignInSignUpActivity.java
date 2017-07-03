@@ -12,7 +12,6 @@ import com.elearning.elearning.base.BaseActivity;
  */
 
 public class SignInSignUpActivity extends BaseActivity {
-    private PageAdapter mPageAdapter;
     private ViewPager mViewPager;
     private TabLayout mtabLayout;
 
@@ -23,7 +22,6 @@ public class SignInSignUpActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mPageAdapter = new PageAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.viewPage);
         setupViewPager(mViewPager);
         mtabLayout = (TabLayout) findViewById(R.id.tab);

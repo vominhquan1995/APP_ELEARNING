@@ -42,4 +42,14 @@
     <string name="cap_yes">Yes</string>
     <string name="cap_no">No</string>
     <string name="cap_logout_ask">Do you want to exit ?</string>
+
+    <!--validate_input-->
+    <string name="validate_email">Please input email</string>
+    <string name="validate_firstName">Please input first name</string>
+    <string name="validate_lastName">Please input last name</string>
+    <string name="validate_pass">Please input password</string>
+    <string name="validate_pass_confirm">Please input confirm password</string>
+    <string name="validate_confirmpass_error">Password not macth</string>
+    <string name="cap_signup_success">Registration success</string>
+    <string name="cap_signup_fail">Registration fail</string>
 </resources>

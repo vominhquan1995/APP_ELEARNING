@@ -3,6 +3,7 @@ package com.elearning.elearning.activity.signin_signup;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -26,22 +27,22 @@ import com.elearning.elearning.prefs.Constant;
 public class LoginFragment extends BaseFragment implements LoginView, View.OnClickListener {
 
     private LoginPresenter loginPresenter;
-    private CheckBox chkAutoLogin;
+    private CheckBox chkAutoLogin, cbShowHidePass;
     private boolean autoLogin = false;
     private LinearLayout vgEmail, vgPass;
     private ImageView iconEmail, iconPass;
     private EditText edtEmail, edtPass;
-
     @Override
     public void initView() {
         vgEmail = (LinearLayout) view.findViewById(R.id.vgEmail);
-        vgPass= (LinearLayout) view.findViewById(R.id.vgPassWord);
+        vgPass = (LinearLayout) view.findViewById(R.id.vgPassWord);
         edtEmail = (EditText) vgEmail.findViewById(R.id.editText);
         edtPass = (EditText) vgPass.findViewById(R.id.editText);
         //icon
         iconEmail = (ImageView) vgEmail.findViewById(R.id.imgIcon);
         iconPass = (ImageView) vgPass.findViewById(R.id.imgIcon);
         chkAutoLogin = (CheckBox) view.findViewById(R.id.cbAuto);
+        cbShowHidePass = (CheckBox) vgPass.findViewById(R.id.cbShowHidePass);
         iconEmail.setBackground(context.getResources().getDrawable(R.drawable.profile_email));
         iconPass.setBackground(context.getResources().getDrawable(R.drawable.password));
         //set hint text
@@ -49,7 +50,9 @@ public class LoginFragment extends BaseFragment implements LoginView, View.OnCli
         edtPass.setHint(context.getResources().getString(R.string.passWord));
         //validate type input
         edtEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-        edtPass.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        //set value
+        edtEmail.setText("vominhquan.hutech@gmail.com");
+        edtPass.setText("123456");
     }
 
     @Override
@@ -68,6 +71,23 @@ public class LoginFragment extends BaseFragment implements LoginView, View.OnCli
                 } else {
                     autoLogin = false;
                 }
+            }
+        });
+        cbShowHidePass.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    edtPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                } else {
+                    edtPass.setTransformationMethod(null);
+                }
+            }
+        });
+        SignUpFragment.setOnSignupListener(new SignUpFragment.onSignupListener() {
+            @Override
+            public void onSignupSuccess(String email) {
+                edtEmail.setText(email);
+                edtPass.setText("");
             }
         });
     }
