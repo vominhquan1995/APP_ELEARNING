@@ -9,6 +9,6 @@
         android:id="@+id/imagePlash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/elogo_plash"/>
+        android:background="@drawable/logo_plash"/>
 </LinearLayout>
 

@@ -19,11 +19,17 @@ import java.util.List;
  */
 
 public class HomeFragment extends BaseFragment implements HomeView {
+    //send id course to list lesson
+    private static HomeFragment.onSendCourseID onSendCourseID;
     private RecyclerView mRecyclerNew, mRecyclerMost, mRecyclerTopView;
     private CourseAdapter mCourseAdapter;
     private HomePresenter homePresenter;
     //list Course
     private List<Course> listNewCourse = new ArrayList<>();
+
+    public static void setSendCourseID(HomeFragment.onSendCourseID onSendCourseID) {
+        HomeFragment.onSendCourseID = onSendCourseID;
+    }
 
     @Override
     public int setFragmentView() {
@@ -46,7 +52,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     public void initValue() {
         //init presenter home
         homePresenter = new HomePresenter(this);
-        mCourseAdapter = new CourseAdapter(context, listNewCourse,R.layout.item_course);
+        mCourseAdapter = new CourseAdapter(context, listNewCourse, R.layout.item_course);
         mRecyclerNew.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerNew.setAdapter(mCourseAdapter);
         mRecyclerMost.setAdapter(mCourseAdapter);
@@ -57,6 +63,16 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void initAction() {
         homePresenter.getListNewCourse(8);
+        mCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
+                if (onSendCourseID != null) {
+                    onSendCourseID.onSend(listNewCourse.get(position).getId());
+                }
+                Log.d("Home", String.valueOf(mCourseAdapter.getItem(position).getId()));
+            }
+        });
     }
 
     @Override
@@ -71,5 +87,9 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void onGetNewCourseFail(String message) {
         Log.d("Home", "Fail");
+    }
+
+    public interface onSendCourseID {
+        void onSend(int CourseId);
     }
 }

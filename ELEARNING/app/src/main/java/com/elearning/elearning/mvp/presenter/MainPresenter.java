@@ -2,12 +2,12 @@ package com.elearning.elearning.mvp.presenter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.adapter.NavAdapter;
 import com.elearning.elearning.fragment.HomeFragment;
+import com.elearning.elearning.fragment.ListLessonFragment;
 import com.elearning.elearning.fragment.UserInfoFragment;
 import com.elearning.elearning.helper.FragmentNavigator;
 import com.elearning.elearning.mvp.model.Course;
@@ -23,9 +23,9 @@ import org.json.JSONObject;
  */
 
 public class MainPresenter {
+    public FragmentNavigator fragmentNavigator;
     private Context context;
     private MainView mainView;
-    public FragmentNavigator fragmentNavigator;
     private NavAdapter.OnItemMenuListener onItemMenuListener;
 
     public MainPresenter(final MainView mainView) {
@@ -57,13 +57,16 @@ public class MainPresenter {
         fragmentNavigator.goTo(fragment);
     }
 
-    private void goToFragment(String id) {
+    public void goToFragment(String id) {
         if (id.equals(context.getString(R.string.nav_home))) {
             fragmentNavigator.goToRoot();
             mainView.updateToolbar(false, false, id);
         } else if (id.equals(context.getString(R.string.nav_settings))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new UserInfoFragment());
+        } else if (id.equals(context.getString(R.string.menu_listlesson))) {
+            mainView.updateToolbar(true, false, id);
+            switchFragment(new ListLessonFragment());
         } else if (id.equals(context.getString(R.string.nav_logout))) {
             mainView.onLogout();
         }

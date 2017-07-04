@@ -230,4 +230,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         onCloseDrawer();
         mainPresenter.onBackPressed();
     }
+    public  void gotoFragment(String id){
+        mainPresenter.goToFragment(id);
+    }
 }

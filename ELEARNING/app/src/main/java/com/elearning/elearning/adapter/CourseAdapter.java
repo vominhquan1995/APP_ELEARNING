@@ -30,6 +30,7 @@ import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 public class CourseAdapter extends BaseRecyclerAdapter<Course> {
     private Context context;
     private int layout;
+    private OnItemClickListener onItemClickListener;
 
     public CourseAdapter(Context context, List<Course> listCourse, int layout) {
         this.context = context;
@@ -66,7 +67,13 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
         View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
         return new CourseViewHolder(rootView);
     }
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
     private class CourseViewHolder extends RecyclerView.ViewHolder {
         private ImageView image;
         private TextView name;
@@ -83,81 +90,14 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
             donor = (TextView) itemView.findViewById(R.id.txtCredits);
             dateStart = (TextView) itemView.findViewById(R.id.txtDateStart);
             dateEnd = (TextView) itemView.findViewById(R.id.txtDateEnd);
-        }
-    }
-
-    /**
-     * Model course item
-     */
-    public class ItemCourse {
-        //Image Course
-        private Drawable image;
-        //Name Course
-        private String name;
-        //Number Credits
-        private int Credits;
-        //Donor
-        private String donor;
-        //Date start
-        private String dateStart;
-        //Date end
-        private String dateEnd;
-
-        public ItemCourse(Drawable image, String name, int credits, String donor, String dateStart, String dateEnd) {
-            this.image = image;
-            this.name = name;
-            Credits = credits;
-            this.donor = donor;
-            this.dateStart = dateStart;
-            this.dateEnd = dateEnd;
-        }
-
-        public Drawable getImage() {
-            return image;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getCredits() {
-            return Credits;
-        }
-
-        public String getDonor() {
-            return donor;
-        }
-
-        public String getDateStart() {
-            return dateStart;
-        }
-
-        public String getDateEnd() {
-            return dateEnd;
-        }
-
-        public void setImage(Drawable image) {
-            this.image = image;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setCredits(int credits) {
-            Credits = credits;
-        }
-
-        public void setDonor(String donor) {
-            this.donor = donor;
-        }
-
-        public void setDateStart(String dateStart) {
-            this.dateStart = dateStart;
-        }
-
-        public void setDateEnd(String dateEnd) {
-            this.dateEnd = dateEnd;
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemClickListener != null) {
+                        onItemClickListener.onItemClick(getAdapterPosition());
+                    }
+                }
+            });
         }
     }
 }

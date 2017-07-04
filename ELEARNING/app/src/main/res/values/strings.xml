@@ -33,6 +33,7 @@
     <string name="nav_logout">Đăng xuất</string>
     <string name="nav_support">Hỗ trợ</string>
     <string name="nav_hotline">Holine : 1900 1000</string>
+    <string name="menu_listlesson">Danh sách bài giảng</string>
     <string name="nav_email">Email : elearning@gmail.com</string>
     <string name="home_course_new">Mới nhất</string>
     <string name="home_course_most">Phổ biến nhất</string>
@@ -62,5 +63,8 @@
     <string name="course_donor">Tài trợ: %s</string>
     <string name="course_date_start">Bắt đầu: %s</string>
     <string name="course_date_end">Kết thúc: %s</string>
-
+    <!--item lesson-->
+    <string name="lesson_source_type">Loại bài giảng: %s</string>
+    <string name="lesson_time">Thời gian: %s phút</string>
+    <string name="lesson_description">Mô tả : %s</string>
 </resources>

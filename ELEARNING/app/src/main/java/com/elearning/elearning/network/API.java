@@ -181,6 +181,29 @@ public class API {
     }
 
 
+    //get list lesson
+    public static void listLesson(final String idCourse, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.LIST_LESSON_HEADER_URL + idCourse+ APIConstant.LIST_LESSON_FOOTER_URL)
+                .addHeaders(APIConstant.BEARER, User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
     //get list new course
     public static void listNewCourse(final String numberItem, OnAPIListener onAPIListener) {
         listener = onAPIListener;
@@ -204,7 +227,6 @@ public class API {
                     }
                 });
     }
-
     public interface OnAPIListener {
         void onSuccessObject(final JSONObject response) throws JSONException;
 

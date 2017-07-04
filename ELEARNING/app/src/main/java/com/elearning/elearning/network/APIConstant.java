@@ -28,6 +28,9 @@ public interface APIConstant {
     String USER_INFORMATION_URL = HOST_NAME + "/students/";
     //Edit Information
     String USER_EDIT_INFO_URL = HOST_NAME + "/students";
+    //List Lesson
+    String LIST_LESSON_HEADER_URL = HOST_NAME + "/courses/";
+    String LIST_LESSON_FOOTER_URL = "/lessons";
     //Header
     String BEARER = "Bearer ";
     String AUTHORIZATION = "Authorization";
@@ -76,7 +79,19 @@ public interface APIConstant {
     String COURSE_EDITTIME = "editTime";
 
     /**
+     * Lesson Parram
+     */
+    String LESSON_NAME = "name";
+    String LESSON_INDEX = "index";
+    String LESSON_COURSEID = "courseId";
+    String LESSON_LESSONURL = "lessonUrl";
+    String LESSON_SOURSETYPE = "sourceType";
+    String LESSON_TIME = "time";
+    String LESSON_URLIMAGE = "urlImage";
+    String LESSON_DESCRIPTION = "description";
+    String LESSON_ID = "id";
+    /**
      * Search
      */
-    String SEARCH="search";
+    String SEARCH = "search";
 }
