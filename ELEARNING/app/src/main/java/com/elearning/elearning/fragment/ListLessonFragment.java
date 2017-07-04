@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.elearning.elearning.R;
+import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.adapter.LessonAdapter;
 import com.elearning.elearning.base.BaseFragment;
 import com.elearning.elearning.mvp.model.Lesson;
@@ -21,11 +22,16 @@ import static com.elearning.elearning.prefs.Constant.NUMBER_COLUMNS_2;
  */
 
 public class ListLessonFragment extends BaseFragment implements ListLessonView {
+    private static ListLessonFragment.onSendLessonItem onSendLessonItem;
     private RecyclerView rvListLesson;
     private ListLessonPresenter listLessonPresenter;
     private LessonAdapter lessonAdapter;
     //list Course
     private List<Lesson> listLesson = new ArrayList<>();
+
+    public static void setOnSendLessonItem(ListLessonFragment.onSendLessonItem onSendLessonItem) {
+        ListLessonFragment.onSendLessonItem = onSendLessonItem;
+    }
 
     @Override
     public int setFragmentView() {
@@ -49,11 +55,24 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
                 listLessonPresenter.getListLesson(3);
             }
         });
+        MainActivity.setSendCourseID(new MainActivity.onSendCourseID() {
+            @Override
+            public void onSend(int CourseId) {
+                listLessonPresenter.getListLesson(4);
+            }
+        });
     }
 
     @Override
     public void initAction() {
-
+        lessonAdapter.setOnItemClickListener(new LessonAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Log.d("List lesson", String.valueOf(listLesson.get(position).getId()));
+                getMainActivity().gotoFragment(getResources().getString(R.string.menu_lesson));
+                onSendLessonItem.onSend(listLesson.get(position));
+            }
+        });
     }
 
     @Override
@@ -61,12 +80,21 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
         for (Lesson itemLesson : lessonList) {
             this.listLesson.add(itemLesson);
         }
-       lessonAdapter.notifyDataSetChanged();
+        lessonAdapter.notifyDataSetChanged();
         Log.d("List Lesson", String.valueOf(lessonList));
     }
 
     @Override
     public void onGetListFail(String errorMessafe) {
 
+    }
+
+    @Override
+    protected void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    public interface onSendLessonItem {
+        void onSend(Lesson lesson);
     }
 }

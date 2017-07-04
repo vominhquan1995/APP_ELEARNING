@@ -16,6 +16,7 @@ import com.elearning.elearning.adapter.CourseAdapter;
 import com.elearning.elearning.adapter.NavAdapter;
 import com.elearning.elearning.base.BaseActivity;
 import com.elearning.elearning.dialog.DialogLogOut;
+import com.elearning.elearning.fragment.HomeFragment;
 import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.mvp.model.User;
 import com.elearning.elearning.mvp.presenter.MainPresenter;
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     private RecyclerView mRecyclerSearchResult;
     private CourseAdapter mCourseAdapter;
     private List<Course> listCourse;
+    private static MainActivity.onSendCourseID onSendCourseID;
 
 
     @Override
@@ -65,6 +67,10 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         rlNav = (RecyclerView) findViewById(R.id.navRows);
         searchView = (android.widget.SearchView) findViewById(R.id.edtSearch);
         mRecyclerSearchResult = (RecyclerView) findViewById(R.id.recyclerSearchResult);
+    }
+
+    public static void setSendCourseID(MainActivity.onSendCourseID onSendCourseID) {
+        MainActivity.onSendCourseID = onSendCourseID;
     }
 
     @Override
@@ -128,7 +134,15 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
                 return false;
             }
         });
-
+        mCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                gotoFragment(getResources().getString(R.string.menu_listlesson));
+                if (onSendCourseID != null) {
+                    onSendCourseID.onSend(listCourse.get(position).getId());
+                }
+            }
+        });
     }
 
     @Override
@@ -218,6 +232,8 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 
     @Override
     public void onBackPressed() {
+        onCloseDrawer();
+        mainPresenter.onBackPressed();
         if (lnSearchContainer.getVisibility() == View.VISIBLE) {
             updateToolbar(false, false, null);
             findViewById(R.id.lnContainer).setVisibility(View.VISIBLE);
@@ -227,10 +243,13 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         } else {
             super.onBackPressed();
         }
-        onCloseDrawer();
-        mainPresenter.onBackPressed();
     }
-    public  void gotoFragment(String id){
+
+    public void gotoFragment(String id) {
         mainPresenter.goToFragment(id);
+    }
+
+    public interface onSendCourseID {
+        void onSend(int CourseId);
     }
 }

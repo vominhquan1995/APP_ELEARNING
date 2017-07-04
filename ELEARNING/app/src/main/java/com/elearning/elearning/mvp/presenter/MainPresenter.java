@@ -2,11 +2,13 @@ package com.elearning.elearning.mvp.presenter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.adapter.NavAdapter;
 import com.elearning.elearning.fragment.HomeFragment;
+import com.elearning.elearning.fragment.LessonFragment;
 import com.elearning.elearning.fragment.ListLessonFragment;
 import com.elearning.elearning.fragment.UserInfoFragment;
 import com.elearning.elearning.helper.FragmentNavigator;
@@ -46,14 +48,25 @@ public class MainPresenter {
         fragmentNavigator.setOnStackChanged(new FragmentNavigator.onStackChanged() {
             @Override
             public void onChanged(Fragment fragment) {
-
             }
         });
         fragmentNavigator.setRootFragment(new HomeFragment());
     }
 
     public void switchFragment(Fragment fragment) {
-        fragmentNavigator.goToRoot();
+        boolean backRoot = false;
+        if (fragment instanceof HomeFragment) {
+            backRoot = true;
+        }
+        if (fragment instanceof UserInfoFragment) {
+            backRoot = true;
+        }
+        if (fragment instanceof ListLessonFragment) {
+            backRoot = true;
+        }
+        if (backRoot) {
+            fragmentNavigator.goToRoot();
+        }
         fragmentNavigator.goTo(fragment);
     }
 
@@ -67,13 +80,20 @@ public class MainPresenter {
         } else if (id.equals(context.getString(R.string.menu_listlesson))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new ListLessonFragment());
+        } else if (id.equals(context.getString(R.string.menu_lesson))) {
+            mainView.updateToolbar(true, false, id);
+            switchFragment(new LessonFragment());
         } else if (id.equals(context.getString(R.string.nav_logout))) {
             mainView.onLogout();
         }
     }
 
     public void onBackPressed() {
-        if (fragmentNavigator.getActiveFragment() instanceof HomeFragment) {
+        if (fragmentNavigator.getActiveFragment() instanceof LessonFragment) {
+            mainView.updateToolbar(true, false, context.getString(R.string.menu_listlesson));
+            fragmentNavigator.goOneBack();
+        } else if (fragmentNavigator.getActiveFragment() instanceof HomeFragment) {
+            mainView.updateToolbar(false, false, context.getString(R.string.nav_home));
             fragmentNavigator.goToRoot();
             mainView.setItemSelected(context.getString(R.string.nav_home));
         }

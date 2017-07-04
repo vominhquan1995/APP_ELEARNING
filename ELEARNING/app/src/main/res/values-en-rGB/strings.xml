@@ -32,6 +32,7 @@
     <string name="nav_logout">Logout</string>
     <string name="nav_support">Support</string>
     <string name="menu_listlesson">List lesson</string>
+    <string name="menu_lesson">Lesson</string>
     <string name="home_course_new">New</string>
     <string name="home_course_most">Top Most</string>
     <string name="home_course_top_view">Top View</string>
@@ -62,6 +63,7 @@
     <string name="course_date_start">Start: %s</string>
     <string name="course_date_end">End : %s</string>
     <!--item lesson-->
+    <string name="lesson_name">Name lesson: %s</string>
     <string name="lesson_source_type">Type lesson: %s</string>
     <string name="lesson_time">Time: %s minutes</string>
     <string name="lesson_description">Description: %s</string>
