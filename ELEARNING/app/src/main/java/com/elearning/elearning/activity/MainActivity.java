@@ -22,6 +22,7 @@ import com.elearning.elearning.mvp.model.User;
 import com.elearning.elearning.mvp.presenter.MainPresenter;
 import com.elearning.elearning.mvp.view.MainView;
 import com.elearning.elearning.prefs.Constant;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,13 +41,14 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     //information for navigation
     private ImageView avatarUser;
     private TextView txtUserName, txtTitle;
-    private LinearLayout lnActivity, lnFragment, lnSearch, lnMenu, lnSearchContainer;
+    private LinearLayout lnActivity, lnFragment, lnSearch, lnMenu, lnSearchContainer, lnFragmentContainer;
     private android.widget.SearchView searchView;
     //search result
     private RecyclerView mRecyclerSearchResult;
     private CourseAdapter mCourseAdapter;
     private List<Course> listCourse;
     private static MainActivity.onSendCourseID onSendCourseID;
+    public  static int IdLesson=0;
 
 
     @Override
@@ -64,6 +66,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         lnSearch = (LinearLayout) findViewById(R.id.lnSearch);
         lnMenu = (LinearLayout) findViewById(R.id.btnMenu);
         lnSearchContainer = (LinearLayout) findViewById(R.id.lnSearchContainer);
+        lnFragmentContainer = (LinearLayout) findViewById(R.id.lnContainer);
         rlNav = (RecyclerView) findViewById(R.id.navRows);
         searchView = (android.widget.SearchView) findViewById(R.id.edtSearch);
         mRecyclerSearchResult = (RecyclerView) findViewById(R.id.recyclerSearchResult);
@@ -90,6 +93,8 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         mCourseAdapter = new CourseAdapter(context, listCourse, R.layout.item_course_search);
         mRecyclerSearchResult.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         mRecyclerSearchResult.setAdapter(mCourseAdapter);
+        // subscribe to topic
+        FirebaseMessaging.getInstance().subscribeToTopic(Constant.FIREBASE_TOPIC_USER);
     }
 
     @Override
@@ -129,7 +134,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
             @Override
             public boolean onQueryTextChange(String s) {
                 updateToolbar(false, true, null);
-                findViewById(R.id.lnContainer).setVisibility(View.GONE);
+                lnFragmentContainer.setVisibility(View.GONE);
                 lnSearchContainer.setVisibility(View.VISIBLE);
                 return false;
             }
@@ -137,6 +142,8 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         mCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                lnFragmentContainer.setVisibility(View.VISIBLE);
+                lnSearchContainer.setVisibility(View.GONE);
                 gotoFragment(getResources().getString(R.string.menu_listlesson));
                 if (onSendCourseID != null) {
                     onSendCourseID.onSend(listCourse.get(position).getId());
@@ -191,9 +198,9 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     }
 
     @Override
-    public void updateToolbar(boolean isFragment, boolean isSearch, String title) {
+    public void updateToolbar(boolean isHome, boolean isSearch, String title) {
         txtTitle.setText(title);
-        if (isFragment) {
+        if (isHome) {
             lnActivity.setVisibility(View.GONE);
             lnFragment.setVisibility(View.VISIBLE);
         } else {
@@ -233,6 +240,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     @Override
     public void onBackPressed() {
         onCloseDrawer();
+//        super.onBackPressed();
         mainPresenter.onBackPressed();
         if (lnSearchContainer.getVisibility() == View.VISIBLE) {
             updateToolbar(false, false, null);
@@ -240,8 +248,6 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
             lnSearchContainer.setVisibility(View.GONE);
             searchView.setQuery("", false);
             searchView.clearFocus();
-        } else {
-            super.onBackPressed();
         }
     }
 
@@ -251,5 +257,13 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 
     public interface onSendCourseID {
         void onSend(int CourseId);
+    }
+
+    public static int getIdLesson() {
+        return IdLesson;
+    }
+
+    public static void setIdLesson(int idLesson) {
+        IdLesson = idLesson;
     }
 }

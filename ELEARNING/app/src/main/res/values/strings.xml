@@ -49,6 +49,7 @@
     <string name="cap_logout_ask">Bạn có chắc chắn thoát không ?</string>
     <string name="cap_search_result">Kết quả tìm kiếm</string>
     <string name="title_search">Tìm kiếm khóa học</string>
+    <string name="cap_do_exam">Làm bài</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>

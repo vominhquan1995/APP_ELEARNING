@@ -15,7 +15,7 @@ public interface MainView {
 
     void onLogout();
 
-    void updateToolbar(boolean isFragment,boolean isSearch, String title);
+    void updateToolbar(boolean isHome,boolean isSearch, String title);
 
     void onSearchResult(List<Course> courseList);
 

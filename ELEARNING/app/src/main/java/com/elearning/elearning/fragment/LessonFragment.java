@@ -1,10 +1,12 @@
 package com.elearning.elearning.fragment;
 
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.elearning.elearning.R;
+import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.base.BaseFragment;
 import com.elearning.elearning.mvp.model.Lesson;
 import com.elearning.elearning.mvp.presenter.LessonPresenter;
@@ -31,9 +33,9 @@ public class LessonFragment extends BaseFragment implements LessonView {
         webView = (WebView) view.findViewById(R.id.wvLesson);
 //        PDFView = (PDFView) view.findViewById(R.id.pdfView);
         name = (TextView) view.findViewById(R.id.txtNameLesson);
-        time = (TextView)  view.findViewById(R.id.txtTime);
-        typeLesson = (TextView)  view.findViewById(R.id.txtTypeLesson);
-        description = (TextView)  view.findViewById(R.id.txtDescription);
+        time = (TextView) view.findViewById(R.id.txtTime);
+        typeLesson = (TextView) view.findViewById(R.id.txtTypeLesson);
+        description = (TextView) view.findViewById(R.id.txtDescription);
     }
 
     @Override
@@ -48,6 +50,12 @@ public class LessonFragment extends BaseFragment implements LessonView {
             public void onSend(Lesson lesson) {
                 lessonItem = lesson;
                 setUI();
+            }
+        });
+        view.findViewById(R.id.btnDoExam).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.setIdLesson(lessonItem.getId());
             }
         });
     }

@@ -46,6 +46,7 @@
     <string name="cap_logout_ask">Do you want to exit ?</string>
     <string name="cap_search_result">Result Search</string>
     <string name="title_search">Find course</string>
+    <string name="cap_do_exam">Do exam</string>
 
     <!--validate_input-->
     <string name="validate_email">Please input email</string>

@@ -48,6 +48,9 @@ public class MainPresenter {
         fragmentNavigator.setOnStackChanged(new FragmentNavigator.onStackChanged() {
             @Override
             public void onChanged(Fragment fragment) {
+                if(fragment instanceof  ListLessonFragment){
+                    mainView.updateToolbar(true, false, context.getResources().getString(R.string.menu_listlesson));
+                }
             }
         });
         fragmentNavigator.setRootFragment(new HomeFragment());
@@ -92,7 +95,7 @@ public class MainPresenter {
         if (fragmentNavigator.getActiveFragment() instanceof LessonFragment) {
             mainView.updateToolbar(true, false, context.getString(R.string.menu_listlesson));
             fragmentNavigator.goOneBack();
-        } else if (fragmentNavigator.getActiveFragment() instanceof HomeFragment) {
+        }else{
             mainView.updateToolbar(false, false, context.getString(R.string.nav_home));
             fragmentNavigator.goToRoot();
             mainView.setItemSelected(context.getString(R.string.nav_home));

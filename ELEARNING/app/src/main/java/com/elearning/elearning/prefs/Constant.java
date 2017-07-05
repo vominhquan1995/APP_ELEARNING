@@ -14,5 +14,8 @@ public class Constant {
     public static final String USER_PW = "USER_PW";
     public static final int NUMBER_COLUMNS_2= 2;
     public static final int NUMBER_COLUMNS_3= 3;
+    public static final String FIREBASE_TITLE = "FIREBASE_TITLE";
+    public static final String FIREBASE_MSG = "FIREBASE_MSG";
+    public static final String FIREBASE_TOPIC_USER = "all";
 
 }

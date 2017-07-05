@@ -77,10 +77,12 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
 
     @Override
     public void onGetListSuccess(List<Lesson> lessonList) {
-        for (Lesson itemLesson : lessonList) {
-            this.listLesson.add(itemLesson);
+        if (lessonList != null) {
+            for (Lesson itemLesson : lessonList) {
+                this.listLesson.add(itemLesson);
+            }
+            lessonAdapter.notifyDataSetChanged();
         }
-        lessonAdapter.notifyDataSetChanged();
         Log.d("List Lesson", String.valueOf(lessonList));
     }
 

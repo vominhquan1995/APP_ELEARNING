@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.elearning.elearning">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,11 +21,20 @@
         </activity>
         <activity
             android:name=".activity.signin_signup.SignInSignUpActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize"
-            android:screenOrientation="sensorPortrait"></activity>
-        <activity android:name=".activity.MainActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize"
-            android:screenOrientation="sensorPortrait"></activity>
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="sensorPortrait"
+            android:windowSoftInputMode="adjustPan|adjustResize"></activity>
+        <activity android:name=".dialog.FirebaseMessageDialog" />
+
+        <service android:name=".service.FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".service.NotificationListener" />
     </application>
 
 </manifest>
