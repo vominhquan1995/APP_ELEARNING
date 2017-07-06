@@ -71,7 +71,6 @@ public class LessonFragment extends BaseFragment implements LessonView {
 //            Uri myUri = Uri.parse("http://apielearning.azurewebsites.net/FilesUploaded/10_06_2017_09_39_31pdf-test.pdf");
 //            PDFView.fromUri(myUri).load();
 //            webView.loadUrl(APIConstant.HOST_NAME_IMAGE + lessonItem.getLessonUrl());
-
             //set information
             name.setText(String.format(context.getResources().getString(R.string.lesson_name), String.valueOf(lessonItem.getName())));
             typeLesson.setText(String.format(context.getResources().getString(R.string.lesson_source_type), String.valueOf(lessonItem.getSourseType())));

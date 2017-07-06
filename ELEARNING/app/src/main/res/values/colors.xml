@@ -74,6 +74,7 @@
     <color name="color_yes">#1565C0</color>
     <color name="color_no">#1565C0</color>
     <color name="color_tab_selected">#c4def9</color>
+    <color name="colorRed">#D32F2F</color>
 
 
 </resources>

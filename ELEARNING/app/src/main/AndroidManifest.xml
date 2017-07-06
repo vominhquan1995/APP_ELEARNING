@@ -27,7 +27,7 @@
             android:name=".activity.MainActivity"
             android:screenOrientation="sensorPortrait"
             android:windowSoftInputMode="adjustPan|adjustResize"></activity>
-        <activity android:name=".dialog.FirebaseMessageDialog" />
+        <activity android:name=".dialog.FirebaseMessageDialog" android:theme="@style/Base.Theme.AppCompat.Dialog"/>
 
         <service android:name=".service.FirebaseMessagingService">
             <intent-filter>

@@ -46,7 +46,6 @@ public class DialogLogOut {
                 }
             });
         }
-
         public Build setOnLogoutListener(OnLogoutListener onLogoutListener) {
             this.onLogoutListener = onLogoutListener;
             return this;

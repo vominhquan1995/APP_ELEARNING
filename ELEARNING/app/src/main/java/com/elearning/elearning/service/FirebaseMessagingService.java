@@ -27,7 +27,7 @@ public class FirebaseMessagingService extends
             JSONObject object = new JSONObject(params);
 //            Log.d("urlImage",object.getString("urlImage"));
             sendNotification(object.getString("title"),
-                    object.getString("body"));
+                    object.getString("body"),object.getString("urlImage"));
         } catch (Exception ex) {
 
         }
@@ -50,15 +50,15 @@ public class FirebaseMessagingService extends
 
     }
 
-    private void sendNotification(String title, String message) {
-
+    private void sendNotification(String title, String message,String urlImage) {
         Intent intent = new Intent(getApplicationContext(), FirebaseMessageDialog.class);
         intent.putExtra(Constant.FIREBASE_TITLE, title);
         intent.putExtra(Constant.FIREBASE_MSG, message);
+        intent.putExtra(Constant.FIREBASE_IMAGE, urlImage);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         new NotificationUtils(getApplicationContext())
-                .showNotificationMessage(R.drawable.logo_300_300, title, String.valueOf(Html.fromHtml(
-                        message.substring(0, message.length() >= 100 ? 100 : message.length()))));
+                .showNotificationMessage(R.drawable.logo_300_300, title,String.valueOf(Html.fromHtml(
+                        message.substring(0, message.length() >= 100 ? 100 : message.length()))),urlImage);
         startActivity(intent);
     }
 }
