@@ -1,64 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_notification"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/margin_10dp"
-    android:padding="@dimen/dialog_margin">
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@android:color/transparent"
         android:gravity="center"
         android:orientation="vertical"
         tools:ignore="UselessParent">
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/txtTitle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"
+            android:layout_weight="0.2"
             android:gravity="center"
+            android:text="Thông báo"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/txt_size_24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtBody"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="@dimen/margin_3dp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/txtTitle"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.95"
-                android:gravity="center|left"
-                android:text="Thông báo"
-                android:textColor="@color/colorRed"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_size_15" />
-            <ImageView
-                android:layout_margin="@dimen/margin_3dp"
-                android:id="@+id/imgCancel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.05"
-                android:background="@drawable/cancel"/>
-        </LinearLayout>
+            android:layout_weight="0.2"
+            android:gravity="center"
+            android:text="dsdsdsdsdsdsdsssssdsdsdsdsdsdsadsadadad"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageNotification"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_3dp"
+            android:layout_weight="0.6"
+            android:background="@drawable/background_avatar" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.9"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/imageNotification"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.8"
-                android:background="@drawable/background_avatar"/>
-            <TextView
-                android:id="@+id/txtBody"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="dsdsdsdsdsdsdsssssdsdsdsdsdsdsadsadadad"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"
+            android:layout_weight="0.1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_5dp"
+                android:layout_weight="0.5"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:padding="@dimen/padding_5dp"
+                android:text="@string/title_cancel"
+                android:textColor="@color/color_blue"
                 android:textSize="@dimen/text_size_15" />
+
+            <Button
+                android:id="@+id/btnView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_5dp"
+                android:layout_weight="0.5"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:padding="@dimen/padding_5dp"
+                android:text="@string/cap_view"
+                android:textColor="@color/color_blue" />
         </LinearLayout>
 
     </LinearLayout>

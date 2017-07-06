@@ -47,6 +47,7 @@
     <string name="cap_search_result">Result Search</string>
     <string name="title_search">Find course</string>
     <string name="cap_do_exam">Do exam</string>
+    <string name="cap_view">View</string>
 
     <!--validate_input-->
     <string name="validate_email">Please input email</string>
