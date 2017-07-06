@@ -48,6 +48,11 @@
     <string name="title_search">Find course</string>
     <string name="cap_do_exam">Do exam</string>
     <string name="cap_view">View</string>
+    <string name="cap_question_prev">Prev</string>
+    <string name="cap_question_next">Next</string>
+    <string name="cap_start">Start</string>
+    <string name="cap_info_exam">Information Exam</string>
+    <string name="cap_info_last_exam">Result Last Exam</string>
 
     <!--validate_input-->
     <string name="validate_email">Please input email</string>

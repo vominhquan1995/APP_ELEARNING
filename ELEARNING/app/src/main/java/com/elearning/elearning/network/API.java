@@ -88,7 +88,7 @@ public class API {
     public static void searchListCourse(final String keyword, OnAPIListener onAPIListener) {
         listener = onAPIListener;
         AndroidNetworking.post(APIConstant.COURSE_SEARCH)
-                .addBodyParameter(APIConstant.SEARCH,keyword)
+                .addBodyParameter(APIConstant.SEARCH, keyword)
                 .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()
@@ -101,6 +101,7 @@ public class API {
                             e.printStackTrace();
                         }
                     }
+
                     @Override
                     public void onError(ANError anError) {
                         listener.onError(anError.getMessage());
@@ -184,8 +185,8 @@ public class API {
     //get list lesson
     public static void listLesson(final String idCourse, OnAPIListener onAPIListener) {
         listener = onAPIListener;
-        AndroidNetworking.get(APIConstant.LIST_LESSON_HEADER_URL + idCourse+ APIConstant.LIST_LESSON_FOOTER_URL)
-                .addHeaders(APIConstant.BEARER, User.get().getToken())
+        AndroidNetworking.get(APIConstant.LIST_LESSON_HEADER_URL + idCourse + APIConstant.LIST_LESSON_FOOTER_URL)
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()
                 .getAsJSONArray(new JSONArrayRequestListener() {
@@ -197,6 +198,7 @@ public class API {
                             e.printStackTrace();
                         }
                     }
+
                     @Override
                     public void onError(ANError anError) {
                         listener.onError(anError.getMessage());
@@ -227,6 +229,81 @@ public class API {
                     }
                 });
     }
+
+    //get Information Exam
+    public static void getInformationExam(final String idLesson, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        Log.d("Token", User.get().getToken());
+        AndroidNetworking.get(APIConstant.INFO_EXAM_HEADER_URL + idLesson + APIConstant.INFO_EXAM_FOOTER_URL)
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            listener.onSuccessObject(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
+    //get history exam of user
+    public static void getHistoryExam(final String idLesson, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        Log.d("Token", User.get().getToken());
+        AndroidNetworking.get(APIConstant.HISTORY_EXAM_HEADER_URL + User.get().getUserId() + '/' + idLesson)
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            listener.onSuccessObject(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
+    //get list question for exam
+    public static void getListQuestion(final String idLesson, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.LIST_QUESTION_HEADER_URL + idLesson + APIConstant.LIST_QUESTION_FOOTER_URL)
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getErrorBody());
+                    }
+                });
+    }
+
     public interface OnAPIListener {
         void onSuccessObject(final JSONObject response) throws JSONException;
 

@@ -31,6 +31,14 @@ public interface APIConstant {
     //List Lesson
     String LIST_LESSON_HEADER_URL = HOST_NAME + "/courses/";
     String LIST_LESSON_FOOTER_URL = "/lessons";
+    //Get Information Exam
+    String INFO_EXAM_HEADER_URL = HOST_NAME + "/exams/";
+    String INFO_EXAM_FOOTER_URL = "/information";
+    //Get History Exam User
+    String HISTORY_EXAM_HEADER_URL = HOST_NAME + "/exams/";
+    //Get list question for exam
+    String LIST_QUESTION_HEADER_URL = HOST_NAME + "/exams/";
+    String LIST_QUESTION_FOOTER_URL = "/getQuestion";
     //Header
     String BEARER = "Bearer ";
     String AUTHORIZATION = "Authorization";
@@ -94,4 +102,30 @@ public interface APIConstant {
      * Search
      */
     String SEARCH = "search";
+
+    /**
+     * model exam information
+     */
+    String EXAMNAME="examName";
+    String TIMEEXAM="timeExam";
+    String NUMBERQUESTION="numberQuestion";
+    String IDEXAM="id";
+
+    /**
+     * model history exam
+     */
+    String EXAMID="examId";
+    String POINTEXAM="point";
+    String EXAMSTATUS="status";
+    String EXAMTIME="time";
+
+    /**
+     * model question
+     */
+    String IDQUESTION="idQuestion";
+    String CONTENTQUESTION="content";
+    String LISTANSWER="listAnswer";
+    String IDANSWER="idAnswer";
+    String CONTENTANSWER="contentAnswer";
+
 }

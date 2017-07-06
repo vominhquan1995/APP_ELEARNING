@@ -7,6 +7,7 @@ import android.view.View;
 import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.adapter.NavAdapter;
+import com.elearning.elearning.fragment.ExamFragment;
 import com.elearning.elearning.fragment.HomeFragment;
 import com.elearning.elearning.fragment.LessonFragment;
 import com.elearning.elearning.fragment.ListLessonFragment;
@@ -48,7 +49,7 @@ public class MainPresenter {
         fragmentNavigator.setOnStackChanged(new FragmentNavigator.onStackChanged() {
             @Override
             public void onChanged(Fragment fragment) {
-                if(fragment instanceof  ListLessonFragment){
+                if (fragment instanceof ListLessonFragment) {
                     mainView.updateToolbar(true, false, context.getResources().getString(R.string.menu_listlesson));
                 }
             }
@@ -77,6 +78,9 @@ public class MainPresenter {
         if (id.equals(context.getString(R.string.nav_home))) {
             fragmentNavigator.goToRoot();
             mainView.updateToolbar(false, false, id);
+        } else if (id.equals(context.getString(R.string.nav_exam))) {
+            mainView.updateToolbar(true, false, id);
+            switchFragment(new ExamFragment());
         } else if (id.equals(context.getString(R.string.nav_settings))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new UserInfoFragment());
@@ -95,7 +99,7 @@ public class MainPresenter {
         if (fragmentNavigator.getActiveFragment() instanceof LessonFragment) {
             mainView.updateToolbar(true, false, context.getString(R.string.menu_listlesson));
             fragmentNavigator.goOneBack();
-        }else{
+        } else {
             mainView.updateToolbar(false, false, context.getString(R.string.nav_home));
             fragmentNavigator.goToRoot();
             mainView.setItemSelected(context.getString(R.string.nav_home));

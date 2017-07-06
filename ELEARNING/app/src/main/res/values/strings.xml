@@ -51,6 +51,11 @@
     <string name="title_search">Tìm kiếm khóa học</string>
     <string name="cap_do_exam">Làm bài</string>
     <string name="cap_view">Xem</string>
+    <string name="cap_question_prev">Câu trước</string>
+    <string name="cap_question_next">Câu sau</string>
+    <string name="cap_start">Bắt đầu</string>
+    <string name="cap_info_exam">Thông tin bài kiểm tra</string>
+    <string name="cap_info_last_exam">Kết quả trước đó</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>
@@ -71,4 +76,13 @@
     <string name="lesson_source_type">Loại bài giảng: %s</string>
     <string name="lesson_time">Thời gian: %s phút</string>
     <string name="lesson_description">Mô tả : %s</string>
+    <!--item exam information-->
+    <string name="exam_name">Tên bài kiểm tra: %s</string>
+    <string name="exam_time">Thời gian:  %s phút </string>
+    <string name="exam_number_question">Số câu hỏi : %s</string>
+    <string formatted="false" name="exam_request_question">Yêu cầu : %s/%s</string>
+    <!--item exam history-->
+    <string name="exam_history_time">Thời gian : %s</string>
+    <string name="exam_history_point">Điểm số :  %s/100 </string>
+    <string name="exam_history_result">Kết quả : %s</string>
 </resources>
