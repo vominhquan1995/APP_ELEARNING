@@ -39,6 +39,8 @@ public interface APIConstant {
     //Get list question for exam
     String LIST_QUESTION_HEADER_URL = HOST_NAME + "/exams/";
     String LIST_QUESTION_FOOTER_URL = "/getQuestion";
+    //Check Answer
+    String CHECK_RESULT_URL = HOST_NAME + "/exams/check-answer";
     //Header
     String BEARER = "Bearer ";
     String AUTHORIZATION = "Authorization";
@@ -127,5 +129,11 @@ public interface APIConstant {
     String LISTANSWER="listAnswer";
     String IDANSWER="idAnswer";
     String CONTENTANSWER="contentAnswer";
+
+    String IDUSER="idUser";
+    String ID_EXAM="idExam";
+    String LISTID="listID";
+    String NUMBERRIGHT="numberRight";
+    String MESSAGE="message";
 
 }

@@ -40,6 +40,7 @@ public class LessonFragment extends BaseFragment implements LessonView {
 
     @Override
     public void initValue() {
+        showProgressDialog();
         lessonPresenter = new LessonPresenter(this);
     }
 

@@ -18,5 +18,8 @@ public class Constant {
     public static final String FIREBASE_MSG = "FIREBASE_MSG";
     public static final String FIREBASE_IMAGE = "FIREBASE_IMAGE";
     public static final String FIREBASE_TOPIC_USER = "all";
+    public static final String POS_UP = "UP";
+    public static final String POS_DOWN = "DOWN";
+    public static final String MSG_FAIL = "Sorry ! You fail";
 
 }

@@ -12,5 +12,7 @@ public interface ExamView {
 
     void onGetInfoFail(String mess);
 
+    void onReceiveReuslt(int point,String mess);
 
+    void onReceiveReusltFail(String mess);
 }

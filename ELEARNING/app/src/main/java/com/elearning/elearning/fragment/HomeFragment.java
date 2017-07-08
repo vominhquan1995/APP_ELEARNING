@@ -63,6 +63,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void initAction() {
         homePresenter.getListNewCourse(8);
+        getMainActivity().showProgressDialog();
         mCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -77,6 +78,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     public void onGetNewCourseSuccess(List<Course> courseArray) {
+        getMainActivity().dismissProgressDialog();
         //don't set this.listNewCourse=courseArray cuz notifyDataSetChanged will not working
         for (Course itemCourse : courseArray) {
             this.listNewCourse.add(itemCourse);

@@ -1,14 +1,23 @@
 package com.elearning.elearning.fragment;
 
+import android.app.Activity;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.support.annotation.IdRes;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.base.BaseFragment;
+import com.elearning.elearning.dialog.DialogResult;
 import com.elearning.elearning.mvp.model.Exam;
 import com.elearning.elearning.mvp.model.HistoryExam;
 import com.elearning.elearning.mvp.model.Question;
@@ -16,21 +25,34 @@ import com.elearning.elearning.mvp.presenter.ExamPresenter;
 import com.elearning.elearning.mvp.view.ExamView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import static com.elearning.elearning.prefs.Constant.MSG_FAIL;
+import static com.elearning.elearning.prefs.Constant.POS_DOWN;
+import static com.elearning.elearning.prefs.Constant.POS_UP;
 import static com.google.android.gms.internal.zzs.TAG;
 
 /**
  * Created by MinhQuan on 05/07/2017.
  */
 
-public class ExamFragment extends BaseFragment implements ExamView {
+public class ExamFragment extends BaseFragment implements ExamView, View.OnClickListener {
     private ExamPresenter examPresenter;
-    private TextView txtNameExam, txtNumberQuestion, txtTime, txtRequest, txtLastPoint, txtLastTime, txtLastStatus;
-    private TextView txtContentQuestion;
+    private TextView txtNameExam, txtNumberQuestion, txtTime, txtRequest, txtLastPoint, txtLastTime, txtLastStatus, txtTimeCountdown;
+    private TextView txtContentQuestion, txtIndexQuestion, txtNumberAnswer;
     private FrameLayout frameInfo, frameDoExam;
     private RadioGroup rg;
-    List<Question> listQuestionData;
+    private Button btnPrev, btnNext, btnDone;
+    private List<Question> listQuestionData;
+    private Question currentQuestion;
+    private int posCurrent, posHeaderAnswerCurrent;
+    private String[] listHeaderQuestion = new String[]{"A", "B", "C", "D", "E", "F"};
+    private Exam examInfo;
+    private ProgressBar prTimeCountdown;
+    private ArrayAnswer arrayAnswer;
+    private TimeCountdownAsyncTask timeCountdownAsyncTask;
+    private int idExam = 2;
 
     @Override
     public void initView() {
@@ -42,30 +64,45 @@ public class ExamFragment extends BaseFragment implements ExamView {
         txtLastTime = (TextView) view.findViewById(R.id.txtLastTime);
         txtLastStatus = (TextView) view.findViewById(R.id.txtLastStatus);
         txtContentQuestion = (TextView) view.findViewById(R.id.txtContentQuestion);
+        txtIndexQuestion = (TextView) view.findViewById(R.id.txtIndexQuestion);
+        txtTimeCountdown = (TextView) view.findViewById(R.id.txtTimeCountdown);
+        txtNumberAnswer = (TextView) view.findViewById(R.id.txtNumberAnswer);
         frameInfo = (FrameLayout) view.findViewById(R.id.frInfoExam);
         frameDoExam = (FrameLayout) view.findViewById(R.id.frDoExam);
+        btnNext = (Button) view.findViewById(R.id.btnNext);
+        btnPrev = (Button) view.findViewById(R.id.btnPrev);
+        btnDone = (Button) view.findViewById(R.id.btnDone);
         rg = (RadioGroup) view.findViewById(R.id.rg);
+        prTimeCountdown = (ProgressBar) view.findViewById(R.id.prTimeCountdown);
     }
 
     @Override
     public void initValue() {
-        examPresenter = new ExamPresenter(this);
-        listQuestionData = new ArrayList<>();
+//        examPresenter = new ExamPresenter(this);
+//        listQuestionData = new ArrayList<>();
+//        arrayAnswer = new ArrayAnswer();
+//        posCurrent = 0;
+//        posHeaderAnswerCurrent = 0;
+        init();
     }
 
     @Override
     public void initAction() {
-        examPresenter.getInfoExam(2);
+        examPresenter.getInfoExam(idExam);
+        showProgressDialog();
         view.findViewById(R.id.btnStart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 frameDoExam.setVisibility(View.VISIBLE);
                 frameInfo.setVisibility(View.GONE);
-                examPresenter.getListQuestion(2, new ExamPresenter.onGetListQuestion() {
+                showProgressDialog();
+                examPresenter.getListQuestion(idExam, new ExamPresenter.onGetListQuestion() {
                     @Override
                     public void getListQuestionSuccess(List<Question> listQuestion) {
-                        Log.d("List Question",String.valueOf(listQuestionData.size()));
+                        dismissProgressDialog();
                         listQuestionData = listQuestion;
+                        prTimeCountdown.setMax(2 * 60);
+                        timeCountdownAsyncTask.execute(2);
                         setQuestion(0);
                     }
 
@@ -74,6 +111,21 @@ public class ExamFragment extends BaseFragment implements ExamView {
 
                     }
                 });
+            }
+        });
+        btnNext.setOnClickListener(this);
+        btnPrev.setOnClickListener(this);
+        btnDone.setOnClickListener(this);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                //get index of radio checked
+                int indexChecked = rg.indexOfChild(view.findViewById(rg.getCheckedRadioButtonId()));
+                if (currentQuestion.getAnswerList().get(indexChecked).getIdAnswer() != -1) {
+                    arrayAnswer.add(currentQuestion.getIdQuestion(), currentQuestion.getAnswerList().get(indexChecked).getIdAnswer());
+                }
+                //update number question answer
+                txtNumberAnswer.setText(String.format(getResources().getString(R.string.cap_number_answered), String.valueOf(arrayAnswer.getSize()), String.valueOf(examInfo.getNumberQuesion())));
             }
         });
     }
@@ -85,14 +137,16 @@ public class ExamFragment extends BaseFragment implements ExamView {
 
     @Override
     public void onGetInfoSuccess(Exam exam) {
-        txtNameExam.setText(String.format(getResources().getString(R.string.exam_name), exam.getNameExam()));
-        txtNumberQuestion.setText(String.format(getResources().getString(R.string.exam_number_question), String.valueOf(exam.getNumberQuesion())));
-        txtTime.setText(String.format(getResources().getString(R.string.exam_time), String.valueOf(exam.getTimeExam())));
-        txtRequest.setText(String.format(getResources().getString(R.string.exam_request_question), String.valueOf(Math.round(exam.getNumberQuesion() * (0.75))), String.valueOf(exam.getNumberQuesion())));
+        examInfo = exam;
+        txtNameExam.setText(String.format(getResources().getString(R.string.exam_name), examInfo.getNameExam()));
+        txtNumberQuestion.setText(String.format(getResources().getString(R.string.exam_number_question), String.valueOf(examInfo.getNumberQuesion())));
+        txtTime.setText(String.format(getResources().getString(R.string.exam_time), String.valueOf(examInfo.getTimeExam())));
+        txtRequest.setText(String.format(getResources().getString(R.string.exam_request_question), String.valueOf(Math.round(examInfo.getNumberQuesion() * (0.75))), String.valueOf(exam.getNumberQuesion())));
         examPresenter.getHistoryExam(2, new ExamPresenter.onGetHistory() {
             @Override
             public void onGetHistorySuccess(HistoryExam historyExam) {
                 if (historyExam != null) {
+                    dismissProgressDialog();
                     txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), historyExam.getDateExam()));
                     txtLastPoint.setText(String.format(getResources().getString(R.string.exam_history_point), String.valueOf(historyExam.getPoint())));
                     txtLastStatus.setText(String.format(getResources().getString(R.string.exam_history_result), historyExam.getStatus()));
@@ -111,22 +165,238 @@ public class ExamFragment extends BaseFragment implements ExamView {
         Log.d(TAG, mess);
     }
 
-    private void setQuestion(int currentQuesiton) {
+    @Override
+    public void onReceiveReuslt(int point, String mess) {
+        dismissProgressDialog();
+        Drawable drawable;
+        if (mess.equals(MSG_FAIL)) {
+            drawable = getResources().getDrawable(R.drawable.result_fail);
+        } else {
+            drawable = getResources().getDrawable(R.drawable.result_pass);
+        }
+        new DialogResult.Build(getMainActivity())
+                .setTxtStatus(mess)
+                .setImgStatus(drawable)
+                .setTxtBody(String.format(context.getResources().getString(R.string.cap_reulst), String.valueOf(point), String.valueOf(examInfo.getNumberQuesion())))
+                .setOnLogoutListener(new DialogResult.Build.OnLogoutListener() {
+                    @Override
+                    public void onOk() {
+                        init();
+                    }
+                }).show();
+    }
+
+
+    @Override
+    public void onReceiveReusltFail(String mess) {
+
+    }
+
+    private void setQuestion(int posCurrent) {
         if (listQuestionData != null) {
-            txtContentQuestion.setText(listQuestionData.get(0).getContentQuestion());
+            currentQuestion = listQuestionData.get(posCurrent);
+            txtContentQuestion.setText(currentQuestion.getContentQuestion());
+            txtIndexQuestion.setText(String.format(getResources().getString(R.string.cap_index_question), String.valueOf(posCurrent + 1)));
             rg.removeAllViews();
-            for (Question.Answer answer : listQuestionData.get(0).getAnswerList()) {
+            posHeaderAnswerCurrent = 0;
+            for (Question.Answer answer : currentQuestion.getAnswerList()) {
                 RadioButton radioButton = new RadioButton(context);
-            radioButton.setButtonDrawable(R.drawable.general_comp_btn_radio);
-                radioButton.setText(answer.getContentAnswer());
+                radioButton.setButtonDrawable(R.drawable.custom_answer_choice);
+                radioButton.setText(String.format(getResources().getString(R.string.cap_struct_answer), listHeaderQuestion[posHeaderAnswerCurrent], answer.getContentAnswer()));
                 radioButton.setPadding(10, 0, 0, 0);
                 rg.addView(radioButton);
                 RadioGroup.LayoutParams params = (RadioGroup.LayoutParams) radioButton.getLayoutParams();
-                params.setMargins(0, 5, 0, 5);
+                params.setMargins(0, 15, 0, 15);
                 radioButton.setLayoutParams(params);
+                posHeaderAnswerCurrent++;
             }
-            ((RadioButton) rg.getChildAt(0)).setChecked(true);
+//            ((RadioButton) rg.getChildAt(0)).setChecked(true);
             rg.invalidate();
+        }
+    }
+
+    private void updatePosCurrent(String type) {
+        switch (type) {
+            case POS_UP:
+                if (posCurrent == listQuestionData.size() - 1) {
+                    posCurrent = 0;
+                } else {
+                    posCurrent++;
+                }
+                break;
+            case POS_DOWN:
+                if (posCurrent == 0) {
+                    posCurrent = listQuestionData.size() - 1;
+                } else {
+                    posCurrent--;
+                }
+                break;
+        }
+        setQuestion(posCurrent);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnPrev:
+                updatePosCurrent(POS_DOWN);
+                break;
+            case R.id.btnNext:
+                updatePosCurrent(POS_UP);
+                break;
+            case R.id.btnDone:
+                timeCountdownAsyncTask.cancelTask();
+                showProgressDialog();
+                break;
+        }
+    }
+
+    private void init() {
+        timeCountdownAsyncTask = new TimeCountdownAsyncTask(getMainActivity());
+        frameInfo.setVisibility(View.VISIBLE);
+        frameDoExam.setVisibility(View.GONE);
+        examPresenter = new ExamPresenter(this);
+        listQuestionData = new ArrayList<>();
+        arrayAnswer = new ArrayAnswer();
+        posCurrent = 0;
+        posHeaderAnswerCurrent = 0;
+    }
+
+    public class TimeCountdownAsyncTask extends AsyncTask<Integer, Integer, Void> {
+
+        private Activity contextParent;
+        private boolean isTaskCancelled = false;
+
+        public TimeCountdownAsyncTask(Activity contextParent) {
+            this.contextParent = contextParent;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            //start second
+            //don't hanlde UI on there
+            int minute = integers[0];
+            int second = minute * 60;
+            int secondCurrent = 59;
+            minute--;
+            while (second > 0) {
+                if (isTaskCancelled()) {
+                    //set time out
+                    second = 0;
+                } else {
+                    try {
+                        Thread.sleep(1000);
+                        if (secondCurrent > 0) {
+                            secondCurrent--;
+                        } else {
+                            secondCurrent = 59;
+                            minute--;
+                        }
+                        second--;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    // call onProgressUpdate
+                    publishProgress(minute, secondCurrent, second);
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //start first
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            //update UI after receive value from doInBackground
+            super.onProgressUpdate(values);
+            int minutes = values[0];
+            int seconds = values[1];
+            int secondCountdown = values[2];
+            //update UI
+            if (secondCountdown < 60) {
+                prTimeCountdown.setProgressTintList(ColorStateList.valueOf(Color.RED));
+            }
+            prTimeCountdown.setProgress(secondCountdown);
+            txtTimeCountdown.setText(String.format(contextParent.getResources().getString(R.string.cap_time_countdown), String.valueOf(minutes), String.valueOf(seconds)));
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            showProgressDialog();
+            playSound();
+            examPresenter.checkResult(idExam, arrayAnswer.getListAnswer());
+            txtTimeCountdown.setText("Hết giờ");
+        }
+
+        public void cancelTask() {
+            isTaskCancelled = true;
+        }
+
+        private boolean isTaskCancelled() {
+            return isTaskCancelled;
+        }
+    }
+
+    private class ArrayAnswer {
+        List<AnswerSend> listAnswerSends;
+
+        ArrayAnswer() {
+            listAnswerSends = new ArrayList<>();
+        }
+
+        private void add(int idQuestion, int idAnswer) {
+            Iterator<AnswerSend> i = listAnswerSends.iterator();
+            while (i.hasNext()) {
+                AnswerSend item = i.next();
+                if (item.getIdQuestion() == idQuestion) {
+                    i.remove();
+                }
+            }
+            this.listAnswerSends.add(new AnswerSend(idQuestion, idAnswer));
+        }
+
+        private List<String> getListAnswer() {
+            List<String> listAnswer = new ArrayList<>();
+            for (AnswerSend item : listAnswerSends) {
+                listAnswer.add(String.valueOf(item.getIdAnswer()));
+            }
+            return listAnswer;
+        }
+
+        private int getSize() {
+            return this.listAnswerSends.size();
+        }
+    }
+
+    //model
+    private class AnswerSend {
+        int idQuestion;
+        int idAnswer;
+
+        public AnswerSend(int idQuestion, int number) {
+            this.idQuestion = idQuestion;
+            this.idAnswer = number;
+        }
+
+        public int getIdQuestion() {
+            return idQuestion;
+        }
+
+        public int getIdAnswer() {
+            return idAnswer;
+        }
+
+        public void setIdQuestion(int idQuestion) {
+            this.idQuestion = idQuestion;
+        }
+
+        public void setIdAnswer(int idAnswer) {
+            this.idAnswer = idAnswer;
         }
     }
 }

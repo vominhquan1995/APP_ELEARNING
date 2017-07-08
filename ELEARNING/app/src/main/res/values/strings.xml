@@ -56,6 +56,7 @@
     <string name="cap_start">Bắt đầu</string>
     <string name="cap_info_exam">Thông tin bài kiểm tra</string>
     <string name="cap_info_last_exam">Kết quả trước đó</string>
+    <string name="cap_continute">Tiếp tục</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>
@@ -85,4 +86,9 @@
     <string name="exam_history_time">Thời gian : %s</string>
     <string name="exam_history_point">Điểm số :  %s/100 </string>
     <string name="exam_history_result">Kết quả : %s</string>
+    <string name="cap_index_question">Câu %s :</string>
+    <string  formatted="false" name="cap_struct_answer">%s . %s</string>
+    <string  formatted="false" name="cap_time_countdown">Thời gian còn lại: %s phút %s giây</string>
+    <string  formatted="false" name="cap_reulst">Bạn trả lời đúng %s trên %s câu.</string>
+    <string  formatted="false" name="cap_number_answered">Trả lời: %s/%s câu.</string>
 </resources>

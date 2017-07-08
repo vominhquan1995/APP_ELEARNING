@@ -33,18 +33,35 @@ public abstract class BaseFragment extends Fragment implements Init {
         return view;
 
     }
+
     protected SignInSignUpActivity getSignInSignUpActivity() {
         return ((SignInSignUpActivity) getActivity());
     }
+
     protected MainActivity getMainActivity() {
         return ((MainActivity) getActivity());
     }
+
     protected SharedPreferences getSharePreferences() {
         return getMainActivity().sharedPreferences;
     }
+
     protected void onBackPressed() {
 //        SystemHelper.hideKeyboard(context);
         getMainActivity().onBackPressed();
     }
+
+    protected void showProgressDialog() {
+        getMainActivity().showProgressDialog();
+    }
+
+    protected void dismissProgressDialog() {
+        getMainActivity().dismissProgressDialog();
+    }
+
+    protected void playSound() {
+        getMainActivity().playSound();
+    }
+
     public abstract int setFragmentView();
 }

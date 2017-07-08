@@ -84,6 +84,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
 
     @Override
     public void initValue() {
+        showProgressDialog();
         userInfoPresenter = new UserInfoPresenter(this);
     }
 
@@ -110,6 +111,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
 
     @Override
     public void getInfoSuccess(User user) {
+        dismissProgressDialog();
         edtEmail.setText(user.getEmail());
         edtFirstName.setText(user.getFirstName());
         edtLastName.setText(user.getLastName());

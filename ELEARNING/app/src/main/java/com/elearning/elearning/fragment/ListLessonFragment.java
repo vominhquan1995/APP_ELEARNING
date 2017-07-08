@@ -52,12 +52,14 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
         HomeFragment.setSendCourseID(new HomeFragment.onSendCourseID() {
             @Override
             public void onSend(int CourseId) {
+                showProgressDialog();
                 listLessonPresenter.getListLesson(3);
             }
         });
         MainActivity.setSendCourseID(new MainActivity.onSendCourseID() {
             @Override
             public void onSend(int CourseId) {
+                showProgressDialog();
                 listLessonPresenter.getListLesson(4);
             }
         });
@@ -78,6 +80,7 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
     @Override
     public void onGetListSuccess(List<Lesson> lessonList) {
         if (lessonList != null) {
+            dismissProgressDialog();
             for (Lesson itemLesson : lessonList) {
                 this.listLesson.add(itemLesson);
             }

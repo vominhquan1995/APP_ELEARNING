@@ -14,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import okhttp3.Response;
 
 import static com.elearning.elearning.network.APIConstant.CONTENTTYPE;
@@ -231,10 +233,10 @@ public class API {
     }
 
     //get Information Exam
-    public static void getInformationExam(final String idLesson, OnAPIListener onAPIListener) {
+    public static void getInformationExam(final String idExam, OnAPIListener onAPIListener) {
         listener = onAPIListener;
         Log.d("Token", User.get().getToken());
-        AndroidNetworking.get(APIConstant.INFO_EXAM_HEADER_URL + idLesson + APIConstant.INFO_EXAM_FOOTER_URL)
+        AndroidNetworking.get(APIConstant.INFO_EXAM_HEADER_URL + idExam + APIConstant.INFO_EXAM_FOOTER_URL)
                 .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()
@@ -292,6 +294,39 @@ public class API {
                     public void onResponse(JSONArray response) {
                         try {
                             listener.onSuccessArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getErrorBody());
+                    }
+                });
+    }
+
+    //check result
+    public static void checkResult(final int idExam, List<String> listIdAnswer, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(APIConstant.IDUSER, String.valueOf(User.get().getUserId()));
+            jsonObject.put(APIConstant.ID_EXAM, String.valueOf(idExam));
+            jsonObject.put(APIConstant.LISTID, listIdAnswer.toString().replace("[", "").replace("]", ""));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        AndroidNetworking.post(APIConstant.CHECK_RESULT_URL)
+                .addJSONObjectBody(jsonObject)
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            listener.onSuccessObject(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

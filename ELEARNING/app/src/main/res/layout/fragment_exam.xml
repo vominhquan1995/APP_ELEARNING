@@ -2,20 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
     android:background="@color/colorWhite"
+    android:clickable="true"
     android:orientation="vertical">
-
-    <android.support.v7.widget.CardView
-        style="@style/BCCardView"
+    <FrameLayout
+        android:id="@+id/frInfoExam"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <FrameLayout
-            android:id="@+id/frInfoExam"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+        <android.support.v7.widget.CardView
+            style="@style/BCCardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhite">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -145,130 +143,182 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_3dp"
                     android:layout_weight="0.1"
+                    android:background="@color/color_blue"
                     android:gravity="center"
                     android:text="@string/cap_start"
-                    android:layout_margin="@dimen/margin_3dp"
                     android:textColor="@color/colorWhite"
-                    android:background="@color/color_blue"
                     android:textSize="@dimen/text_size_15" />
             </LinearLayout>
-        </FrameLayout>
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/frDoExam"
+    <FrameLayout
+        android:id="@+id/frDoExam"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_3dp"
+        android:background="@color/colorWhite">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_3dp"
-            android:visibility="gone"
-            android:background="@color/colorWhite">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/lnInvestigate"
+            <android.support.v7.widget.CardView
+                style="@style/BCCardView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtContentQuestion"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.15"
-                    android:gravity="center"
-                    android:text="ASD"
-                    android:textSize="@dimen/text_size_18" />
+                android:layout_height="0dp"
+                android:layout_weight="0.3">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.7"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    android:gravity="center|top">
+                    android:padding="@dimen/padding_5dp">
+
                     <TextView
-                        android:id="@+id/textView2"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.2"
-                        android:gravity="center|left"
-                        android:textSize="@dimen/text_size_18"
-                        android:text="Câu 1: hai cộng ba" />
-                    <RadioGroup
-                        android:id="@+id/rg"
+                        android:text="Bài kiểm tra: Toán"
+                        android:textColor="@color/colorBlue500"
+                        android:textSize="@dimen/text_size_15"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/prTimeCountdown"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="0.18"
+                        android:max="100"
+                        android:progress="45"
+                        android:progressBackgroundTint="@color/colorBlack"
+                        android:progressTint="@color/color_green" />
+
+                    <TextView
+                        android:id="@+id/txtTimeCountdown"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.8"
-                        android:layout_marginLeft="@dimen/margin_3dp"
-                        android:layout_marginRight="@dimen/margin_3dp"
-                        android:orientation="vertical" />
+                        android:layout_weight="0.18"
+                        android:text="60 phút 30 giây" />
+
+                    <TextView
+                        android:id="@+id/txtNumberAnswer"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.18"
+                        android:text="Trả lời: 3/5 câu" />
+
+                    <Button
+                        android:id="@+id/btnDone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.3"
+                        android:background="@color/color_blue"
+                        android:layout_margin="@dimen/margin_3dp"
+                        android:text="Hoàn Thành"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/text_size_15" />
                 </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                style="@style/BCCardView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.7">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.15"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/btnPrev"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="@dimen/margin_3dp"
-                        android:layout_weight="0.5"
-                        android:gravity="center"
-                        android:text="@string/cap_question_next"
-                        android:background="@color/color_bright_orange"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/text_size_15" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btnNext"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="@dimen/margin_3dp"
-                        android:layout_weight="0.5"
-                        android:gravity="center"
-                        android:text="@string/cap_question_next"
-                        android:background="@color/color_bright_orange"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/text_size_15" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.8"
+                        android:gravity="center|top"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.15"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/txtIndexQuestion"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.2"
+                                android:gravity="center|right"
+                                android:text="Câu 1 :"
+                                android:textSize="@dimen/text_size_18"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txtContentQuestion"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/margin_5dp"
+                                android:layout_weight="0.3"
+                                android:gravity="center|left"
+                                android:text="hai cộng ba"
+                                android:textSize="@dimen/text_size_18" />
+                        </LinearLayout>
+
+                        <RadioGroup
+                            android:id="@+id/rg"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="@dimen/margin_3dp"
+                            android:layout_marginRight="@dimen/margin_3dp"
+                            android:layout_weight="0.8"
+                            android:orientation="vertical" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_weight="0.2"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnPrev"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/margin_3dp"
+                            android:layout_weight="0.5"
+                            android:background="@color/color_bright_orange"
+                            android:gravity="center"
+                            android:text="@string/cap_question_prev"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/text_size_15" />
+
+                        <Button
+                            android:id="@+id/btnNext"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/margin_3dp"
+                            android:layout_weight="0.5"
+                            android:background="@color/color_bright_orange"
+                            android:gravity="center"
+                            android:text="@string/cap_question_next"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/text_size_15" />
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/lnResult"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/txtName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="24dp" />
-
-                <TextView
-                    android:id="@+id/txtYear"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="0"
-                    android:textColor="@color/colorAccent" />
-
-                <Button
-                    android:id="@+id/btnConfirm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center" />
-            </LinearLayout>
-        </FrameLayout>
-    </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

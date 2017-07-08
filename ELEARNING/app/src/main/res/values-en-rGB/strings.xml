@@ -63,6 +63,7 @@
     <string name="validate_confirmpass_error">Password not macth</string>
     <string name="cap_signup_success">Registration success</string>
     <string name="cap_signup_fail">Registration fail</string>
+    <string name="cap_continute">Continute</string>
 
     <!--item course-->
     <string name="course_creadits">Number Creadits: %s</string>
@@ -74,4 +75,17 @@
     <string name="lesson_source_type">Type lesson: %s</string>
     <string name="lesson_time">Time: %s minutes</string>
     <string name="lesson_description">Description: %s</string>
+    <!--item exam information-->
+    <string name="exam_name">Name exam: %s</string>
+    <string name="exam_time">Time:  %s phút </string>
+    <string name="exam_number_question">Number Question : %s</string>
+    <string formatted="false" name="exam_request_question">Request : %s/%s</string>
+    <!--item exam history-->
+    <string name="exam_history_time">Time : %s</string>
+    <string name="exam_history_point">Point :  %s/100 </string>
+    <string name="exam_history_result">Result : %s</string>
+    <string name="cap_index_question">Question %s :</string>
+    <string  formatted="false" name="cap_time_countdown">Time remaining : %s minute %s seconds</string>
+    <string  formatted="false" name="cap_reulst">You answer right %s in %s question.</string>
+    <string  formatted="false" name="cap_number_answered">Number answered: %s/%s question.</string>
 </resources>

@@ -15,8 +15,8 @@ import com.elearning.elearning.activity.signin_signup.SignInSignUpActivity;
 import com.elearning.elearning.adapter.CourseAdapter;
 import com.elearning.elearning.adapter.NavAdapter;
 import com.elearning.elearning.base.BaseActivity;
-import com.elearning.elearning.dialog.DialogLogOut;
-import com.elearning.elearning.fragment.HomeFragment;
+import com.elearning.elearning.dialog.DialogConfirm;
+import com.elearning.elearning.helper.Sound;
 import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.mvp.model.User;
 import com.elearning.elearning.mvp.presenter.MainPresenter;
@@ -48,7 +48,8 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     private CourseAdapter mCourseAdapter;
     private List<Course> listCourse;
     private static MainActivity.onSendCourseID onSendCourseID;
-    public  static int IdLesson=0;
+    private static Sound sound;
+    public static int IdLesson = 0;
 
 
     @Override
@@ -95,6 +96,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         mRecyclerSearchResult.setAdapter(mCourseAdapter);
         // subscribe to topic
         FirebaseMessaging.getInstance().subscribeToTopic(Constant.FIREBASE_TOPIC_USER);
+        sound = new Sound(context);
     }
 
     @Override
@@ -184,7 +186,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 
     @Override
     public void onLogout() {
-        new DialogLogOut.Build(this).setOnLogoutListener(new DialogLogOut.Build.OnLogoutListener() {
+        new DialogConfirm.Build(this).setOnLogoutListener(new DialogConfirm.Build.OnLogoutListener() {
             @Override
             public void onConfirm() {
                 goLogin();
@@ -265,5 +267,9 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 
     public static void setIdLesson(int idLesson) {
         IdLesson = idLesson;
+    }
+
+    public void playSound() {
+        sound.playRingtone();
     }
 }

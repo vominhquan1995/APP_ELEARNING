@@ -5,6 +5,7 @@ import com.elearning.elearning.mvp.model.HistoryExam;
 import com.elearning.elearning.mvp.model.Question;
 import com.elearning.elearning.mvp.view.ExamView;
 import com.elearning.elearning.network.API;
+import com.elearning.elearning.network.APIConstant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,8 +24,8 @@ public class ExamPresenter {
         this.examView = examView;
     }
 
-    public void getInfoExam(int idLesson) {
-        API.getInformationExam(String.valueOf(idLesson), new API.OnAPIListener() {
+    public void getInfoExam(int idExam) {
+        API.getInformationExam(String.valueOf(idExam), new API.OnAPIListener() {
             @Override
             public void onSuccessObject(JSONObject response) throws JSONException {
                 examView.onGetInfoSuccess(Exam.parseInfoExam(response));
@@ -91,6 +92,31 @@ public class ExamPresenter {
             @Override
             public void onError(String errorMessage) {
                 onGetListQuestion.getListQuestionFail(errorMessage);
+            }
+        });
+    }
+
+
+    public void checkResult(int idEXam, List<String> listIdAnswer) {
+        API.checkResult(idEXam, listIdAnswer, new API.OnAPIListener() {
+            @Override
+            public void onSuccessObject(JSONObject response) throws JSONException {
+                examView.onReceiveReuslt(response.getInt(APIConstant.NUMBERRIGHT), response.getString(APIConstant.MESSAGE));
+            }
+
+            @Override
+            public void onSuccessArray(JSONArray response) throws JSONException {
+
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                examView.onReceiveReusltFail(errorMessage);
             }
         });
     }
