@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:clickable="true"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorGreen700"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/margin_5dp"
+                android:textSize="@dimen/txt_size_24sp"
+                android:text="@string/cap_history_done"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvCourseDone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:background="@color/color_bright_orange"
+                android:textStyle="bold"
+                android:layout_margin="@dimen/margin_5dp"
+                android:textSize="@dimen/txt_size_24sp"
+                android:text="@string/cap_history_studing"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvCourseStuding"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

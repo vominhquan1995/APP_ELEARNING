@@ -5,6 +5,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +23,7 @@ import com.elearning.elearning.mvp.model.User;
 import com.elearning.elearning.mvp.presenter.MainPresenter;
 import com.elearning.elearning.mvp.view.MainView;
 import com.elearning.elearning.prefs.Constant;
+import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
@@ -175,7 +177,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 
     @Override
     public void exitApp() {
-
+            finish();
     }
 
     @Override
@@ -242,21 +244,20 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     @Override
     public void onBackPressed() {
         onCloseDrawer();
-//        super.onBackPressed();
-        mainPresenter.onBackPressed();
         if (lnSearchContainer.getVisibility() == View.VISIBLE) {
             updateToolbar(false, false, null);
             findViewById(R.id.lnContainer).setVisibility(View.VISIBLE);
             lnSearchContainer.setVisibility(View.GONE);
             searchView.setQuery("", false);
             searchView.clearFocus();
+        }else{
+            mainPresenter.onBackPressed();
         }
     }
 
     public void gotoFragment(String id) {
         mainPresenter.goToFragment(id);
     }
-
     public interface onSendCourseID {
         void onSend(int CourseId);
     }

@@ -22,6 +22,12 @@ public interface APIConstant {
     //New Course
     String NEW_COURSE_HEADER_URL = HOST_NAME + "/courses/";
     String NEW_COURSE_FOOTER_URL = "/newcourses";
+    //MostCourse
+    String MOST_COURSE_HEADER_URL = HOST_NAME + "/courses/";
+    String MOST_COURSE_FOOTER_URL = "/mostcourses";
+    //Top Review Course
+    String TOP_REVIEW_COURSE_HEADER_URL = HOST_NAME + "/courses/";
+    String TOP_REVIEW_COURSE_FOOTER_URL = "/top-review";
     //Search Course
     String COURSE_SEARCH = HOST_NAME + "/courses/search";
     //User Information
@@ -41,6 +47,9 @@ public interface APIConstant {
     String LIST_QUESTION_FOOTER_URL = "/getQuestion";
     //Check Answer
     String CHECK_RESULT_URL = HOST_NAME + "/exams/check-answer";
+    //Get history learn
+    String HISTORY_LEARN_HEADER_URL=HOST_NAME+ "/students/";
+    String HISTORY_LEARN_FOOTER_URL="/history";
     //Header
     String BEARER = "Bearer ";
     String AUTHORIZATION = "Authorization";
@@ -135,5 +144,14 @@ public interface APIConstant {
     String LISTID="listID";
     String NUMBERRIGHT="numberRight";
     String MESSAGE="message";
+
+    /**
+     * history learn
+     */
+    String HISTORY_LEARN_ID="id";
+    String HISTORY_LEARN_NAMECOURSES="nameCourses" ;
+    String HISTORY_LEARN_URLIMAGE="urlImage" ;
+    String HISTORY_LEARN_STATUS="status" ;
+
 
 }

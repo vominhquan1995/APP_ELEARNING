@@ -57,6 +57,11 @@
     <string name="cap_info_exam">Thông tin bài kiểm tra</string>
     <string name="cap_info_last_exam">Kết quả trước đó</string>
     <string name="cap_continute">Tiếp tục</string>
+    <string name="cap_ask_done_exam">Bạn có chắc chắn nộp bài ?</string>
+    <string name="cap_done_exam">Hoàn Thành</string>
+    <string name="cap_loading">Đang tải...</string>
+    <string name="cap_history_studing">Khóa Học Đang Học</string>
+    <string name="cap_history_done">Khóa Học Đã Hoàn Thành</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>

@@ -5,7 +5,9 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.IdRes;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.base.BaseFragment;
+import com.elearning.elearning.dialog.DialogConfirm;
 import com.elearning.elearning.dialog.DialogResult;
 import com.elearning.elearning.mvp.model.Exam;
 import com.elearning.elearning.mvp.model.HistoryExam;
@@ -31,6 +34,8 @@ import java.util.List;
 import static com.elearning.elearning.prefs.Constant.MSG_FAIL;
 import static com.elearning.elearning.prefs.Constant.POS_DOWN;
 import static com.elearning.elearning.prefs.Constant.POS_UP;
+import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;
+import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 import static com.google.android.gms.internal.zzs.TAG;
 
 /**
@@ -39,7 +44,7 @@ import static com.google.android.gms.internal.zzs.TAG;
 
 public class ExamFragment extends BaseFragment implements ExamView, View.OnClickListener {
     private ExamPresenter examPresenter;
-    private TextView txtNameExam, txtNumberQuestion, txtTime, txtRequest, txtLastPoint, txtLastTime, txtLastStatus, txtTimeCountdown;
+    private TextView txtNameExam_Do, txtNameExam, txtNumberQuestion, txtTime, txtRequest, txtLastPoint, txtLastTime, txtLastStatus, txtTimeCountdown;
     private TextView txtContentQuestion, txtIndexQuestion, txtNumberAnswer;
     private FrameLayout frameInfo, frameDoExam;
     private RadioGroup rg;
@@ -57,6 +62,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     @Override
     public void initView() {
         txtNameExam = (TextView) view.findViewById(R.id.txtNameExam);
+        txtNameExam_Do = (TextView) view.findViewById(R.id.txtNameExam_Do);
         txtNumberQuestion = (TextView) view.findViewById(R.id.txtNumberQuestion);
         txtTime = (TextView) view.findViewById(R.id.txtTime);
         txtRequest = (TextView) view.findViewById(R.id.txtRequestQuestion);
@@ -97,13 +103,10 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                 frameInfo.setVisibility(View.GONE);
                 showProgressDialog();
                 examPresenter.getListQuestion(idExam, new ExamPresenter.onGetListQuestion() {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void getListQuestionSuccess(List<Question> listQuestion) {
-                        dismissProgressDialog();
-                        listQuestionData = listQuestion;
-                        prTimeCountdown.setMax(2 * 60);
-                        timeCountdownAsyncTask.execute(2);
-                        setQuestion(0);
+                        initDoExam(listQuestion);
                     }
 
                     @Override
@@ -122,7 +125,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                 //get index of radio checked
                 int indexChecked = rg.indexOfChild(view.findViewById(rg.getCheckedRadioButtonId()));
                 if (currentQuestion.getAnswerList().get(indexChecked).getIdAnswer() != -1) {
-                    arrayAnswer.add(currentQuestion.getIdQuestion(), currentQuestion.getAnswerList().get(indexChecked).getIdAnswer());
+                    arrayAnswer.add(currentQuestion.getIdQuestion(), currentQuestion.getAnswerList().get(indexChecked).getIdAnswer(), indexChecked);
                 }
                 //update number question answer
                 txtNumberAnswer.setText(String.format(getResources().getString(R.string.cap_number_answered), String.valueOf(arrayAnswer.getSize()), String.valueOf(examInfo.getNumberQuesion())));
@@ -147,7 +150,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
             public void onGetHistorySuccess(HistoryExam historyExam) {
                 if (historyExam != null) {
                     dismissProgressDialog();
-                    txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), historyExam.getDateExam()));
+                    txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), DATE_FORMAT.format(historyExam.getDateExam())));
                     txtLastPoint.setText(String.format(getResources().getString(R.string.exam_history_point), String.valueOf(historyExam.getPoint())));
                     txtLastStatus.setText(String.format(getResources().getString(R.string.exam_history_result), historyExam.getStatus()));
                 }
@@ -168,6 +171,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     @Override
     public void onReceiveReuslt(int point, String mess) {
         dismissProgressDialog();
+        playSound();
         Drawable drawable;
         if (mess.equals(MSG_FAIL)) {
             drawable = getResources().getDrawable(R.drawable.result_fail);
@@ -192,6 +196,12 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
 
     }
 
+    private void setChoice() {
+        if (arrayAnswer.getLastChoice(currentQuestion.getIdQuestion()) != -1) {
+            ((RadioButton) rg.getChildAt(arrayAnswer.getLastChoice(currentQuestion.getIdQuestion()))).setChecked(true);
+        }
+    }
+
     private void setQuestion(int posCurrent) {
         if (listQuestionData != null) {
             currentQuestion = listQuestionData.get(posCurrent);
@@ -210,7 +220,6 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                 radioButton.setLayoutParams(params);
                 posHeaderAnswerCurrent++;
             }
-//            ((RadioButton) rg.getChildAt(0)).setChecked(true);
             rg.invalidate();
         }
     }
@@ -233,6 +242,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                 break;
         }
         setQuestion(posCurrent);
+        setChoice();
     }
 
     @Override
@@ -245,10 +255,35 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                 updatePosCurrent(POS_UP);
                 break;
             case R.id.btnDone:
-                timeCountdownAsyncTask.cancelTask();
-                showProgressDialog();
+                new DialogConfirm.Build(getMainActivity())
+                        .setTxtTitle(getResources().getString(R.string.cap_done_exam))
+                        .setTxtBody(getResources().getString(R.string.cap_ask_done_exam))
+                        .setOnLogoutListener(new DialogConfirm.Build.OnLogoutListener() {
+                            @Override
+                            public void onConfirm() {
+                                timeCountdownAsyncTask.cancelTask();
+                                showProgressDialog();
+                            }
+
+                            @Override
+                            public void onCancel() {
+
+                            }
+                        }).show();
                 break;
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void initDoExam(List<Question> listQuestion) {
+        dismissProgressDialog();
+        txtNameExam_Do.setText(examInfo.getNameExam());
+        prTimeCountdown.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
+        txtNumberAnswer.setText(String.format(getResources().getString(R.string.cap_number_answered), "0", String.valueOf(examInfo.getNumberQuesion())));
+        listQuestionData = listQuestion;
+        prTimeCountdown.setMax(2 * 60);
+        timeCountdownAsyncTask.execute(2);
+        setQuestion(0);
     }
 
     private void init() {
@@ -309,6 +344,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
             //start first
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         protected void onProgressUpdate(Integer... values) {
             //update UI after receive value from doInBackground
@@ -328,7 +364,6 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             showProgressDialog();
-            playSound();
             examPresenter.checkResult(idExam, arrayAnswer.getListAnswer());
             txtTimeCountdown.setText("Hết giờ");
         }
@@ -349,7 +384,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
             listAnswerSends = new ArrayList<>();
         }
 
-        private void add(int idQuestion, int idAnswer) {
+        private void add(int idQuestion, int idAnswer, int pos) {
             Iterator<AnswerSend> i = listAnswerSends.iterator();
             while (i.hasNext()) {
                 AnswerSend item = i.next();
@@ -357,7 +392,17 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                     i.remove();
                 }
             }
-            this.listAnswerSends.add(new AnswerSend(idQuestion, idAnswer));
+            this.listAnswerSends.add(new AnswerSend(idQuestion, idAnswer, pos));
+        }
+
+        private int getLastChoice(int idQuestion) {
+            int pos = -1;
+            for (AnswerSend item : listAnswerSends) {
+                if (item.getIdQuestion() == idQuestion) {
+                    pos = item.getPosCurrent();
+                }
+            }
+            return pos;
         }
 
         private List<String> getListAnswer() {
@@ -377,10 +422,12 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     private class AnswerSend {
         int idQuestion;
         int idAnswer;
+        int posCurrent;
 
-        public AnswerSend(int idQuestion, int number) {
+        public AnswerSend(int idQuestion, int number, int posCurrent) {
             this.idQuestion = idQuestion;
             this.idAnswer = number;
+            this.posCurrent = posCurrent;
         }
 
         public int getIdQuestion() {
@@ -397,6 +444,14 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
 
         public void setIdAnswer(int idAnswer) {
             this.idAnswer = idAnswer;
+        }
+
+        public void setPosCurrent(int posCurrent) {
+            this.posCurrent = posCurrent;
+        }
+
+        public int getPosCurrent() {
+            return posCurrent;
         }
     }
 }

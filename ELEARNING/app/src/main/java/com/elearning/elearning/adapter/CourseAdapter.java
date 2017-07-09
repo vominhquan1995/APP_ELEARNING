@@ -21,6 +21,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 
 /**
@@ -58,8 +59,8 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
         courseViewHolder.name.setText(item.getNameCourses());
         courseViewHolder.credits.setText(String.format(context.getResources().getString(R.string.course_creadits), String.valueOf(item.getNumberCredits())));
         courseViewHolder.donor.setText(String.format(context.getResources().getString(R.string.course_donor), item.getDonors()));
-        courseViewHolder.dateStart.setText(String.format(context.getResources().getString(R.string.course_date_start), DATE_FORMAT_YYYYMMDD.format(item.getDateStart())));
-        courseViewHolder.dateEnd.setText(String.format(context.getResources().getString(R.string.course_date_end), DATE_FORMAT_YYYYMMDD.format(item.getDateEnd())));
+        courseViewHolder.dateStart.setText(String.format(context.getResources().getString(R.string.course_date_start), DATE_FORMAT.format(item.getDateStart())));
+        courseViewHolder.dateEnd.setText(String.format(context.getResources().getString(R.string.course_date_end), DATE_FORMAT.format(item.getDateEnd())));
     }
 
     @Override

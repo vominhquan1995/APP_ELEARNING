@@ -14,6 +14,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import com.elearning.elearning.R;
 import com.elearning.elearning.network.APIConstant;
 
 import java.io.IOException;
@@ -59,7 +60,6 @@ public class NotificationUtils {
             if (imageUrl.length() > 4 && Patterns.WEB_URL.matcher(APIConstant.HOST_NAME_IMAGE+imageUrl)
                     .matches()) {
                 Bitmap bitmap = getBitmapFromURL(APIConstant.HOST_NAME_IMAGE+imageUrl);
-
                 if (bitmap != null) {
                     // show big notification
                     showBigNotification(bitmap, builder, notificationIcon, title, message,
@@ -81,7 +81,6 @@ public class NotificationUtils {
                                        String title, String message, PendingIntent pendingIntent, Uri notificationSound) {
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         inboxStyle.addLine(message);
-
         Notification notification;
         notification = builder.setSmallIcon(icon).setTicker(title).setWhen(0)
                 .setAutoCancel(true)
@@ -121,7 +120,6 @@ public class NotificationUtils {
                 .setLights(Color.GREEN, 3000, 3000) // led light
                 .setContentIntent(pendingIntent)
                 .build();
-
         NotificationManager notificationManager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(NOTIFICATION_ID_BIG_IMAGE, notification);

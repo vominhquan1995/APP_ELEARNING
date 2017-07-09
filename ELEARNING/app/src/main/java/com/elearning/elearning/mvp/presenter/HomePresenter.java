@@ -42,4 +42,52 @@ public class HomePresenter {
             }
         });
     }
+
+    public void getListMostCourse(int numberItem) {
+        API.listMostCourse(String.valueOf(numberItem), new API.OnAPIListener() {
+            @Override
+            public void onSuccessObject(JSONObject response) throws JSONException {
+
+            }
+
+            @Override
+            public void onSuccessArray(JSONArray response) throws JSONException {
+                homeView.onGetMostCourseSuccess(Course.getListCourse(response));
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                homeView.onGetMostCourseFail(errorMessage);
+            }
+        });
+    }
+
+    public void getListTopReviewCourse(int numberItem) {
+        API.listReviewCourse(String.valueOf(numberItem), new API.OnAPIListener() {
+            @Override
+            public void onSuccessObject(JSONObject response) throws JSONException {
+
+            }
+
+            @Override
+            public void onSuccessArray(JSONArray response) throws JSONException {
+                homeView.onGetTopReviewCourseSuccess(Course.getListCourse(response));
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                homeView.onGetTopReviewCourseFail(errorMessage);
+            }
+        });
+    }
 }

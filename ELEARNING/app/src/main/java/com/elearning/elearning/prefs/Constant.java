@@ -6,9 +6,7 @@ package com.elearning.elearning.prefs;
 
 public class Constant {
     public static final String TAG = "bitcare";
-
     public static final long SPLASH_TIME = 500; // milliseconds
-
     public static final String AUTO_LOGIN = "AUTO_LOGIN";
     public static final String USER_EMAIL = "USER_EMAIL";
     public static final String USER_PW = "USER_PW";
@@ -21,5 +19,9 @@ public class Constant {
     public static final String POS_UP = "UP";
     public static final String POS_DOWN = "DOWN";
     public static final String MSG_FAIL = "Sorry ! You fail";
+    public static final int TIME_AUTO_CLOSE_DIALOG = 3000;
+    public static final int NUMBER_ITEM_SLIDE= 8;
+    public static final String TYPE_PDF="PDF";
+    public static final String TYPE_VIDEO="Video";
 
 }

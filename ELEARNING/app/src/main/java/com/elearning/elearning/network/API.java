@@ -20,6 +20,7 @@ import okhttp3.Response;
 
 import static com.elearning.elearning.network.APIConstant.CONTENTTYPE;
 import static com.elearning.elearning.network.APIConstant.HEADERFORM;
+import static com.elearning.elearning.network.APIConstant.HISTORY_LEARN_FOOTER_URL;
 import static com.elearning.elearning.network.APIConstant.USER_EDIT_INFO_URL;
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 
@@ -74,6 +75,78 @@ public class API {
                     public void onResponse(String response) {
                         try {
                             listener.onString(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
+    //get list new course
+    public static void listNewCourse(final String numberItem, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.NEW_COURSE_HEADER_URL + numberItem + APIConstant.NEW_COURSE_FOOTER_URL)
+                .addHeaders(APIConstant.BEARER, User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
+    //get list most course
+    public static void listMostCourse(final String numberItem, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.MOST_COURSE_HEADER_URL + numberItem + APIConstant.MOST_COURSE_FOOTER_URL)
+                .addHeaders(APIConstant.BEARER, User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
+    //get list top review course
+    public static void listReviewCourse(final String numberItem, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.TOP_REVIEW_COURSE_HEADER_URL + numberItem + APIConstant.TOP_REVIEW_COURSE_FOOTER_URL)
+                .addHeaders(APIConstant.BEARER, User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -208,29 +281,6 @@ public class API {
                 });
     }
 
-    //get list new course
-    public static void listNewCourse(final String numberItem, OnAPIListener onAPIListener) {
-        listener = onAPIListener;
-        AndroidNetworking.get(APIConstant.NEW_COURSE_HEADER_URL + numberItem + APIConstant.NEW_COURSE_FOOTER_URL)
-                .addHeaders(APIConstant.BEARER, User.get().getToken())
-                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
-                .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            listener.onSuccessArray(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        listener.onError(anError.getMessage());
-                    }
-                });
-    }
 
     //get Information Exam
     public static void getInformationExam(final String idExam, OnAPIListener onAPIListener) {
@@ -327,6 +377,30 @@ public class API {
                     public void onResponse(JSONObject response) {
                         try {
                             listener.onSuccessObject(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getErrorBody());
+                    }
+                });
+    }
+
+    //get history
+    public static void getHistory(OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.HISTORY_LEARN_HEADER_URL + User.get().getUserId() + HISTORY_LEARN_FOOTER_URL)
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

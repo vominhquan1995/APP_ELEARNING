@@ -12,4 +12,12 @@ public interface HomeView {
     void onGetNewCourseSuccess(List<Course> courseArray);
 
     void onGetNewCourseFail(String message);
+
+    void onGetMostCourseSuccess(List<Course> courseArray);
+
+    void onGetMostCourseFail(String message);
+
+    void onGetTopReviewCourseSuccess(List<Course> courseArray);
+
+    void onGetTopReviewCourseFail(String message);
 }

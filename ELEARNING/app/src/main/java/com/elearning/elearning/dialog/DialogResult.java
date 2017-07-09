@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.elearning.elearning.R;
+
+import static com.elearning.elearning.prefs.Constant.TIME_AUTO_CLOSE_DIALOG;
 
 
 /**

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,11 +27,12 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
+import static com.elearning.elearning.prefs.Constant.TIME_AUTO_CLOSE_DIALOG;
+
 public class FirebaseMessageDialog extends AppCompatActivity {
     private TextView txtTitle, txtBody;
     private ImageView imgContent;
     private Button btnCancel, btnView;
-    private Sound sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,6 @@ public class FirebaseMessageDialog extends AppCompatActivity {
         String urlImage = getIntent().getExtras().getString(Constant.FIREBASE_IMAGE);
         final View notificationView = LayoutInflater
                 .from(this).inflate(R.layout.dialog_notification2, (ViewGroup) findViewById(R.id.dialog_notification));
-        sound = new Sound(this);
         txtTitle = (TextView) notificationView.findViewById(R.id.txtTitle);
         txtBody = (TextView) notificationView.findViewById(R.id.txtBody);
         imgContent = (ImageView) notificationView.findViewById(R.id.imageNotification);
@@ -70,8 +71,12 @@ public class FirebaseMessageDialog extends AppCompatActivity {
         dialogNotification.setCanceledOnTouchOutside(false);
         dialogNotification.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialogNotification.show();
-        if (dialogNotification.isShowing()) {
-            sound.playRingtone();
-        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+                dialogNotification.dismiss();
+            }
+        }, TIME_AUTO_CLOSE_DIALOG);
     }
 }

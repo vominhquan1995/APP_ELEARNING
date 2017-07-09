@@ -64,6 +64,11 @@
     <string name="cap_signup_success">Registration success</string>
     <string name="cap_signup_fail">Registration fail</string>
     <string name="cap_continute">Continute</string>
+    <string name="cap_ask_done_exam">Do you want to finish your exam ?</string>
+    <string name="cap_done_exam">Finish</string>
+    <string name="cap_loading">Loading...</string>
+    <string name="cap_history_studing">Course Sutding</string>
+    <string name="cap_history_done">Course Done</string>
 
     <!--item course-->
     <string name="course_creadits">Number Creadits: %s</string>
@@ -79,13 +84,13 @@
     <string name="exam_name">Name exam: %s</string>
     <string name="exam_time">Time:  %s phút </string>
     <string name="exam_number_question">Number Question : %s</string>
-    <string formatted="false" name="exam_request_question">Request : %s/%s</string>
+    <string name="exam_request_question" formatted="false">Request : %s/%s</string>
     <!--item exam history-->
     <string name="exam_history_time">Time : %s</string>
     <string name="exam_history_point">Point :  %s/100 </string>
     <string name="exam_history_result">Result : %s</string>
     <string name="cap_index_question">Question %s :</string>
-    <string  formatted="false" name="cap_time_countdown">Time remaining : %s minute %s seconds</string>
-    <string  formatted="false" name="cap_reulst">You answer right %s in %s question.</string>
-    <string  formatted="false" name="cap_number_answered">Number answered: %s/%s question.</string>
+    <string name="cap_time_countdown" formatted="false">Time remaining : %s minute %s seconds</string>
+    <string name="cap_reulst" formatted="false">You answer right %s in %s question.</string>
+    <string name="cap_number_answered" formatted="false">Number answered: %s/%s question.</string>
 </resources>

@@ -2,12 +2,15 @@ package com.elearning.elearning.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.elearning.elearning.R;
+
+import static com.elearning.elearning.prefs.Constant.TIME_AUTO_CLOSE_DIALOG;
 
 
 /**
@@ -20,7 +23,9 @@ public class DialogConfirm {
         private AlertDialog dialog;
         private TextView btnCancel;
         private TextView btnConfirm;
+        private TextView txtTitle, txtBody;
         private OnLogoutListener onLogoutListener;
+
         public Build(Activity activity) {
             builder = new AlertDialog.Builder(activity);
             LayoutInflater inflater = activity.getLayoutInflater();
@@ -31,6 +36,8 @@ public class DialogConfirm {
             dialog.setCanceledOnTouchOutside(false);
             btnConfirm = (TextView) view.findViewById(R.id.btnConfirm);
             btnCancel = (TextView) view.findViewById(R.id.btnCancel);
+            txtTitle = (TextView) view.findViewById(R.id.txtTitle);
+            txtBody = (TextView) view.findViewById(R.id.txtBody);
             btnConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -46,8 +53,19 @@ public class DialogConfirm {
                 }
             });
         }
+
         public Build setOnLogoutListener(OnLogoutListener onLogoutListener) {
             this.onLogoutListener = onLogoutListener;
+            return this;
+        }
+
+        public Build setTxtTitle(String title) {
+            this.txtTitle.setText(title);
+            return this;
+        }
+
+        public Build setTxtBody(String body) {
+            this.txtBody.setText(body);
             return this;
         }
 
@@ -55,6 +73,12 @@ public class DialogConfirm {
             Log.d(TAG, "show: ");
             if (!dialog.isShowing()) {
                 dialog.show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                    }
+                }, TIME_AUTO_CLOSE_DIALOG);
             }
         }
 

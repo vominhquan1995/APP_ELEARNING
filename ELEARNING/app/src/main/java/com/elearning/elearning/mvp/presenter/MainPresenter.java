@@ -8,6 +8,7 @@ import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.adapter.NavAdapter;
 import com.elearning.elearning.fragment.ExamFragment;
+import com.elearning.elearning.fragment.HistoryFragment;
 import com.elearning.elearning.fragment.HomeFragment;
 import com.elearning.elearning.fragment.LessonFragment;
 import com.elearning.elearning.fragment.ListLessonFragment;
@@ -81,6 +82,9 @@ public class MainPresenter {
         } else if (id.equals(context.getString(R.string.nav_exam))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new ExamFragment());
+        } else if (id.equals(context.getString(R.string.nav_history))) {
+            mainView.updateToolbar(true, false, id);
+            switchFragment(new HistoryFragment());
         } else if (id.equals(context.getString(R.string.nav_settings))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new UserInfoFragment());
@@ -99,10 +103,14 @@ public class MainPresenter {
         if (fragmentNavigator.getActiveFragment() instanceof LessonFragment) {
             mainView.updateToolbar(true, false, context.getString(R.string.menu_listlesson));
             fragmentNavigator.goOneBack();
-        } else {
+        } else if (fragmentNavigator.getActiveFragment() instanceof ExamFragment ||
+                fragmentNavigator.getActiveFragment() instanceof UserInfoFragment ||
+                fragmentNavigator.getActiveFragment() instanceof ListLessonFragment || fragmentNavigator.getActiveFragment() instanceof HistoryFragment) {
             mainView.updateToolbar(false, false, context.getString(R.string.nav_home));
             fragmentNavigator.goToRoot();
             mainView.setItemSelected(context.getString(R.string.nav_home));
+        } else {
+            mainView.exitApp();
         }
     }
 
