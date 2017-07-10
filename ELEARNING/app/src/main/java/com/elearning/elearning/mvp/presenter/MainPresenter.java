@@ -12,6 +12,7 @@ import com.elearning.elearning.fragment.HistoryFragment;
 import com.elearning.elearning.fragment.HomeFragment;
 import com.elearning.elearning.fragment.LessonFragment;
 import com.elearning.elearning.fragment.ListLessonFragment;
+import com.elearning.elearning.fragment.NotificationFragment;
 import com.elearning.elearning.fragment.UserInfoFragment;
 import com.elearning.elearning.helper.FragmentNavigator;
 import com.elearning.elearning.mvp.model.Course;
@@ -85,7 +86,11 @@ public class MainPresenter {
         } else if (id.equals(context.getString(R.string.nav_history))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new HistoryFragment());
-        } else if (id.equals(context.getString(R.string.nav_settings))) {
+        } else if (id.equals(context.getString(R.string.nav_notifications))) {
+            mainView.updateToolbar(true, false, id);
+            switchFragment(new NotificationFragment());
+        }
+        else if (id.equals(context.getString(R.string.nav_settings))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new UserInfoFragment());
         } else if (id.equals(context.getString(R.string.menu_listlesson))) {
@@ -105,7 +110,9 @@ public class MainPresenter {
             fragmentNavigator.goOneBack();
         } else if (fragmentNavigator.getActiveFragment() instanceof ExamFragment ||
                 fragmentNavigator.getActiveFragment() instanceof UserInfoFragment ||
-                fragmentNavigator.getActiveFragment() instanceof ListLessonFragment || fragmentNavigator.getActiveFragment() instanceof HistoryFragment) {
+                fragmentNavigator.getActiveFragment() instanceof ListLessonFragment
+                || fragmentNavigator.getActiveFragment() instanceof HistoryFragment
+                || fragmentNavigator.getActiveFragment() instanceof  NotificationFragment) {
             mainView.updateToolbar(false, false, context.getString(R.string.nav_home));
             fragmentNavigator.goToRoot();
             mainView.setItemSelected(context.getString(R.string.nav_home));

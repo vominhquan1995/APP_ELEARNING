@@ -53,6 +53,8 @@
     <string name="cap_start">Start</string>
     <string name="cap_info_exam">Information Exam</string>
     <string name="cap_info_last_exam">Result Last Exam</string>
+    <string name="cap_notification_end">Date end : %s</string>
+    <string name="cap_notification_start">Date start : %s</string>
 
     <!--validate_input-->
     <string name="validate_email">Please input email</string>

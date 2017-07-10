@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,20 +52,14 @@ public class FirebaseMessageDialog extends AppCompatActivity {
         //set value
         txtTitle.setText(title);
         txtBody.setText(message);
-        Picasso.with(this)
-                .load(APIConstant.HOST_NAME_IMAGE + urlImage)
-                .into(imgContent);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NotificationManager notificationManager =
-                        (NotificationManager) getApplicationContext()
-                                .getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.cancelAll();
-                FirebaseMessageDialog.this.finish();
-                finish();
-            }
-        });
+        if (Patterns.WEB_URL.matcher(APIConstant.HOST_NAME_IMAGE + urlImage)
+                .matches()) {
+            Picasso.with(this)
+                    .load(APIConstant.HOST_NAME_IMAGE + urlImage)
+                    .into(imgContent);
+        } else {
+            imgContent.setVisibility(View.GONE);
+        }
         final AlertDialog dialogNotification = new AlertDialog.Builder(this)
                 .setView(notificationView).create();
         dialogNotification.setCancelable(false);
@@ -78,5 +73,17 @@ public class FirebaseMessageDialog extends AppCompatActivity {
                 dialogNotification.dismiss();
             }
         }, TIME_AUTO_CLOSE_DIALOG);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NotificationManager notificationManager =
+                        (NotificationManager) getApplicationContext()
+                                .getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.cancelAll();
+//                FirebaseMessageDialog.this.finish();
+                finish();
+                dialogNotification.dismiss();
+            }
+        });
     }
 }

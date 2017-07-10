@@ -50,6 +50,8 @@ public interface APIConstant {
     //Get history learn
     String HISTORY_LEARN_HEADER_URL=HOST_NAME+ "/students/";
     String HISTORY_LEARN_FOOTER_URL="/history";
+    //Get list notififi
+    String NOTFICATION_URL=HOST_NAME+ "/notification";
     //Header
     String BEARER = "Bearer ";
     String AUTHORIZATION = "Authorization";
@@ -152,6 +154,16 @@ public interface APIConstant {
     String HISTORY_LEARN_NAMECOURSES="nameCourses" ;
     String HISTORY_LEARN_URLIMAGE="urlImage" ;
     String HISTORY_LEARN_STATUS="status" ;
+
+    /**
+     * model notification
+     */
+    String NOTIFICATION_ID="id";
+    String NOTIFICATION_TITLE="title";
+    String NOTIFICATION_BODY="body";
+    String NOTIFICATION_URLIMAGE="urlImage";
+    String NOTIFICATION_ADDDATE="dateStart";
+    String NOTIFICATION_EDITDATE="dateEnd";
 
 
 }

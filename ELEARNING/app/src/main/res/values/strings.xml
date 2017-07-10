@@ -62,6 +62,8 @@
     <string name="cap_loading">Đang tải...</string>
     <string name="cap_history_studing">Khóa Học Đang Học</string>
     <string name="cap_history_done">Khóa Học Đã Hoàn Thành</string>
+    <string name="cap_notification_end">Ngày hết hạn : %s</string>
+    <string name="cap_notification_start">Ngày bắt đầu : %s</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>
