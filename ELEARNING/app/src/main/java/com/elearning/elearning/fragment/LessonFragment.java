@@ -41,6 +41,7 @@ public class LessonFragment extends BaseFragment implements LessonView {
     private TextView time;
     private TextView typeLesson;
     private TextView description;
+    private static onDoExam onDoExam;
     private LinearLayout lnContent, lnInfo;
     private ReadFilePdf readFilePdf;
 
@@ -68,6 +69,7 @@ public class LessonFragment extends BaseFragment implements LessonView {
         ListLessonFragment.setOnSendLessonItem(new ListLessonFragment.onSendLessonItem() {
             @Override
             public void onSend(Lesson lesson) {
+                //set value of lesson
                 lessonItem = lesson;
                 setUI();
             }
@@ -85,6 +87,15 @@ public class LessonFragment extends BaseFragment implements LessonView {
                     lnInfo.setVisibility(View.GONE);
                 } else {
                     lnInfo.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        view.findViewById(R.id.btnDoExam).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getMainActivity().gotoFragment(context.getResources().getString(R.string.nav_exam));
+                if (onDoExam != null) {
+                    onDoExam.onDoExam(lessonItem.getId());
                 }
             }
         });
@@ -154,5 +165,13 @@ public class LessonFragment extends BaseFragment implements LessonView {
     protected void onBackPressed() {
         super.onBackPressed();
 
+    }
+
+    public static void setOnDoExam(LessonFragment.onDoExam onDoExam) {
+        LessonFragment.onDoExam = onDoExam;
+    }
+
+    public interface onDoExam {
+        void onDoExam(int idLesson);
     }
 }

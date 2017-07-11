@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.List;
 
 import okhttp3.Response;
@@ -21,6 +22,8 @@ import okhttp3.Response;
 import static com.elearning.elearning.network.APIConstant.CONTENTTYPE;
 import static com.elearning.elearning.network.APIConstant.HEADERFORM;
 import static com.elearning.elearning.network.APIConstant.HISTORY_LEARN_FOOTER_URL;
+import static com.elearning.elearning.network.APIConstant.UPLOAD_AVATAR_FOOTER_URL;
+import static com.elearning.elearning.network.APIConstant.UPLOAD_AVATAR_HEADER_URL;
 import static com.elearning.elearning.network.APIConstant.USER_EDIT_INFO_URL;
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 
@@ -283,10 +286,10 @@ public class API {
 
 
     //get Information Exam
-    public static void getInformationExam(final String idExam, OnAPIListener onAPIListener) {
+    public static void getInformationExam(final String idLesson, OnAPIListener onAPIListener) {
         listener = onAPIListener;
         Log.d("Token", User.get().getToken());
-        AndroidNetworking.get(APIConstant.INFO_EXAM_HEADER_URL + idExam + APIConstant.INFO_EXAM_FOOTER_URL)
+        AndroidNetworking.get(APIConstant.INFO_EXAM_HEADER_URL + idLesson + APIConstant.INFO_EXAM_FOOTER_URL)
                 .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()
@@ -307,10 +310,9 @@ public class API {
                 });
     }
 
-    //get history exam of user
+    //get last history exam of user
     public static void getHistoryExam(final String idLesson, OnAPIListener onAPIListener) {
         listener = onAPIListener;
-        Log.d("Token", User.get().getToken());
         AndroidNetworking.get(APIConstant.HISTORY_EXAM_HEADER_URL + User.get().getUserId() + '/' + idLesson)
                 .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
@@ -320,6 +322,30 @@ public class API {
                     public void onResponse(JSONObject response) {
                         try {
                             listener.onSuccessObject(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
+    //get all history exam of user
+    public static void getHistoryExamAll(OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.HISTORY_DO_EXAM_HEADER_URL + User.get().getUserId() + APIConstant.HISTORY_DO_EXAM_FOOTER_URL)
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -436,6 +462,32 @@ public class API {
                     }
                 });
     }
+
+    //upload avatar
+    public static void uploadAvatar(File file, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.post(UPLOAD_AVATAR_HEADER_URL + User.get().getUserId() + UPLOAD_AVATAR_FOOTER_URL)
+                .addFileBody(new File("/storage/emulated/0/DCIM/Facebook/FB_IMG_1494958038652.jpg"))
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            listener.onString(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getErrorBody());
+                    }
+                });
+    }
+
     public interface OnAPIListener {
         void onSuccessObject(final JSONObject response) throws JSONException;
 

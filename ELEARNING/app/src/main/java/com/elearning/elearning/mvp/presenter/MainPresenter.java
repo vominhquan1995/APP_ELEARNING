@@ -8,6 +8,7 @@ import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.adapter.NavAdapter;
 import com.elearning.elearning.fragment.ExamFragment;
+import com.elearning.elearning.fragment.HistoryExamFragment;
 import com.elearning.elearning.fragment.HistoryFragment;
 import com.elearning.elearning.fragment.HomeFragment;
 import com.elearning.elearning.fragment.LessonFragment;
@@ -70,6 +71,9 @@ public class MainPresenter {
         if (fragment instanceof ListLessonFragment) {
             backRoot = true;
         }
+        if (fragment instanceof ExamFragment) {
+            backRoot = true;
+        }
         if (backRoot) {
             fragmentNavigator.goToRoot();
         }
@@ -83,14 +87,16 @@ public class MainPresenter {
         } else if (id.equals(context.getString(R.string.nav_exam))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new ExamFragment());
-        } else if (id.equals(context.getString(R.string.nav_history))) {
+        } else if (id.equals(context.getString(R.string.nav_history_exam))) {
+            mainView.updateToolbar(true, false, id);
+            switchFragment(new HistoryExamFragment());
+        }else if (id.equals(context.getString(R.string.nav_history))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new HistoryFragment());
         } else if (id.equals(context.getString(R.string.nav_notifications))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new NotificationFragment());
-        }
-        else if (id.equals(context.getString(R.string.nav_settings))) {
+        } else if (id.equals(context.getString(R.string.nav_settings))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new UserInfoFragment());
         } else if (id.equals(context.getString(R.string.menu_listlesson))) {
@@ -112,7 +118,8 @@ public class MainPresenter {
                 fragmentNavigator.getActiveFragment() instanceof UserInfoFragment ||
                 fragmentNavigator.getActiveFragment() instanceof ListLessonFragment
                 || fragmentNavigator.getActiveFragment() instanceof HistoryFragment
-                || fragmentNavigator.getActiveFragment() instanceof  NotificationFragment) {
+                || fragmentNavigator.getActiveFragment() instanceof NotificationFragment
+                || fragmentNavigator.getActiveFragment() instanceof HistoryExamFragment) {
             mainView.updateToolbar(false, false, context.getString(R.string.nav_home));
             fragmentNavigator.goToRoot();
             mainView.setItemSelected(context.getString(R.string.nav_home));

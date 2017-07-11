@@ -34,6 +34,9 @@ public interface APIConstant {
     String USER_INFORMATION_URL = HOST_NAME + "/students/";
     //Edit Information
     String USER_EDIT_INFO_URL = HOST_NAME + "/students";
+    //Upload avatar
+    String UPLOAD_AVATAR_HEADER_URL=HOST_NAME+"/accounts/UploadAvatar/";
+    String UPLOAD_AVATAR_FOOTER_URL="/upload-file";
     //List Lesson
     String LIST_LESSON_HEADER_URL = HOST_NAME + "/courses/";
     String LIST_LESSON_FOOTER_URL = "/lessons";
@@ -50,6 +53,9 @@ public interface APIConstant {
     //Get history learn
     String HISTORY_LEARN_HEADER_URL=HOST_NAME+ "/students/";
     String HISTORY_LEARN_FOOTER_URL="/history";
+    //Get history do exam
+    String HISTORY_DO_EXAM_HEADER_URL=HOST_NAME+ "/exams/";
+    String HISTORY_DO_EXAM_FOOTER_URL="/list-history-exam";
     //Get list notififi
     String NOTFICATION_URL=HOST_NAME+ "/notification";
     //Header

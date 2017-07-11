@@ -35,9 +35,9 @@ public class HistoryFragment extends BaseFragment implements HistoryLearnView {
 
     @Override
     public void initView() {
-        rvCourseStuding = (RecyclerView) view.findViewById(R.id.rvCourseStuding);
+        rvCourseStuding = (RecyclerView) view.findViewById(R.id.rv1);
         rvCourseStuding.setLayoutManager(new GridLayoutManager(context, NUMBER_COLUMNS_3));
-        rvCourseDone = (RecyclerView) view.findViewById(R.id.rvCourseDone);
+        rvCourseDone = (RecyclerView) view.findViewById(R.id.rv2);
         rvCourseDone.setLayoutManager(new GridLayoutManager(context, NUMBER_COLUMNS_3));
     }
 

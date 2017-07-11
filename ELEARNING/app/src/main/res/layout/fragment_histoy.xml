@@ -12,6 +12,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/txtTitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
@@ -21,11 +22,12 @@
                 android:textSize="@dimen/txt_size_24sp"
                 android:text="@string/cap_history_done"/>
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvCourseDone"
+                android:id="@+id/rv1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </android.support.v7.widget.RecyclerView>
             <TextView
+                android:id="@+id/txtTitle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
@@ -35,7 +37,7 @@
                 android:textSize="@dimen/txt_size_24sp"
                 android:text="@string/cap_history_studing"/>
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvCourseStuding"
+                android:id="@+id/rv2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </android.support.v7.widget.RecyclerView>

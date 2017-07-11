@@ -57,7 +57,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     private ProgressBar prTimeCountdown;
     private ArrayAnswer arrayAnswer;
     private TimeCountdownAsyncTask timeCountdownAsyncTask;
-    private int idExam = 2;
+    private int lessonId;//default
 
     @Override
     public void initView() {
@@ -89,12 +89,21 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
 //        arrayAnswer = new ArrayAnswer();
 //        posCurrent = 0;
 //        posHeaderAnswerCurrent = 0;
+        LessonFragment.setOnDoExam(new LessonFragment.onDoExam() {
+            @Override
+            public void onDoExam(int idLesson) {
+                lessonId = idLesson;
+                examPresenter.getInfoExam(lessonId);
+                showProgressDialog();
+            }
+        });
         init();
     }
 
     @Override
     public void initAction() {
-        examPresenter.getInfoExam(idExam);
+
+        examPresenter.getInfoExam(lessonId);
         showProgressDialog();
         view.findViewById(R.id.btnStart).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +111,8 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                 frameDoExam.setVisibility(View.VISIBLE);
                 frameInfo.setVisibility(View.GONE);
                 showProgressDialog();
-                examPresenter.getListQuestion(idExam, new ExamPresenter.onGetListQuestion() {
+                Log.d("Exam id",String.valueOf(examInfo.getIdExam()));
+                examPresenter.getListQuestion(lessonId, new ExamPresenter.onGetListQuestion() {
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void getListQuestionSuccess(List<Question> listQuestion) {
@@ -145,7 +155,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
         txtNumberQuestion.setText(String.format(getResources().getString(R.string.exam_number_question), String.valueOf(examInfo.getNumberQuesion())));
         txtTime.setText(String.format(getResources().getString(R.string.exam_time), String.valueOf(examInfo.getTimeExam())));
         txtRequest.setText(String.format(getResources().getString(R.string.exam_request_question), String.valueOf(Math.round(examInfo.getNumberQuesion() * (0.75))), String.valueOf(exam.getNumberQuesion())));
-        examPresenter.getHistoryExam(2, new ExamPresenter.onGetHistory() {
+        examPresenter.getHistoryExam(lessonId, new ExamPresenter.onGetHistory() {
             @Override
             public void onGetHistorySuccess(HistoryExam historyExam) {
                 if (historyExam != null) {
@@ -153,6 +163,11 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                     txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), DATE_FORMAT.format(historyExam.getDateExam())));
                     txtLastPoint.setText(String.format(getResources().getString(R.string.exam_history_point), String.valueOf(historyExam.getPoint())));
                     txtLastStatus.setText(String.format(getResources().getString(R.string.exam_history_result), historyExam.getStatus()));
+                }else{
+                    dismissProgressDialog();
+                    txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), getResources().getString(R.string.cap_no_data)));
+                    txtLastPoint.setText(String.format(getResources().getString(R.string.exam_history_point), getResources().getString(R.string.cap_no_data)));
+                    txtLastStatus.setText(String.format(getResources().getString(R.string.exam_history_result),getResources().getString(R.string.cap_no_data)));
                 }
             }
 
@@ -203,7 +218,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     }
 
     private void setQuestion(int posCurrent) {
-        if (listQuestionData != null) {
+        if (listQuestionData.size()!=0) {
             currentQuestion = listQuestionData.get(posCurrent);
             txtContentQuestion.setText(currentQuestion.getContentQuestion());
             txtIndexQuestion.setText(String.format(getResources().getString(R.string.cap_index_question), String.valueOf(posCurrent + 1)));
@@ -225,24 +240,26 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     }
 
     private void updatePosCurrent(String type) {
-        switch (type) {
-            case POS_UP:
-                if (posCurrent == listQuestionData.size() - 1) {
-                    posCurrent = 0;
-                } else {
-                    posCurrent++;
-                }
-                break;
-            case POS_DOWN:
-                if (posCurrent == 0) {
-                    posCurrent = listQuestionData.size() - 1;
-                } else {
-                    posCurrent--;
-                }
-                break;
+        if(listQuestionData.size()!=0){
+            switch (type) {
+                case POS_UP:
+                    if (posCurrent == listQuestionData.size() - 1) {
+                        posCurrent = 0;
+                    } else {
+                        posCurrent++;
+                    }
+                    break;
+                case POS_DOWN:
+                    if (posCurrent == 0) {
+                        posCurrent = listQuestionData.size() - 1;
+                    } else {
+                        posCurrent--;
+                    }
+                    break;
+            }
+            setQuestion(posCurrent);
+            setChoice();
         }
-        setQuestion(posCurrent);
-        setChoice();
     }
 
     @Override
@@ -281,8 +298,8 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
         prTimeCountdown.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
         txtNumberAnswer.setText(String.format(getResources().getString(R.string.cap_number_answered), "0", String.valueOf(examInfo.getNumberQuesion())));
         listQuestionData = listQuestion;
-        prTimeCountdown.setMax(2 * 60);
-        timeCountdownAsyncTask.execute(2);
+        prTimeCountdown.setMax(examInfo.getTimeExam() * 60);
+        timeCountdownAsyncTask.execute(examInfo.getTimeExam());
         setQuestion(0);
     }
 
@@ -364,7 +381,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             showProgressDialog();
-            examPresenter.checkResult(idExam, arrayAnswer.getListAnswer());
+            examPresenter.checkResult(examInfo.getIdExam(), arrayAnswer.getListAnswer());
             txtTimeCountdown.setText("Hết giờ");
         }
 

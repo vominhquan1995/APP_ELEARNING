@@ -25,6 +25,7 @@
     <!-- Navigation Drawer menu labels -->
     <string name="nav_home">Home</string>
     <string name="nav_exam">Exam</string>
+    <string name="nav_history_exam">History Exam</string>
     <string name="nav_history">History Learn</string>
     <string name="nav_notifications">Notifications</string>
     <string name="nav_settings">Settings</string>
@@ -55,6 +56,9 @@
     <string name="cap_info_last_exam">Result Last Exam</string>
     <string name="cap_notification_end">Date end : %s</string>
     <string name="cap_notification_start">Date start : %s</string>
+    <string name="cap_exam_pass">Exam passed</string>
+    <string name="cap_exam_fail">Exam failed</string>
+    <string name="cap_no_data">No data</string>
 
     <!--validate_input-->
     <string name="validate_email">Please input email</string>

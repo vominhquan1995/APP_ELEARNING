@@ -8,12 +8,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+
 /**
  * Created by MinhQuan on 02/07/2017.
  */
 
 public class UserInfoPresenter {
     private UserInfoView userInfoView;
+
 
     public UserInfoPresenter(UserInfoView userInfoView) {
         this.userInfoView = userInfoView;
@@ -42,7 +45,8 @@ public class UserInfoPresenter {
             }
         });
     }
-    public  void editUserInfo(final User user){
+
+    public void editUserInfo(final User user) {
         API.editUserInfo(user, new API.OnAPIListener() {
             @Override
             public void onSuccessObject(JSONObject response) throws JSONException {
@@ -64,5 +68,35 @@ public class UserInfoPresenter {
                 userInfoView.editFail();
             }
         });
+    }
+
+    public void uploadAvatar(File file,final onUploadAvatar onUploadAvatar) {
+        API.uploadAvatar(file, new API.OnAPIListener() {
+            @Override
+            public void onSuccessObject(JSONObject response) throws JSONException {
+
+            }
+
+            @Override
+            public void onSuccessArray(JSONArray response) throws JSONException {
+
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
+                onUploadAvatar.onUploadSuccess(response.toString());
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                onUploadAvatar.onUploadFail(errorMessage);
+            }
+        });
+    }
+
+    public interface onUploadAvatar {
+        void onUploadSuccess(String url);
+
+        void onUploadFail(String mess);
     }
 }

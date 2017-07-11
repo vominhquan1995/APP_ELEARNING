@@ -2,9 +2,14 @@ package com.elearning.elearning.mvp.model;
 
 import com.elearning.elearning.network.APIConstant;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 
@@ -14,6 +19,7 @@ import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 
 public class HistoryExam {
     private int idExam;
+    private String nameExam;
     private Date dateExam;
     private int point;
     private String status;
@@ -22,11 +28,20 @@ public class HistoryExam {
 
     }
 
-    public HistoryExam(int idExam, Date dateExam, int point, String status) {
+    public HistoryExam(int idExam, String nameExam, Date dateExam, int point, String status) {
         this.idExam = idExam;
+        this.nameExam = nameExam;
         this.dateExam = dateExam;
         this.point = point;
         this.status = status;
+    }
+
+    public String getNameExam() {
+        return nameExam;
+    }
+
+    public void setNameExam(String nameExam) {
+        this.nameExam = nameExam;
     }
 
     public int getIdExam() {
@@ -65,6 +80,7 @@ public class HistoryExam {
         try {
             HistoryExam historyExam = new HistoryExam();
             historyExam.setIdExam(jsonObject.getInt(APIConstant.EXAMID));
+            historyExam.setNameExam(jsonObject.getString(APIConstant.EXAMNAME));
             historyExam.setPoint(jsonObject.getInt(APIConstant.POINTEXAM));
             historyExam.setStatus(jsonObject.getString(APIConstant.EXAMSTATUS));
             historyExam.setDateExam(DATE_FORMAT_YYYYMMDD.parse(jsonObject.getString(APIConstant.EXAMTIME).substring(0, 10)));
@@ -72,5 +88,28 @@ public class HistoryExam {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    public static List<HistoryExam> parseListHistory(JSONArray jsonArray) {
+        List<HistoryExam> historyExamList = new ArrayList();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                JSONObject data = (JSONObject) jsonArray.get(i);
+                HistoryExam historyExam = new HistoryExam();
+                historyExam.setIdExam(data.getInt(APIConstant.EXAMID));
+                historyExam.setNameExam(data.getString(APIConstant.EXAMNAME));
+                historyExam.setPoint(data.getInt(APIConstant.POINTEXAM));
+                historyExam.setStatus(data.getString(APIConstant.EXAMSTATUS));
+                historyExam.setDateExam(DATE_FORMAT_YYYYMMDD.parse(data.getString(APIConstant.EXAMTIME).substring(0, 10)));
+                historyExamList.add(historyExam);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return historyExamList;
     }
 }

@@ -24,8 +24,8 @@ public class ExamPresenter {
         this.examView = examView;
     }
 
-    public void getInfoExam(int idExam) {
-        API.getInformationExam(String.valueOf(idExam), new API.OnAPIListener() {
+    public void getInfoExam(int idLesson) {
+        API.getInformationExam(String.valueOf(idLesson), new API.OnAPIListener() {
             @Override
             public void onSuccessObject(JSONObject response) throws JSONException {
                 examView.onGetInfoSuccess(Exam.parseInfoExam(response));
@@ -48,6 +48,7 @@ public class ExamPresenter {
         });
     }
 
+    //get last history
     public void getHistoryExam(int idLesson, final onGetHistory onGetHistory) {
         API.getHistoryExam(String.valueOf(idLesson), new API.OnAPIListener() {
             @Override

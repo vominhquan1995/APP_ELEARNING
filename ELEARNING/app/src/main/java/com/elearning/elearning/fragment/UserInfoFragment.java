@@ -1,6 +1,11 @@
 package com.elearning.elearning.fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +25,9 @@ import com.elearning.elearning.mvp.presenter.UserInfoPresenter;
 import com.elearning.elearning.mvp.view.UserInfoView;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.ParseException;
 
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;
@@ -164,11 +172,10 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
                 }
                 userInfoPresenter.editUserInfo(User.get());
             }
-            case  R.id.txtChangeImage:
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"),REQUEST_CODE);
+            case R.id.txtChangeImage:
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, REQUEST_CODE);
                 break;
         }
     }
@@ -176,8 +183,39 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case REQUEST_CODE:
+        if (requestCode == REQUEST_CODE) {
+            try {
+                final Uri imageUri = data.getData();
+                final InputStream imageStream = context.getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                File imgFile = new File(getPath(imageUri));
+                userInfoPresenter.uploadAvatar(imgFile, new UserInfoPresenter.onUploadAvatar() {
+                    @Override
+                    public void onUploadSuccess(String url) {
+                        avatarUser.setImageBitmap(selectedImage);
+                    }
+
+                    @Override
+                    public void onUploadFail(String mess) {
+                        Log.d("Profile", "Fail");
+                    }
+                });
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
+    }
+    public String getPath(Uri uri)
+    {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor == null) return null;
+        int column_index =             cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String s=cursor.getString(column_index);
+        cursor.close();
+        return s;
     }
 }
