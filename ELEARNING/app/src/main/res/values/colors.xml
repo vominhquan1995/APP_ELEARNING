@@ -56,16 +56,9 @@
 
     <!-- Custom theme -->
     <color name="colorBlue500">#0F75BD</color>
-    <!--<color name="colorBlue700">#1565C0</color>-->
-    <color name="colorAmber500">#FFC107</color>
-    <color name="colorAmber700">#FFA000</color>
-    <color name="colorGreen500">#4CAF50</color>
-    <color name="colorGreen700">#388E3C</color>
 
 
     <color name="color_background_main_blue">#1565C0</color>
-    <color name="historySelector">#E8F5E9</color>
-    <color name="foodSelector">#FFEBEE</color>
     <color name="colorFBBackground">#3c5A96</color>
     <color name="colorGGBackground">#D80027</color>
     <color name="color_selected_menu">#EEEEEE</color>
