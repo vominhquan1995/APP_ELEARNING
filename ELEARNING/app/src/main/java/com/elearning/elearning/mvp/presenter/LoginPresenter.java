@@ -24,6 +24,7 @@ public class LoginPresenter {
             @Override
             public void onSuccessObject(JSONObject response) throws JSONException {
                 //set information user
+
                 User.get().init(response);
                 loginView.onLoginSuccess();
             }

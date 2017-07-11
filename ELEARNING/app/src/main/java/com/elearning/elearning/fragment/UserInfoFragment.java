@@ -1,5 +1,6 @@
 package com.elearning.elearning.fragment;
 
+import android.content.Intent;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elearning.elearning.R;
@@ -27,11 +29,13 @@ import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;
  */
 
 public class UserInfoFragment extends BaseFragment implements UserInfoView, View.OnClickListener {
+    private static final int REQUEST_CODE = 101;
     private UserInfoPresenter userInfoPresenter;
     private ImageView avatarUser;
     private LinearLayout vgEmail, vgFirstName, vgLastName, vgPhone, vgAddress, vgInformation, vgButton, vgBirthday, vgGender;
     private ImageView iconEmail, iconFirstName, iconLastName, iconPhone, iconAddress, iconInformation, iconBirthday;
     private EditText edtEmail, edtFirstName, edtLastName, edtPhone, edtAddress, edtInformation, edtBirthday;
+    private TextView txtChangeImage;
     private Button btnCancel, btnSave;
     private RadioGroup rgGender;
 
@@ -47,6 +51,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
         vgButton = (LinearLayout) view.findViewById(R.id.vgButton);
         vgBirthday = (LinearLayout) view.findViewById(R.id.vgBirthDay);
         vgGender = (LinearLayout) view.findViewById(R.id.vgGender);
+        txtChangeImage = (TextView) view.findViewById(R.id.txtChangeImage);
         //icon
         iconEmail = (ImageView) vgEmail.findViewById(R.id.imgIcon);
         iconFirstName = (ImageView) vgFirstName.findViewById(R.id.imgIcon);
@@ -93,6 +98,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
         userInfoPresenter.getUserInfo(User.get().getUserId());
         vgButton.findViewById(R.id.btnCancel).setOnClickListener(this);
         vgButton.findViewById(R.id.btnSave).setOnClickListener(this);
+        txtChangeImage.setOnClickListener(this);
         rgGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -158,6 +164,20 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
                 }
                 userInfoPresenter.editUserInfo(User.get());
             }
+            case  R.id.txtChangeImage:
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"),REQUEST_CODE);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case REQUEST_CODE:
         }
     }
 }
