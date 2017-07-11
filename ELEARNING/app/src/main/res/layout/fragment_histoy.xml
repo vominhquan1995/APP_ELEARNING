@@ -15,7 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
-                android:background="@color/colorGreen700"
+                android:background="@color/color_green"
                 android:textStyle="bold"
                 android:layout_margin="@dimen/margin_5dp"
                 android:textSize="@dimen/txt_size_24sp"
