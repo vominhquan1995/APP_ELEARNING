@@ -359,9 +359,9 @@ public class API {
     }
 
     //get list question for exam
-    public static void getListQuestion(final String idLesson, OnAPIListener onAPIListener) {
+    public static void getListQuestion(final String idExam, OnAPIListener onAPIListener) {
         listener = onAPIListener;
-        AndroidNetworking.get(APIConstant.LIST_QUESTION_HEADER_URL + idLesson + APIConstant.LIST_QUESTION_FOOTER_URL)
+        AndroidNetworking.get(APIConstant.LIST_QUESTION_HEADER_URL + idExam + APIConstant.LIST_QUESTION_FOOTER_URL)
                 .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()

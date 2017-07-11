@@ -73,8 +73,8 @@ public class ExamPresenter {
         });
     }
 
-    public void getListQuestion(int idLesson, final onGetListQuestion onGetListQuestion) {
-        API.getListQuestion(String.valueOf(idLesson), new API.OnAPIListener() {
+    public void getListQuestion(int idExam, final onGetListQuestion onGetListQuestion) {
+        API.getListQuestion(String.valueOf(idExam), new API.OnAPIListener() {
             @Override
             public void onSuccessObject(JSONObject response) throws JSONException {
 

@@ -53,14 +53,14 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
             @Override
             public void onSend(int CourseId) {
                 showProgressDialog();
-                listLessonPresenter.getListLesson(3);
+                listLessonPresenter.getListLesson(CourseId);
             }
         });
         MainActivity.setSendCourseID(new MainActivity.onSendCourseID() {
             @Override
             public void onSend(int CourseId) {
                 showProgressDialog();
-                listLessonPresenter.getListLesson(4);
+                listLessonPresenter.getListLesson(CourseId);
             }
         });
     }

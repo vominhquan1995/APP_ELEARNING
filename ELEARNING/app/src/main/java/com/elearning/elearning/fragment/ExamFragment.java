@@ -102,7 +102,6 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
 
     @Override
     public void initAction() {
-
         examPresenter.getInfoExam(lessonId);
         showProgressDialog();
         view.findViewById(R.id.btnStart).setOnClickListener(new View.OnClickListener() {
@@ -112,7 +111,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                 frameInfo.setVisibility(View.GONE);
                 showProgressDialog();
                 Log.d("Exam id",String.valueOf(examInfo.getIdExam()));
-                examPresenter.getListQuestion(lessonId, new ExamPresenter.onGetListQuestion() {
+                examPresenter.getListQuestion(examInfo.getIdExam(), new ExamPresenter.onGetListQuestion() {
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void getListQuestionSuccess(List<Question> listQuestion) {
@@ -121,7 +120,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
 
                     @Override
                     public void getListQuestionFail(String mess) {
-
+                        Log.d("Exam","get question fail");
                     }
                 });
             }
@@ -180,6 +179,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
 
     @Override
     public void onGetInfoFail(String mess) {
+        //handle show dialong warning in there
         Log.d(TAG, mess);
     }
 
