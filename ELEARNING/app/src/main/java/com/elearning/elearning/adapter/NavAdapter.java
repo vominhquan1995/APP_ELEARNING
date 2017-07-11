@@ -57,7 +57,7 @@ public class NavAdapter extends BaseRecyclerAdapter<NavAdapter.Item> {
     private void initMenu() {
         List<Item> itemList = new ArrayList<>();
         itemList.add(new Item(getTitle(R.string.nav_home), getIcon(R.drawable.menu_home)));
-        itemList.add(new Item(getTitle(R.string.nav_exam), getIcon(R.drawable.menu_exam)));
+        itemList.add(new Item(getTitle(R.string.nav_history_exam), getIcon(R.drawable.menu_exam)));
         itemList.add(new Item(getTitle(R.string.nav_history), getIcon(R.drawable.menu_history)));
         itemList.add(new Item(getTitle(R.string.nav_notifications), getIcon(R.drawable.menu_nofication)));
         itemList.add(new Item(getTitle(R.string.nav_settings), getIcon(R.drawable.menu_profile)));
