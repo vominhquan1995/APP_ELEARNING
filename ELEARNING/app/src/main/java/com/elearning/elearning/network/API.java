@@ -1,5 +1,6 @@
 package com.elearning.elearning.network;
 
+import android.os.Environment;
 import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
@@ -466,26 +467,29 @@ public class API {
     //upload avatar
     public static void uploadAvatar(File file, OnAPIListener onAPIListener) {
         listener = onAPIListener;
-        AndroidNetworking.post(UPLOAD_AVATAR_HEADER_URL + User.get().getUserId() + UPLOAD_AVATAR_FOOTER_URL)
-                .addFileBody(new File("/storage/emulated/0/DCIM/Facebook/FB_IMG_1494958038652.jpg"))
-                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
-                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
-                .build()
-                .getAsString(new StringRequestListener() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            listener.onString(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+        String filePath = Environment.getExternalStorageDirectory()+"/DCIM/Facebook/FB_IMG_1494958038652.jpg";
+        if(new File(filePath).exists()){
+            AndroidNetworking.post(UPLOAD_AVATAR_HEADER_URL + User.get().getUserId() + UPLOAD_AVATAR_FOOTER_URL)
+                    .addFileBody(new File(filePath))
+                    .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
+                    .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                    .build()
+                    .getAsString(new StringRequestListener() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                listener.onString(response);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
-                        listener.onError(anError.getErrorBody());
-                    }
-                });
+                        @Override
+                        public void onError(ANError anError) {
+                            listener.onError(anError.getErrorBody());
+                        }
+                    });
+        }
     }
 
     public interface OnAPIListener {

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
@@ -197,6 +198,8 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
 
                     @Override
                     public void onUploadFail(String mess) {
+                        String filePath = Environment.getExternalStorageDirectory()+"/DCIM/Facebook/FB_IMG_1494958038652.jpg";
+                        avatarUser.setImageBitmap(BitmapFactory.decodeFile(filePath));
                         Log.d("Profile", "Fail");
                     }
                 });
