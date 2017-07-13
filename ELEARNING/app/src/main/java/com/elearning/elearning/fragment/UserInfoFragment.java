@@ -2,10 +2,7 @@ package com.elearning.elearning.fragment;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
@@ -24,11 +21,10 @@ import com.elearning.elearning.helper.DatetimeHelper;
 import com.elearning.elearning.mvp.model.User;
 import com.elearning.elearning.mvp.presenter.UserInfoPresenter;
 import com.elearning.elearning.mvp.view.UserInfoView;
+import com.elearning.elearning.network.APIConstant;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.text.ParseException;
 
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;
@@ -86,7 +82,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
         iconInformation.setBackground(context.getResources().getDrawable(R.drawable.profile_info));
         iconBirthday.setBackground(context.getResources().getDrawable(R.drawable.profile_birthday));
         //set avatar
-        Picasso.with(context).load(User.get().getUrlAvatar()).into(avatarUser);
+        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE+User.get().getUrlAvatar()).into(avatarUser);
         //validate type input
         edtEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         edtPhone.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -172,6 +168,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
                     e.printStackTrace();
                 }
                 userInfoPresenter.editUserInfo(User.get());
+                break;
             }
             case R.id.txtChangeImage:
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -185,39 +182,30 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE) {
-            try {
-                final Uri imageUri = data.getData();
-                final InputStream imageStream = context.getContentResolver().openInputStream(imageUri);
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                File imgFile = new File(getPath(imageUri));
-                userInfoPresenter.uploadAvatar(imgFile, new UserInfoPresenter.onUploadAvatar() {
-                    @Override
-                    public void onUploadSuccess(String url) {
-                        avatarUser.setImageBitmap(selectedImage);
-                    }
+            userInfoPresenter.uploadAvatar(new File(getPath(data.getData())), new UserInfoPresenter.onUploadAvatar() {
+                @Override
+                public void onUploadSuccess(String url) {
+                    User.get().setUrlAvatar(url);
+                    Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE+User.get().getUrlAvatar()).resize(300, 300).into(avatarUser);
+                    loadAvatar();
+                    Toast.makeText(context, getResources().getString(R.string.cap_upload_avatar_succes), Toast.LENGTH_LONG).show();
+                }
 
-                    @Override
-                    public void onUploadFail(String mess) {
-                        String filePath = Environment.getExternalStorageDirectory()+"/DCIM/Facebook/FB_IMG_1494958038652.jpg";
-                        avatarUser.setImageBitmap(BitmapFactory.decodeFile(filePath));
-                        Log.d("Profile", "Fail");
-                    }
-                });
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
+                @Override
+                public void onUploadFail(String mess) {
+                    Toast.makeText(context, getResources().getString(R.string.cap_upload_avatar_fail), Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
-    public String getPath(Uri uri)
-    {
-        String[] projection = { MediaStore.Images.Media.DATA };
+
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
         if (cursor == null) return null;
-        int column_index =             cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
-        String s=cursor.getString(column_index);
+        String s = cursor.getString(column_index);
         cursor.close();
         return s;
     }

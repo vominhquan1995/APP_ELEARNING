@@ -62,6 +62,9 @@ public abstract class BaseFragment extends Fragment implements Init {
     protected void playSound() {
         getMainActivity().playSound();
     }
+    protected void loadAvatar() {
+        getMainActivity().loadAvatar();
+    }
 
     public abstract int setFragmentView();
 }

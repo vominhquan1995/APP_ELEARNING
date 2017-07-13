@@ -68,6 +68,8 @@
     <string name="cap_exam_pass">Bài kiểm tra đã hoàn thành</string>
     <string name="cap_exam_fail">Bài kiểm tra chưa hoàn thành</string>
     <string name="cap_no_data">Không có dữ liệu</string>
+    <string name="cap_upload_avatar_succes">Đổi ảnh đại diện thành công</string>
+    <string name="cap_upload_avatar_fail">Đổi ảnh đại diện không thành công</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>

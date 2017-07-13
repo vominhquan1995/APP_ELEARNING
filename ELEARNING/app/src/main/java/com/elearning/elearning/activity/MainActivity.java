@@ -22,6 +22,7 @@ import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.mvp.model.User;
 import com.elearning.elearning.mvp.presenter.MainPresenter;
 import com.elearning.elearning.mvp.view.MainView;
+import com.elearning.elearning.network.APIConstant;
 import com.elearning.elearning.prefs.Constant;
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -88,7 +89,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         navAdapter.setOnItemClickListener(mainPresenter.getOnItemMenuListener());
         //set value for information user
         txtUserName.setText(User.get().getUserName());
-        Picasso.with(context).load(User.get().getUrlAvatar()).into(avatarUser);
+        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE+User.get().getUrlAvatar()).resize(350,350).into(avatarUser);
         lnActivity = (LinearLayout) findViewById(R.id.lnActivity);
         lnFragment = (LinearLayout) findViewById(R.id.lnFragment);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
@@ -272,5 +273,9 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 
     public void playSound() {
         sound.playRingtone();
+    }
+
+    public void loadAvatar(){
+        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE+User.get().getUrlAvatar()).resize(350,350).into(avatarUser);
     }
 }

@@ -102,7 +102,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
 
     @Override
     public void initAction() {
-        examPresenter.getInfoExam(lessonId);
+        //examPresenter.getInfoExam(lessonId);
         showProgressDialog();
         view.findViewById(R.id.btnStart).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,7 +172,10 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
 
             @Override
             public void onGetHistoryFail(String mess) {
-
+                dismissProgressDialog();
+                txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), getResources().getString(R.string.cap_no_data)));
+                txtLastPoint.setText(String.format(getResources().getString(R.string.exam_history_point), getResources().getString(R.string.cap_no_data)));
+                txtLastStatus.setText(String.format(getResources().getString(R.string.exam_history_result),getResources().getString(R.string.cap_no_data)));
             }
         });
     }

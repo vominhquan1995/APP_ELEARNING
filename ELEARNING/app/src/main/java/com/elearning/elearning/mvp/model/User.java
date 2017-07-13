@@ -175,7 +175,7 @@ public class User {
             setRole(response.getInt(APIConstant.ROLE));
             setUserId(response.getInt(APIConstant.UID));
             setUserName(response.getString(APIConstant.USERNAME));
-            setUrlAvatar(APIConstant.HOST_NAME_IMAGE + response.getString(APIConstant.AVATAR));
+            setUrlAvatar(response.getString(APIConstant.AVATAR));
         } catch (Exception e) {
 
         }
@@ -187,7 +187,7 @@ public class User {
             setLastName(response.getString(APIConstant.LASTNAME));
             setPassword(response.getString(APIConstant.PASSWORD));
             setEmail(response.getString(APIConstant.EMAIL));
-            setUrlAvatar(APIConstant.HOST_NAME_IMAGE + response.getString(APIConstant.AVATAR));
+            setUrlAvatar(response.getString(APIConstant.AVATAR));
             setAddress(response.getString(APIConstant.ADDRESS));
             setDateOfBirth(DATE_FORMAT_YYYYMMDD.parse(response.getString(APIConstant.DATEOFBIRTH).substring(0, 10)));
             setInfomation(response.getString(APIConstant.INFOMATION));

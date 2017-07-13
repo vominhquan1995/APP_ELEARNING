@@ -59,6 +59,8 @@
     <string name="cap_exam_pass">Exam passed</string>
     <string name="cap_exam_fail">Exam failed</string>
     <string name="cap_no_data">No data</string>
+    <string name="cap_upload_avatar_succes">Uplaod avatar success</string>
+    <string name="cap_upload_avatar_fail">Upload avatar fail</string>
 
     <!--validate_input-->
     <string name="validate_email">Please input email</string>
