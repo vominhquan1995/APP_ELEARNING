@@ -154,7 +154,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
         txtNumberQuestion.setText(String.format(getResources().getString(R.string.exam_number_question), String.valueOf(examInfo.getNumberQuesion())));
         txtTime.setText(String.format(getResources().getString(R.string.exam_time), String.valueOf(examInfo.getTimeExam())));
         txtRequest.setText(String.format(getResources().getString(R.string.exam_request_question), String.valueOf(Math.round(examInfo.getNumberQuesion() * (0.75))), String.valueOf(exam.getNumberQuesion())));
-        examPresenter.getHistoryExam(lessonId, new ExamPresenter.onGetHistory() {
+        examPresenter.getHistoryExam(examInfo.getIdExam(), new ExamPresenter.onGetHistory() {
             @Override
             public void onGetHistorySuccess(HistoryExam historyExam) {
                 if (historyExam != null) {
