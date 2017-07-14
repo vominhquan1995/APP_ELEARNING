@@ -82,7 +82,7 @@
     <string name="cap_signup_fail">Đăng kí không thành công</string>
     <!--item course-->
     <string name="course_creadits">Số tín chỉ: %s</string>
-    <string name="course_donor">Tài trợ: %s</string>
+    <string name="course_donor">Nhà xuất bản: %s</string>
     <string name="course_date_start">Bắt đầu: %s</string>
     <string name="course_date_end">Kết thúc: %s</string>
     <!--item lesson-->

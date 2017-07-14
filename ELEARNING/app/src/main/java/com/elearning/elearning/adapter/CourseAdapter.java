@@ -53,7 +53,7 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
         CourseAdapter.CourseViewHolder courseViewHolder = (CourseViewHolder) holder;
         Picasso.with(context)
                 .load(APIConstant.HOST_NAME_IMAGE + item.getUrlImage())
-                .resize(200, 200)
+                .resize(400, 240)
                 .into(courseViewHolder.image);
 //        courseViewHolder.image.setBackground(context.getResources().getDrawable(R.drawable.default_course));
         courseViewHolder.name.setText(item.getNameCourses());
@@ -87,8 +87,8 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.imageCourse);
             name = (TextView) itemView.findViewById(R.id.txtNameCourse);
-            credits = (TextView) itemView.findViewById(R.id.txtDonor);
-            donor = (TextView) itemView.findViewById(R.id.txtCredits);
+            donor = (TextView) itemView.findViewById(R.id.txtDonor);
+            credits = (TextView) itemView.findViewById(R.id.txtCredits);
             dateStart = (TextView) itemView.findViewById(R.id.txtDateStart);
             dateEnd = (TextView) itemView.findViewById(R.id.txtDateEnd);
             itemView.setOnClickListener(new View.OnClickListener() {

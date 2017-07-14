@@ -80,7 +80,7 @@
 
     <!--item course-->
     <string name="course_creadits">Number Creadits: %s</string>
-    <string name="course_donor">Donor : %s</string>
+    <string name="course_donor">Publishing House : %s</string>
     <string name="course_date_start">Start: %s</string>
     <string name="course_date_end">End : %s</string>
     <!--item lesson-->
