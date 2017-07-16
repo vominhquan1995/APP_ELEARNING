@@ -56,8 +56,10 @@ public interface APIConstant {
     //Get history do exam
     String HISTORY_DO_EXAM_HEADER_URL=HOST_NAME+ "/exams/";
     String HISTORY_DO_EXAM_FOOTER_URL="/list-history-exam";
-    //Get list notififi
+    //Get list notification
     String NOTFICATION_URL=HOST_NAME+ "/notification";
+    //get progress learn
+    String PROGRESS_LEARN_URL=HOST_NAME+ "/students/";
     //Header
     String BEARER = "Bearer ";
     String AUTHORIZATION = "Authorization";

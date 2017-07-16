@@ -7,4 +7,7 @@ import com.elearning.elearning.mvp.model.Lesson;
  */
 
 public interface LessonView {
+    void onGetProgressSuccess(String value);
+
+    void onGetProgressFail(String mess);
 }

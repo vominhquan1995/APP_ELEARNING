@@ -1,8 +1,10 @@
 package com.elearning.elearning.mvp.presenter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
@@ -32,6 +34,8 @@ public class MainPresenter {
     public FragmentNavigator fragmentNavigator;
     private Context context;
     private MainView mainView;
+    // click back 2 times to exit app
+    boolean doubleBackToExit = false;
     private NavAdapter.OnItemMenuListener onItemMenuListener;
 
     public MainPresenter(final MainView mainView) {
@@ -54,6 +58,10 @@ public class MainPresenter {
             public void onChanged(Fragment fragment) {
                 if (fragment instanceof ListLessonFragment) {
                     mainView.updateToolbar(true, false, context.getResources().getString(R.string.menu_listlesson));
+                } else if (fragment instanceof LessonFragment) {
+                    mainView.updateToolbar(true, false, context.getResources().getString(R.string.menu_lesson));
+                } else if (fragment instanceof ExamFragment) {
+                    mainView.updateToolbar(true, false, context.getResources().getString(R.string.nav_exam));
                 }
             }
         });
@@ -71,9 +79,9 @@ public class MainPresenter {
         if (fragment instanceof ListLessonFragment) {
             backRoot = true;
         }
-        if (fragment instanceof ExamFragment) {
-            backRoot = true;
-        }
+//        if (fragment instanceof ExamFragment) {
+//            backRoot = true;
+//        }
         if (backRoot) {
             fragmentNavigator.goToRoot();
         }
@@ -90,7 +98,7 @@ public class MainPresenter {
         } else if (id.equals(context.getString(R.string.nav_history_exam))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new HistoryExamFragment());
-        }else if (id.equals(context.getString(R.string.nav_history))) {
+        } else if (id.equals(context.getString(R.string.nav_history))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new HistoryFragment());
         } else if (id.equals(context.getString(R.string.nav_notifications))) {
@@ -111,11 +119,11 @@ public class MainPresenter {
     }
 
     public void onBackPressed() {
-        if (fragmentNavigator.getActiveFragment() instanceof LessonFragment) {
+        if (fragmentNavigator.getActiveFragment() instanceof LessonFragment ||
+                fragmentNavigator.getActiveFragment() instanceof ExamFragment) {
             mainView.updateToolbar(true, false, context.getString(R.string.menu_listlesson));
             fragmentNavigator.goOneBack();
-        } else if (fragmentNavigator.getActiveFragment() instanceof ExamFragment ||
-                fragmentNavigator.getActiveFragment() instanceof UserInfoFragment ||
+        } else if (fragmentNavigator.getActiveFragment() instanceof UserInfoFragment ||
                 fragmentNavigator.getActiveFragment() instanceof ListLessonFragment
                 || fragmentNavigator.getActiveFragment() instanceof HistoryFragment
                 || fragmentNavigator.getActiveFragment() instanceof NotificationFragment
@@ -124,8 +132,24 @@ public class MainPresenter {
             fragmentNavigator.goToRoot();
             mainView.setItemSelected(context.getString(R.string.nav_home));
         } else {
-            mainView.exitApp();
+            doubleBackToExit();
         }
+    }
+
+    private void doubleBackToExit() {
+        if (doubleBackToExit) {
+            mainView.exitApp();
+            return;
+        }
+        doubleBackToExit = true;
+        Toast.makeText(context, context.getString(R.string.double_back_to_exit), Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExit = false;
+            }
+        }, 2000); // reset the variable after 2s
+
     }
 
     public NavAdapter.OnItemMenuListener getOnItemMenuListener() {

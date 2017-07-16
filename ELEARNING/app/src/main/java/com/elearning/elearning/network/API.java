@@ -488,6 +488,32 @@ public class API {
                 });
     }
 
+
+    //get progress learn
+    //get list notification
+    public static void getProgressLearn(String idCourse, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.PROGRESS_LEARN_URL + User.get().getUserId() + "/" + idCourse)
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            listener.onString(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getErrorBody());
+                    }
+                });
+    }
+
     public interface OnAPIListener {
         void onSuccessObject(final JSONObject response) throws JSONException;
 

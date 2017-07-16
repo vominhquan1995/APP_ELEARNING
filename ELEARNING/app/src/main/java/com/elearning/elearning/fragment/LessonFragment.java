@@ -7,6 +7,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.elearning.elearning.R;
@@ -38,12 +39,13 @@ public class LessonFragment extends BaseFragment implements LessonView {
     private PDFView pdfView;
     private ImageView imgFull;
     private TextView name;
-    private TextView time;
+    private TextView time,txtTitleProgress;
     private TextView typeLesson;
     private TextView description;
     private static onDoExam onDoExam;
     private LinearLayout lnContent, lnInfo;
     private ReadFilePdf readFilePdf;
+    private ProgressBar progressLearn;
 
     @Override
     public void initView() {
@@ -53,9 +55,11 @@ public class LessonFragment extends BaseFragment implements LessonView {
         pdfView = (PDFView) view.findViewById(R.id.pdfView);
         name = (TextView) view.findViewById(R.id.txtNameLesson);
         time = (TextView) view.findViewById(R.id.txtTime);
+        txtTitleProgress = (TextView) view.findViewById(R.id.txtTitleProgress);
         typeLesson = (TextView) view.findViewById(R.id.txtTypeLesson);
         description = (TextView) view.findViewById(R.id.txtDescription);
         imgFull = (ImageView) view.findViewById(R.id.imgFull);
+        progressLearn = (ProgressBar) view.findViewById(R.id.prLearn);
     }
 
     @Override
@@ -72,6 +76,7 @@ public class LessonFragment extends BaseFragment implements LessonView {
                 //set value of lesson
                 lessonItem = lesson;
                 setUI();
+                lessonPresenter.getProgressLearn(lessonItem.getCourseId());
             }
         });
         view.findViewById(R.id.btnDoExam).setOnClickListener(new View.OnClickListener() {
@@ -85,8 +90,10 @@ public class LessonFragment extends BaseFragment implements LessonView {
             public void onClick(View view) {
                 if (lnInfo.getVisibility() == View.VISIBLE) {
                     lnInfo.setVisibility(View.GONE);
+                    imgFull.setBackground(getResources().getDrawable(R.drawable.exit_full_screen));
                 } else {
                     lnInfo.setVisibility(View.VISIBLE);
+                    imgFull.setBackground(getResources().getDrawable(R.drawable.full_screen));
                 }
             }
         });
@@ -133,6 +140,17 @@ public class LessonFragment extends BaseFragment implements LessonView {
         return R.layout.fragment_lesson;
     }
 
+    @Override
+    public void onGetProgressSuccess(String value) {
+        txtTitleProgress.setText(String.format(getResources().getString(R.string.cap_title_progress_learn),value));
+        progressLearn.setProgress(Integer.parseInt(value));
+    }
+
+    @Override
+    public void onGetProgressFail(String mess) {
+
+    }
+
     class ReadFilePdf extends AsyncTask<String, Void, InputStream> {
 
         @Override
@@ -161,11 +179,11 @@ public class LessonFragment extends BaseFragment implements LessonView {
         }
     }
 
-    @Override
-    protected void onBackPressed() {
-        super.onBackPressed();
-
-    }
+//    @Override
+//    protected void onBackPressed() {
+//        super.onBackPressed();
+//
+//    }
 
     public static void setOnDoExam(LessonFragment.onDoExam onDoExam) {
         LessonFragment.onDoExam = onDoExam;

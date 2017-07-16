@@ -101,4 +101,6 @@
     <string name="cap_time_countdown" formatted="false">Time remaining : %s minute %s seconds</string>
     <string name="cap_reulst" formatted="false">You answer right %s in %s question.</string>
     <string name="cap_number_answered" formatted="false">Number answered: %s/%s question.</string>
+    <string name="double_back_to_exit">Double click to exit</string>
+    <string name="cap_title_progress_learn">Progress learn course :</string>
 </resources>

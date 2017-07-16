@@ -199,7 +199,7 @@
                         android:layout_centerVertical="true"
                         android:layout_weight="0.18"
                         android:progressBackgroundTint="@color/colorBlack"
-                        android:progressTint="@color/color_green" />
+                        android:progressTint="@color/color_background_main_blue" />
 
                     <TextView
                         android:id="@+id/txtTimeCountdown"

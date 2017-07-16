@@ -53,7 +53,7 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
         CourseAdapter.CourseViewHolder courseViewHolder = (CourseViewHolder) holder;
         Picasso.with(context)
                 .load(APIConstant.HOST_NAME_IMAGE + item.getUrlImage())
-                .resize(400, 240)
+                .resize(350, 240)
                 .into(courseViewHolder.image);
 //        courseViewHolder.image.setBackground(context.getResources().getDrawable(R.drawable.default_course));
         courseViewHolder.name.setText(item.getNameCourses());

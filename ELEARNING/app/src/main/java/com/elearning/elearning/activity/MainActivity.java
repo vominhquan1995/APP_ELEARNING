@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -89,7 +90,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         navAdapter.setOnItemClickListener(mainPresenter.getOnItemMenuListener());
         //set value for information user
         txtUserName.setText(User.get().getUserName());
-        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE+User.get().getUrlAvatar()).resize(350,350).into(avatarUser);
+        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE + User.get().getUrlAvatar()).resize(350, 350).into(avatarUser);
         lnActivity = (LinearLayout) findViewById(R.id.lnActivity);
         lnFragment = (LinearLayout) findViewById(R.id.lnFragment);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
@@ -178,7 +179,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 
     @Override
     public void exitApp() {
-            finish();
+        finish();
     }
 
     @Override
@@ -251,7 +252,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
             lnSearchContainer.setVisibility(View.GONE);
             searchView.setQuery("", false);
             searchView.clearFocus();
-        }else{
+        } else {
             mainPresenter.onBackPressed();
         }
     }
@@ -259,6 +260,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     public void gotoFragment(String id) {
         mainPresenter.goToFragment(id);
     }
+
     public interface onSendCourseID {
         void onSend(int CourseId);
     }
@@ -275,7 +277,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         sound.playRingtone();
     }
 
-    public void loadAvatar(){
-        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE+User.get().getUrlAvatar()).resize(350,350).into(avatarUser);
+    public void loadAvatar() {
+        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE + User.get().getUrlAvatar()).resize(350, 350).into(avatarUser);
     }
 }

@@ -104,4 +104,6 @@
     <string  formatted="false" name="cap_time_countdown">Thời gian còn lại: %s phút %s giây</string>
     <string  formatted="false" name="cap_reulst">Bạn trả lời đúng %s trên %s câu.</string>
     <string  formatted="false" name="cap_number_answered">Trả lời: %s/%s câu.</string>
+    <string name="double_back_to_exit">Ấn thoát 2 lần liên tiếp để thoát</string>
+    <string name="cap_title_progress_learn">Tiến trình khóa học:</string>
 </resources>

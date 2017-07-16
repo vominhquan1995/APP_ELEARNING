@@ -4,13 +4,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:screenOrientation">portrait</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorSecondary">@color/color_ffffff</item>
         <item name="android:datePickerStyle">@style/SpinnerDatepicker</item>
+        <!--<item name="android:windowFullscreen">true</item>-->
     </style>
-
     <style name="BCCardView" parent="CardView">
         <item name="android:layout_margin">16dp</item>
         <item name="cardCornerRadius">@dimen/cardview_default_radius</item>

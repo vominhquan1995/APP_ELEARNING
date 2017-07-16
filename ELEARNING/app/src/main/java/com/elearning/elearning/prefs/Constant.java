@@ -18,7 +18,7 @@ public class Constant {
     public static final String FIREBASE_TOPIC_USER = "all";
     public static final String POS_UP = "UP";
     public static final String POS_DOWN = "DOWN";
-    public static final String MSG_FAIL = "Sorry ! You fail";
+    public static final String MSG_FAIL = "Rất tiếc. Bạn chưa đạt yêu cầu";
     public static final int TIME_AUTO_CLOSE_DIALOG = 3000;
     public static final int NUMBER_ITEM_SLIDE= 8;
     public static final String TYPE_PDF="PDF";

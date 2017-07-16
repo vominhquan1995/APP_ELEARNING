@@ -304,7 +304,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     private void initDoExam(List<Question> listQuestion) {
         dismissProgressDialog();
         txtNameExam_Do.setText(examInfo.getNameExam());
-        prTimeCountdown.setProgressTintList(ColorStateList.valueOf(Color.GREEN));
+        prTimeCountdown.setProgressTintList(ColorStateList.valueOf(Color.BLUE));
         txtNumberAnswer.setText(String.format(getResources().getString(R.string.cap_number_answered), "0", String.valueOf(examInfo.getNumberQuesion())));
         listQuestionData = listQuestion;
         prTimeCountdown.setMax(examInfo.getTimeExam() * 60);
@@ -328,8 +328,9 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     }
 
     private void stopCountDown() {
-        if (timeCountdownAsyncTask != null && !timeCountdownAsyncTask.isCancelled()) {
-            timeCountdownAsyncTask.cancel(true);
+        if (timeCountdownAsyncTask != null) {
+            //timeCountdownAsyncTask.cancel(true);
+            timeCountdownAsyncTask = null;
         }
     }
 
@@ -350,7 +351,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
             int secondCurrent = 59;
             minute--;
             while (second > 0) {
-                if (timeCountdownAsyncTask.isCancelled()) {
+                if (timeCountdownAsyncTask == null) {
                     second = 0;
                 } else {
                     try {
@@ -395,12 +396,11 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
         }
 
         @Override
-        protected void onCancelled(Void aVoid) {
-            super.onCancelled(aVoid);
-            timeCountdownAsyncTask = null;
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            txtTimeCountdown.setText("Hết giờ");
             showProgressDialog();
             examPresenter.checkResult(examInfo.getIdExam(), arrayAnswer.getListAnswer());
-            txtTimeCountdown.setText("Hết giờ");
         }
     }
 
