@@ -49,8 +49,8 @@ public class ExamPresenter {
     }
 
     //get last history
-    public void getHistoryExam(int idLesson, final onGetHistory onGetHistory) {
-        API.getHistoryExam(String.valueOf(idLesson), new API.OnAPIListener() {
+    public void getHistoryExam(int idExam, final onGetHistory onGetHistory) {
+        API.getHistoryExam(String.valueOf(idExam), new API.OnAPIListener() {
             @Override
             public void onSuccessObject(JSONObject response) throws JSONException {
                 onGetHistory.onGetHistorySuccess(HistoryExam.parseHistory(response));

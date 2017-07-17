@@ -311,9 +311,9 @@ public class API {
     }
 
     //get last history exam of user
-    public static void getHistoryExam(final String idLesson, OnAPIListener onAPIListener) {
+    public static void getHistoryExam(final String idExam, OnAPIListener onAPIListener) {
         listener = onAPIListener;
-        AndroidNetworking.get(APIConstant.HISTORY_EXAM_HEADER_URL + User.get().getUserId() + '/' + idLesson)
+        AndroidNetworking.get(APIConstant.HISTORY_EXAM_HEADER_URL + User.get().getUserId() + '/' + idExam)
                 .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
                 .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
                 .build()
