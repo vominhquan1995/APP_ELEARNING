@@ -5,7 +5,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.adapter.CourseAdapter;
@@ -149,8 +148,6 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     public void onGetTopReviewCourseSuccess(List<Course> courseArray) {
-        getMainActivity().dismissProgressDialog();
-        Log.d("Home", "Top-reivew");
         getMainActivity().dismissProgressDialog();
         for (Course itemCourse : courseArray) {
             this.listTopReview.add(itemCourse);

@@ -1,11 +1,9 @@
 package com.elearning.elearning.activity.signin_signup;
 
-import android.content.Intent;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -17,13 +15,8 @@ import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.base.BaseFragment;
-import com.elearning.elearning.helper.DatetimeHelper;
 import com.elearning.elearning.mvp.presenter.RegistrationPresenter;
 import com.elearning.elearning.mvp.view.RegistrationView;
-
-import java.util.Date;
-
-import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;
 
 /**
  * Created by MinhQuan on 20/05/2017.

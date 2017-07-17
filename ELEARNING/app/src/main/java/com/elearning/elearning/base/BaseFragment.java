@@ -41,7 +41,6 @@ public abstract class BaseFragment extends Fragment implements Init {
     protected MainActivity getMainActivity() {
         return ((MainActivity) getActivity());
     }
-
     protected SharedPreferences getSharePreferences() {
         return getMainActivity().sharedPreferences;
     }

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ELEARNING</string>
-    <string name="userName">Tên đăng nhập</string>
     <string name="passWord">Mật khẩu</string>
     <string name="passWordConfirm">Xác Nhận Mật khẩu</string>
     <string name="signIn">Đăng nhập</string>
@@ -9,14 +8,9 @@
     <string name="signUp">Đăng kí</string>
     <string name="loginFB">Facebook</string>
     <string name="loginGG">Google</string>
-    <string name="or_login">Hay đăng nhập bằng</string>
-    <string name="createAccount">Tạo tài khoản mới</string>
     <string name="email">Email</string>
     <string name="lastName">Họ</string>
     <string name="firstName">Tên</string>
-    <string name="brithday">Ngày sinh</string>
-    <string name="numberPhone">Số điện thoại</string>
-    <string name="gender">Giới tính</string>
     <string name="male">Nam</string>
     <string name="female">Nữ</string>
     <string name="save">Lưu</string>
@@ -35,7 +29,7 @@
     <string name="nav_support">Hỗ trợ</string>
     <string name="nav_hotline">Holine : 1900 1000</string>
     <string name="menu_listlesson">Danh sách bài giảng</string>
-    <string name="menu_lesson">Bài học</string>
+    <string name="menu_lesson">Nội dung</string>
     <string name="nav_email">Email : elearning@gmail.com</string>
     <string name="home_course_new">Mới nhất</string>
     <string name="home_course_most">Phổ biến nhất</string>
@@ -70,6 +64,7 @@
     <string name="cap_no_data">Không có dữ liệu</string>
     <string name="cap_upload_avatar_succes">Đổi ảnh đại diện thành công</string>
     <string name="cap_upload_avatar_fail">Đổi ảnh đại diện không thành công</string>
+    <string name="cap_tree_dot">...</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>
@@ -106,4 +101,11 @@
     <string  formatted="false" name="cap_number_answered">Trả lời: %s/%s câu.</string>
     <string name="double_back_to_exit">Ấn thoát 2 lần liên tiếp để thoát</string>
     <string name="cap_title_progress_learn">Tiến trình khóa học:</string>
+
+    <!--about me-->
+    <string name="about_description">E-Learning cung cấp tiếp cận phổ cập tới công tác đào tạo tốt nhất trên thế giới, hợp tác với các trường đại học và các tổ chức mức cao nhất để cung cấp các khóa học trực tuyến.</string>
+    <string name="about_hotline">Hotline : 1900 1000</string>
+    <string name="about_address">Địa chỉ :475A Điện Biên Phủ, phường 25, quận Bình Thạnh, TP.HCM</string>
+    <string name="about_email">Email : yduoc360@gmail.com</string>
+    <string name="about_cap_version">Phiên bản: %s</string>
 </resources>

@@ -20,4 +20,5 @@ public interface MainView {
     void onSearchResult(List<Course> courseList);
 
     void setItemSelected(String id);
+    void exitExam();
 }

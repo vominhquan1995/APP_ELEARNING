@@ -91,7 +91,6 @@
                 android:layout_weight="0.2"
                 android:gravity="center|left"
                 android:lines="2"
-                android:text="ssssssssssssssssssssssss"
                 android:textStyle="bold" />
 
             <TextView

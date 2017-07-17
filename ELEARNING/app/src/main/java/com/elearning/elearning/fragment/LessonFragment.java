@@ -26,6 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static com.elearning.elearning.prefs.Constant.TYPE_PDF;
 import static com.elearning.elearning.prefs.Constant.TYPE_VIDEO;
 
 /**
@@ -39,7 +40,7 @@ public class LessonFragment extends BaseFragment implements LessonView {
     private PDFView pdfView;
     private ImageView imgFull;
     private TextView name;
-    private TextView time,txtTitleProgress;
+    private TextView time, txtTitleProgress;
     private TextView typeLesson;
     private TextView description;
     private static onDoExam onDoExam;
@@ -60,6 +61,7 @@ public class LessonFragment extends BaseFragment implements LessonView {
         description = (TextView) view.findViewById(R.id.txtDescription);
         imgFull = (ImageView) view.findViewById(R.id.imgFull);
         progressLearn = (ProgressBar) view.findViewById(R.id.prLearn);
+        txtTitleProgress.setText(getResources().getString(R.string.cap_title_progress_learn));
     }
 
     @Override
@@ -77,6 +79,26 @@ public class LessonFragment extends BaseFragment implements LessonView {
                 lessonItem = lesson;
                 setUI();
                 lessonPresenter.getProgressLearn(lessonItem.getCourseId());
+            }
+        });
+        HistoryExamFragment.setSendIdLesson(new HistoryExamFragment.onSendLessonID() {
+            @Override
+            public void onSend(int lessonID) {
+                showProgressDialog();
+                lessonPresenter.getInformationLesson(lessonID, new LessonPresenter.onGetInfoLesson() {
+                    @Override
+                    public void getInfoSuccess(Lesson lesson) {
+                        dismissProgressDialog();
+                        lessonItem = lesson;
+                        setUI();
+                        lessonPresenter.getProgressLearn(lessonItem.getCourseId());
+                    }
+
+                    @Override
+                    public void getInfoFail(String mess) {
+
+                    }
+                });
             }
         });
         view.findViewById(R.id.btnDoExam).setOnClickListener(new View.OnClickListener() {
@@ -114,20 +136,18 @@ public class LessonFragment extends BaseFragment implements LessonView {
             if (lessonItem.getSourseType().equals(TYPE_VIDEO)) {
                 pdfView.setVisibility(View.GONE);
                 webView.setVisibility(View.VISIBLE);
-                webView.loadUrl("http://apielearning.azurewebsites.net/FilesUploaded/10_06_2017_09_45_49nature%20sounds%20forest%201%20minute%20HD%201080p.mp4");
-            } else {
+                webView.loadUrl(APIConstant.HOST_NAME_IMAGE + lessonItem.getLessonUrl());
+            } else if (lessonItem.getSourseType().equals(TYPE_PDF)) {
                 pdfView.setVisibility(View.VISIBLE);
                 webView.setVisibility(View.GONE);
-                new ReadFilePdf().execute("http://www.tra.org.bh/media/document/sample10.pdf");
+                new ReadFilePdf().execute(APIConstant.HOST_NAME_IMAGE + lessonItem.getLessonUrl());
+            } else {
+                pdfView.setVisibility(View.GONE);
+                webView.setVisibility(View.VISIBLE);
+                String url = "https://view.officeapps.live.com/op/view.aspx?src=" + APIConstant.HOST_NAME_IMAGE + lessonItem.getLessonUrl();
+                Log.d("Powerpoint", url);
+                webView.loadUrl(url);
             }
-//            String doc="<iframe src='http://docs.google.com/viewer?url=http://apielearning.azurewebsites.net/FilesUploaded/10_06_2017_09_39_31pdf-test.pdf&embedded=true'  style='border: none;'></iframe>";
-//            webView.setVisibility(WebView.VISIBLE);
-//            webView.getSettings().setJavaScriptEnabled(true);
-//            webView.loadData(doc, "text/html", "UTF-8");
-//            Uri myUri = Uri.parse("http://apielearning.azurewebsites.net/FilesUploaded/10_06_2017_09_39_31pdf-test.pdf");
-//            pdfView.fromUri(myUri).load();
-//            webView.loadUrl(APIConstant.HOST_NAME_IMAGE + lessonItem.getLessonUrl());
-            //set information
             name.setText(String.format(context.getResources().getString(R.string.lesson_name), String.valueOf(lessonItem.getName())));
             typeLesson.setText(String.format(context.getResources().getString(R.string.lesson_source_type), String.valueOf(lessonItem.getSourseType())));
             time.setText(String.format(context.getResources().getString(R.string.lesson_time), String.valueOf(lessonItem.getTime())));
@@ -142,7 +162,6 @@ public class LessonFragment extends BaseFragment implements LessonView {
 
     @Override
     public void onGetProgressSuccess(String value) {
-        txtTitleProgress.setText(String.format(getResources().getString(R.string.cap_title_progress_learn),value));
         progressLearn.setProgress(Integer.parseInt(value));
     }
 
@@ -174,7 +193,7 @@ public class LessonFragment extends BaseFragment implements LessonView {
         protected void onPostExecute(InputStream inputStream) {
             pdfView.setBackgroundColor(Color.LTGRAY);
             pdfView.fromStream(inputStream)
-                    .swipeHorizontal(true)
+                    .swipeHorizontal(false)
                     .load();
         }
     }

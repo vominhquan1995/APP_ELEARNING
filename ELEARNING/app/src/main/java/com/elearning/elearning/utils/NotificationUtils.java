@@ -14,7 +14,6 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.util.Patterns;
 
-import com.elearning.elearning.R;
 import com.elearning.elearning.network.APIConstant;
 
 import java.io.IOException;

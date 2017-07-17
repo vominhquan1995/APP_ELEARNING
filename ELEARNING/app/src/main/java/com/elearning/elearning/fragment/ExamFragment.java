@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.elearning.elearning.R;
+import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.base.BaseFragment;
 import com.elearning.elearning.dialog.DialogConfirm;
 import com.elearning.elearning.dialog.DialogResult;
@@ -35,7 +36,6 @@ import static com.elearning.elearning.prefs.Constant.MSG_FAIL;
 import static com.elearning.elearning.prefs.Constant.POS_DOWN;
 import static com.elearning.elearning.prefs.Constant.POS_UP;
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;
-import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 import static com.google.android.gms.internal.zzs.TAG;
 
 /**
@@ -57,7 +57,6 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     private ProgressBar prTimeCountdown;
     private ArrayAnswer arrayAnswer;
     private TimeCountdownAsyncTask timeCountdownAsyncTask;
-    private int lessonId;//default
 
     @Override
     public void initView() {
@@ -92,8 +91,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
         LessonFragment.setOnDoExam(new LessonFragment.onDoExam() {
             @Override
             public void onDoExam(int idLesson) {
-                lessonId = idLesson;
-                examPresenter.getInfoExam(lessonId);
+                examPresenter.getInfoExam(idLesson);
                 showProgressDialog();
             }
         });
@@ -138,6 +136,30 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                 }
                 //update number question answer
                 txtNumberAnswer.setText(String.format(getResources().getString(R.string.cap_number_answered), String.valueOf(arrayAnswer.getSize()), String.valueOf(examInfo.getNumberQuesion())));
+            }
+        });
+        MainActivity.setOnExitExam(new MainActivity.onExitExam() {
+            @Override
+            public void onExitExam() {
+                if(frameDoExam.getVisibility()==View.VISIBLE){
+                    new DialogConfirm.Build(getMainActivity())
+                            .setTxtTitle(getResources().getString(R.string.cap_done_exam))
+                            .setTxtBody(getResources().getString(R.string.cap_ask_done_exam))
+                            .setOnLogoutListener(new DialogConfirm.Build.OnLogoutListener() {
+                                @Override
+                                public void onConfirm() {
+                                    stopCountDown();
+                                    showProgressDialog();
+                                }
+
+                                @Override
+                                public void onCancel() {
+
+                                }
+                            }).show();
+                }else{
+                    getMainActivity().backOnePage();
+                }
             }
         });
     }
@@ -293,18 +315,11 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                 break;
         }
     }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        stopCountDown();
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initDoExam(List<Question> listQuestion) {
         dismissProgressDialog();
         txtNameExam_Do.setText(examInfo.getNameExam());
-        prTimeCountdown.setProgressTintList(ColorStateList.valueOf(Color.BLUE));
+        prTimeCountdown.setIndeterminateTintList(ColorStateList.valueOf(getResources().getColor(R.color.color_background_main_blue)));
         txtNumberAnswer.setText(String.format(getResources().getString(R.string.cap_number_answered), "0", String.valueOf(examInfo.getNumberQuesion())));
         listQuestionData = listQuestion;
         prTimeCountdown.setMax(examInfo.getTimeExam() * 60);

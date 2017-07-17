@@ -27,7 +27,6 @@
             android:padding="@dimen/padding_3dp"
             android:textColor="@color/color_blue"
             android:textStyle="bold"
-            android:maxLength="15"
             android:textSize="@dimen/text_size_12" />
 
         <TextView

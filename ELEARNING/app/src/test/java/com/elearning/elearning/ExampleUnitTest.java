@@ -1,7 +1,6 @@
 package com.elearning.elearning;
 
 import android.os.Environment;
-import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -11,7 +10,6 @@ import com.elearning.elearning.mvp.model.User;
 import com.elearning.elearning.network.APIConstant;
 import com.elearning.elearning.network.NetworkUtil;
 
-import org.json.JSONException;
 import org.junit.Test;
 
 import java.io.File;

@@ -1,13 +1,8 @@
 package com.elearning.elearning.adapter;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +13,8 @@ import android.widget.TextView;
 import com.elearning.elearning.R;
 import com.elearning.elearning.base.BaseRecyclerAdapter;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Created by MinhQuan on 30/06/2017.

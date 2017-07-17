@@ -60,6 +60,8 @@ public interface APIConstant {
     String NOTFICATION_URL=HOST_NAME+ "/notification";
     //get progress learn
     String PROGRESS_LEARN_URL=HOST_NAME+ "/students/";
+    //get information lesson
+    String LESSON_INFORMATION_URL=HOST_NAME+ "/lesson/";
     //Header
     String BEARER = "Bearer ";
     String AUTHORIZATION = "Authorization";
@@ -136,6 +138,7 @@ public interface APIConstant {
      * model history exam
      */
     String EXAMID="examId";
+    String LESSONID="lessonId";
     String POINTEXAM="point";
     String EXAMSTATUS="status";
     String EXAMTIME="time";

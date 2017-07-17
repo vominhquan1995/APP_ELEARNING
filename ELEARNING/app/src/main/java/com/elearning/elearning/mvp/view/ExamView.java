@@ -1,7 +1,6 @@
 package com.elearning.elearning.mvp.view;
 
 import com.elearning.elearning.mvp.model.Exam;
-import com.elearning.elearning.mvp.model.HistoryExam;
 
 /**
  * Created by MinhQuan on 06/07/2017.

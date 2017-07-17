@@ -19,6 +19,7 @@ import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 
 public class HistoryExam {
     private int idExam;
+    private int idLesson;
     private String nameExam;
     private Date dateExam;
     private int point;
@@ -28,12 +29,21 @@ public class HistoryExam {
 
     }
 
-    public HistoryExam(int idExam, String nameExam, Date dateExam, int point, String status) {
+    public HistoryExam(int idExam, int idLesson, String nameExam, Date dateExam, int point, String status) {
         this.idExam = idExam;
+        this.idLesson = idLesson;
         this.nameExam = nameExam;
         this.dateExam = dateExam;
         this.point = point;
         this.status = status;
+    }
+
+    public int getIdLesson() {
+        return idLesson;
+    }
+
+    public void setIdLesson(int idLesson) {
+        this.idLesson = idLesson;
     }
 
     public String getNameExam() {
@@ -96,6 +106,7 @@ public class HistoryExam {
             try {
                 JSONObject data = (JSONObject) jsonArray.get(i);
                 HistoryExam historyExam = new HistoryExam();
+                historyExam.setIdLesson(data.getInt(APIConstant.LESSONID));
                 historyExam.setIdExam(data.getInt(APIConstant.EXAMID));
                 historyExam.setNameExam(data.getString(APIConstant.EXAMNAME));
                 historyExam.setPoint(data.getInt(APIConstant.POINTEXAM));

@@ -26,7 +26,7 @@ public class HistoryExamFragment extends BaseFragment implements HistoryExamView
     private List<HistoryExam> listExamFail = new ArrayList<>();
     private RecyclerView rvPass, rvFail;
     private TextView txtTitlePass,txtTitleFail;
-
+    private static HistoryExamFragment.onSendLessonID onSendLessonID;
     @Override
     public void initView() {
         txtTitlePass=(TextView) view.findViewById(R.id.txtTitle1);
@@ -47,12 +47,16 @@ public class HistoryExamFragment extends BaseFragment implements HistoryExamView
         adapterPass = new HistoryExamAdapter(context, listExamPass, new HistoryExamAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Log.d("History exam", String.valueOf(position));
+                getMainActivity().gotoFragment(getResources().getString(R.string.menu_lesson));
+                onSendLessonID.onSend(listExamPass.get(position).getIdLesson());
+                Log.d("Send lesson id", String.valueOf(listExamPass.get(position).getIdLesson()));
             }
         });
         adapterFail = new HistoryExamAdapter(context, listExamFail, new HistoryExamAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                getMainActivity().gotoFragment(getResources().getString(R.string.menu_lesson));
+                onSendLessonID.onSend(listExamFail.get(position).getIdLesson());
                 Log.d("History exam", String.valueOf(position));
             }
         });
@@ -63,6 +67,7 @@ public class HistoryExamFragment extends BaseFragment implements HistoryExamView
 
     @Override
     public void initAction() {
+        showProgressDialog();
         historyExamPresenter.getListHistoryExam();
     }
 
@@ -82,11 +87,17 @@ public class HistoryExamFragment extends BaseFragment implements HistoryExamView
         }
         adapterPass.notifyDataSetChanged();
         adapterFail.notifyDataSetChanged();
-
+        dismissProgressDialog();
     }
 
     @Override
     public void onGetListHistoryFail(String mess) {
 
+    }
+    public static void setSendIdLesson(HistoryExamFragment.onSendLessonID onSendLessonID) {
+        HistoryExamFragment.onSendLessonID = onSendLessonID;
+    }
+    public interface onSendLessonID {
+        void onSend(int LessonId);
     }
 }

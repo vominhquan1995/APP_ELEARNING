@@ -1,8 +1,8 @@
 package com.elearning.elearning.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +13,13 @@ import com.elearning.elearning.R;
 import com.elearning.elearning.base.BaseRecyclerAdapter;
 import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.network.APIConstant;
-import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import static com.elearning.elearning.prefs.Constant.MAX_LENGTH_DONOR_COURSE;
+import static com.elearning.elearning.prefs.Constant.MAX_LENGTH_NAME_COURSE;
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;
-import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 
 /**
  * Created by MinhQuan on 01/07/2017.
@@ -56,9 +53,16 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
                 .resize(350, 240)
                 .into(courseViewHolder.image);
 //        courseViewHolder.image.setBackground(context.getResources().getDrawable(R.drawable.default_course));
-        courseViewHolder.name.setText(item.getNameCourses());
+        courseViewHolder.name.setText((item.getNameCourses().length() > MAX_LENGTH_NAME_COURSE)
+                ? item.getNameCourses().substring(0, MAX_LENGTH_NAME_COURSE)+context.getResources().getString(R.string.cap_tree_dot)
+                : item.getNameCourses());
+        Log.d("Donor",String.valueOf(item.getDonors().length()));
+        Log.d("Donor",item.getDonors());
+        courseViewHolder.donor.setText((item.getDonors().length() >MAX_LENGTH_DONOR_COURSE)
+                ?  String.format(context.getResources().getString(R.string.course_donor), item.getDonors().substring(0,MAX_LENGTH_DONOR_COURSE))+context.getResources().getString(R.string.cap_tree_dot)
+                : String.format(context.getResources().getString(R.string.course_donor), item.getDonors()));
         courseViewHolder.credits.setText(String.format(context.getResources().getString(R.string.course_creadits), String.valueOf(item.getNumberCredits())));
-        courseViewHolder.donor.setText(String.format(context.getResources().getString(R.string.course_donor), item.getDonors()));
+//        courseViewHolder.donor.setText(String.format(context.getResources().getString(R.string.course_donor), item.getDonors()));
         courseViewHolder.dateStart.setText(String.format(context.getResources().getString(R.string.course_date_start), DATE_FORMAT.format(item.getDateStart())));
         courseViewHolder.dateEnd.setText(String.format(context.getResources().getString(R.string.course_date_end), DATE_FORMAT.format(item.getDateEnd())));
     }
@@ -68,6 +72,7 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
         View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
         return new CourseViewHolder(rootView);
     }
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
@@ -75,6 +80,7 @@ public class CourseAdapter extends BaseRecyclerAdapter<Course> {
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
+
     private class CourseViewHolder extends RecyclerView.ViewHolder {
         private ImageView image;
         private TextView name;

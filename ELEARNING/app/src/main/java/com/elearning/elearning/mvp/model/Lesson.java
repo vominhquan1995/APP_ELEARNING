@@ -40,6 +40,25 @@ public class Lesson {
         this.id = id;
     }
 
+    public static Lesson parseLesson(JSONObject jsonObject) {
+        Lesson lesson = new Lesson();
+        try {
+            lesson.setId(jsonObject.getInt(APIConstant.LESSON_ID));
+            lesson.setName(jsonObject.getString(APIConstant.LESSON_NAME));
+            lesson.setIndex(jsonObject.getInt(APIConstant.LESSON_INDEX));
+            lesson.setCourseId(jsonObject.getInt(APIConstant.LESSON_COURSEID));
+            lesson.setLessonUrl(jsonObject.getString(APIConstant.LESSON_LESSONURL));
+            lesson.setSourseType(jsonObject.getString(APIConstant.LESSON_SOURSETYPE));
+            lesson.setTime(jsonObject.getInt(APIConstant.LESSON_TIME));
+            lesson.setUrlImage(jsonObject.getString(APIConstant.LESSON_URLIMAGE));
+            lesson.setDescription(jsonObject.getString(APIConstant.LESSON_DESCRIPTION));
+            return lesson;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return  null;
+        }
+    }
+
     public static List<Lesson> getListLesson(JSONArray jsonArray) {
         List<Lesson> lessonList = new ArrayList();
         try {

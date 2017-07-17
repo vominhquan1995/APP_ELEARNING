@@ -1,19 +1,14 @@
 package com.elearning.elearning.adapter;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.elearning.elearning.R;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by MinhQuan on 09/07/2017.

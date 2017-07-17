@@ -1,14 +1,12 @@
 package com.elearning.elearning.fragment;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.elearning.elearning.R;
-import com.elearning.elearning.adapter.CourseAdapter;
 import com.elearning.elearning.adapter.HistoryLearnAdapter;
 import com.elearning.elearning.base.BaseFragment;
 import com.elearning.elearning.mvp.model.HistoryLearnExam;
@@ -26,12 +24,11 @@ import static com.elearning.elearning.prefs.Constant.NUMBER_COLUMNS_3;
 
 public class HistoryFragment extends BaseFragment implements HistoryLearnView {
     private RecyclerView rvCourseStuding, rvCourseDone;
-    private ImageView imgCourse;
-    private TextView txtNameCourse;
     private HistoryLearnAdapter adapterCourseStuding, adapterCourseDone;
     private List<HistoryLearnExam> listCourseStuding = new ArrayList<>();
     private List<HistoryLearnExam> listCourseDone = new ArrayList<>();
     private HistoryLearnPresenter historyLearnPresenter;
+    private static HistoryFragment.onSendCourseID onSendCourseID;
 
     @Override
     public void initView() {
@@ -54,6 +51,21 @@ public class HistoryFragment extends BaseFragment implements HistoryLearnView {
     public void initAction() {
         showProgressDialog();
         historyLearnPresenter.getHistory();
+        adapterCourseStuding.setOnItemClickListener(new HistoryLearnAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
+                Log.d("History",String.valueOf(listCourseStuding.get(position).getIdCourse()));
+                onSendCourseID.onSend(listCourseStuding.get(position).getIdCourse());
+            }
+        });
+        adapterCourseDone.setOnItemClickListener(new HistoryLearnAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
+                onSendCourseID.onSend(listCourseDone.get(position).getIdCourse());
+            }
+        });
     }
 
     @Override
@@ -78,4 +90,11 @@ public class HistoryFragment extends BaseFragment implements HistoryLearnView {
     public void onGetHistoryFail(String message) {
         Log.d("History", message);
     }
+    public static void setSendCourseID(HistoryFragment.onSendCourseID onSendCourseID) {
+        HistoryFragment.onSendCourseID = onSendCourseID;
+    }
+    public interface onSendCourseID {
+        void onSend(int CourseId);
+    }
+
 }

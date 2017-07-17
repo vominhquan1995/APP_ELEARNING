@@ -5,9 +5,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,7 +23,6 @@ import com.elearning.elearning.mvp.presenter.MainPresenter;
 import com.elearning.elearning.mvp.view.MainView;
 import com.elearning.elearning.network.APIConstant;
 import com.elearning.elearning.prefs.Constant;
-import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
@@ -52,6 +49,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     private CourseAdapter mCourseAdapter;
     private List<Course> listCourse;
     private static MainActivity.onSendCourseID onSendCourseID;
+    private static MainActivity.onExitExam onExitExam;
     private static Sound sound;
     public static int IdLesson = 0;
 
@@ -79,6 +77,10 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 
     public static void setSendCourseID(MainActivity.onSendCourseID onSendCourseID) {
         MainActivity.onSendCourseID = onSendCourseID;
+    }
+
+    public static void setOnExitExam(MainActivity.onExitExam onExitExam) {
+        MainActivity.onExitExam = onExitExam;
     }
 
     @Override
@@ -157,7 +159,6 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
             }
         });
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -171,7 +172,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 //                lnSearchContainer.setVisibility(View.VISIBLE);
                 break;
             case R.id.btnBack:
-                updateToolbar(false, false, null);
+//                updateToolbar(false, false, null);
                 onBackPressed();
                 break;
         }
@@ -234,6 +235,11 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         navAdapter.setSelectedId(id);
     }
 
+    @Override
+    public void exitExam() {
+        onExitExam.onExitExam();
+    }
+
     private void goLogin() {
         sharedPreferences.edit().putBoolean(Constant.AUTO_LOGIN, false).apply();
         sharedPreferences.edit().putString(Constant.USER_EMAIL, "").apply();
@@ -265,6 +271,10 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         void onSend(int CourseId);
     }
 
+    public interface onExitExam {
+        void onExitExam();
+    }
+
     public static int getIdLesson() {
         return IdLesson;
     }
@@ -279,5 +289,9 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 
     public void loadAvatar() {
         Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE + User.get().getUrlAvatar()).resize(350, 350).into(avatarUser);
+    }
+
+    public void backOnePage() {
+        mainPresenter.backOnePage();
     }
 }

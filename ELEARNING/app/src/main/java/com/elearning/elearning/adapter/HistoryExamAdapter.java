@@ -5,17 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.base.BaseRecyclerAdapter;
 import com.elearning.elearning.mvp.model.HistoryExam;
-import com.elearning.elearning.mvp.model.HistoryLearnExam;
-import com.elearning.elearning.network.APIConstant;
-import com.squareup.picasso.Picasso;
 
-import java.util.Date;
 import java.util.List;
 
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;

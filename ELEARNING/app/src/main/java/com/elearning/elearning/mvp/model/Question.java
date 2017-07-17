@@ -1,6 +1,5 @@
 package com.elearning.elearning.mvp.model;
 
-import com.elearning.elearning.network.API;
 import com.elearning.elearning.network.APIConstant;
 
 import org.json.JSONArray;

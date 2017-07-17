@@ -8,6 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.elearning.elearning.mvp.model.Lesson.parseLesson;
+
 /**
  * Created by MinhQuan on 04/07/2017.
  */
@@ -41,5 +43,35 @@ public class LessonPresenter {
                 lessonView.onGetProgressFail(errorMessage);
             }
         });
+    }
+
+    public void getInformationLesson(int idLesson, final onGetInfoLesson onGetInfoLesson) {
+        API.getInformationLesson(String.valueOf(idLesson), new API.OnAPIListener() {
+            @Override
+            public void onSuccessObject(JSONObject response) throws JSONException {
+                onGetInfoLesson.getInfoSuccess(parseLesson(response));
+            }
+
+            @Override
+            public void onSuccessArray(JSONArray response) throws JSONException {
+
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                onGetInfoLesson.getInfoFail(errorMessage);
+            }
+        });
+    }
+
+    public interface onGetInfoLesson {
+        void getInfoSuccess(Lesson lesson);
+
+        void getInfoFail(String mess);
     }
 }

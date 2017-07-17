@@ -3,12 +3,12 @@ package com.elearning.elearning.mvp.presenter;
 import android.content.Context;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.view.View;
 import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.adapter.NavAdapter;
+import com.elearning.elearning.fragment.AboutFragment;
 import com.elearning.elearning.fragment.ExamFragment;
 import com.elearning.elearning.fragment.HistoryExamFragment;
 import com.elearning.elearning.fragment.HistoryFragment;
@@ -113,26 +113,38 @@ public class MainPresenter {
         } else if (id.equals(context.getString(R.string.menu_lesson))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new LessonFragment());
+        } else if (id.equals(context.getString(R.string.nav_about_us))) {
+            mainView.updateToolbar(true, false, id);
+            switchFragment(new AboutFragment());
         } else if (id.equals(context.getString(R.string.nav_logout))) {
             mainView.onLogout();
         }
     }
 
     public void onBackPressed() {
-        if (fragmentNavigator.getActiveFragment() instanceof LessonFragment ||
-                fragmentNavigator.getActiveFragment() instanceof ExamFragment) {
+        if (fragmentNavigator.getActiveFragment() instanceof LessonFragment) {
             mainView.updateToolbar(true, false, context.getString(R.string.menu_listlesson));
             fragmentNavigator.goOneBack();
+        } else if (fragmentNavigator.getActiveFragment() instanceof ExamFragment) {
+            mainView.exitExam();
         } else if (fragmentNavigator.getActiveFragment() instanceof UserInfoFragment ||
                 fragmentNavigator.getActiveFragment() instanceof ListLessonFragment
                 || fragmentNavigator.getActiveFragment() instanceof HistoryFragment
                 || fragmentNavigator.getActiveFragment() instanceof NotificationFragment
-                || fragmentNavigator.getActiveFragment() instanceof HistoryExamFragment) {
+                || fragmentNavigator.getActiveFragment() instanceof HistoryExamFragment
+                || fragmentNavigator.getActiveFragment() instanceof AboutFragment) {
             mainView.updateToolbar(false, false, context.getString(R.string.nav_home));
             fragmentNavigator.goToRoot();
             mainView.setItemSelected(context.getString(R.string.nav_home));
         } else {
             doubleBackToExit();
+        }
+    }
+
+    public void backOnePage() {
+        if (fragmentNavigator.getActiveFragment() instanceof ExamFragment) {
+            fragmentNavigator.goOneBack();
+            mainView.updateToolbar(true, false, context.getString(R.string.menu_lesson));
         }
     }
 

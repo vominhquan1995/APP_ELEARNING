@@ -1,7 +1,6 @@
 package com.elearning.elearning.activity.signin_signup;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;

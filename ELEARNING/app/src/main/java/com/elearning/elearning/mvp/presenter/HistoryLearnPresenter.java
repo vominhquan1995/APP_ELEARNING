@@ -1,7 +1,5 @@
 package com.elearning.elearning.mvp.presenter;
 
-import android.content.Context;
-
 import com.elearning.elearning.mvp.model.HistoryLearnExam;
 import com.elearning.elearning.mvp.view.HistoryLearnView;
 import com.elearning.elearning.network.API;
