@@ -13,8 +13,9 @@ public interface APIConstant {
     int STATUS_CODE_OK = 200;
     int STATUS_CODE_AUTHORIZE = 401;
 
-    String HOST_NAME = "http://apielearning.azurewebsites.net/api";
-    String HOST_NAME_IMAGE = "http://apielearning.azurewebsites.net";
+//    String HOST_NAME = "http://apielearning.azurewebsites.net/api";
+    String HOST_NAME = "http:/apielearninghutech.azurewebsites.net/api";
+    String HOST_NAME_IMAGE = "http://apielearninghutech.azurewebsites.net";
     //Login
     String LOGIN_URL = HOST_NAME + "/accounts/token";
     //Sign up

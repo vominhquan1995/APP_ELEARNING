@@ -65,7 +65,6 @@ public class API {
     //sign up
     public static void registration(final String email, final String password, final String firstName, final String lastName, OnAPIListener onAPIListener) {
         listener = onAPIListener;
-        Log.d("Link", APIConstant.SIGNUP_URL);
         AndroidNetworking.post(APIConstant.SIGNUP_URL)
                 .addBodyParameter(APIConstant.EMAIL, email)
                 .addBodyParameter(APIConstant.PASSWORD, password)
@@ -77,6 +76,7 @@ public class API {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            Log.d("Link",response);
                             listener.onString(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
