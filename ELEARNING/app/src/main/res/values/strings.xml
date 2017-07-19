@@ -30,6 +30,7 @@
     <string name="nav_hotline">Holine : 1900 1000</string>
     <string name="menu_listlesson">Danh sách bài giảng</string>
     <string name="menu_lesson">Nội dung</string>
+    <string name="menu_all_course">Toàn bộ khóa học</string>
     <string name="nav_email">Email : elearning@gmail.com</string>
     <string name="home_course_new">Mới nhất</string>
     <string name="home_course_most">Phổ biến nhất</string>
@@ -65,6 +66,11 @@
     <string name="cap_upload_avatar_succes">Đổi ảnh đại diện thành công</string>
     <string name="cap_upload_avatar_fail">Đổi ảnh đại diện không thành công</string>
     <string name="cap_tree_dot">...</string>
+    <string name="cap_apply">Áp dụng</string>
+    <string name="cap_price">Giá</string>
+    <string name="cap_rate">Đánh Giá</string>
+    <string name="cap_sale">Khuyến mãi</string>
+    <string name="cap_category">Danh mục</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>

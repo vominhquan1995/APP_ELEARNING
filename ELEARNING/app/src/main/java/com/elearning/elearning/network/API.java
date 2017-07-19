@@ -76,7 +76,7 @@ public class API {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Log.d("Link",response);
+                            Log.d("Link", response);
                             listener.onString(response);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -538,6 +538,53 @@ public class API {
                     }
                 });
     }
+
+    //filter rate
+    public static void filterRate(final String minStar, final String maxStar, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.FILTER_RATE_HEADER_URL + minStar + '/' + maxStar + APIConstant.FILTER_RATE_FOOTER_URL)
+                .addHeaders(APIConstant.BEARER, User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
+    //filter price
+    public static void filterPrice(final String minPrice, final String maxPrice, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.FILTER_PRICE_HEADER_URL + minPrice + '/' + maxPrice + APIConstant.FILTER_PRICE_FOOTER_URL)
+                .addHeaders(APIConstant.BEARER, User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
 
     public interface OnAPIListener {
         void onSuccessObject(final JSONObject response) throws JSONException;

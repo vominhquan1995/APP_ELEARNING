@@ -51,7 +51,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="@dimen/margin_3dp"
                                 android:layout_weight="0.3"
-                                android:gravity="center"
+                                android:gravity="center|left"
                                 android:text="@string/home_course_new"
                                 android:textSize="@dimen/text_size_12"
                                 android:textStyle="bold" />
@@ -62,6 +62,7 @@
                                 android:layout_weight="0.4"></LinearLayout>
 
                             <TextView
+                                android:id="@+id/txtViewMore"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_margin="@dimen/margin_3dp"
@@ -119,7 +120,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="@dimen/margin_3dp"
                                 android:layout_weight="0.3"
-                                android:gravity="center"
+                                android:layout_gravity="left|center"
                                 android:text="@string/home_course_most"
                                 android:textSize="@dimen/text_size_12"
                                 android:textStyle="bold" />
@@ -130,6 +131,7 @@
                                 android:layout_weight="0.4"></LinearLayout>
 
                             <TextView
+                                android:id="@+id/txtViewMore2"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_margin="@dimen/margin_3dp"
@@ -189,7 +191,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="@dimen/margin_3dp"
                                 android:layout_weight="0.3"
-                                android:gravity="center"
+                                android:layout_gravity="left|center"
                                 android:text="@string/home_course_top_view"
                                 android:textSize="@dimen/text_size_12"
                                 android:textStyle="bold" />
@@ -200,6 +202,7 @@
                                 android:layout_weight="0.4"></LinearLayout>
 
                             <TextView
+                                android:id="@+id/txtViewMore3"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_margin="@dimen/margin_3dp"

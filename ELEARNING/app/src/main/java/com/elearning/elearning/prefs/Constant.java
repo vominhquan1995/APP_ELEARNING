@@ -21,9 +21,13 @@ public class Constant {
     public static final String MSG_FAIL = "Rất tiếc. Bạn chưa đạt yêu cầu";
     public static final int TIME_AUTO_CLOSE_DIALOG = 3000;
     public static final int NUMBER_ITEM_SLIDE= 8;
-    public static final int MAX_LENGTH_NAME_COURSE= 15;
-    public static final int MAX_LENGTH_DONOR_COURSE= 10;
+    public static final int MAX_LENGTH_NAME_COURSE= 20;
+    public static final int MAX_LENGTH_DONOR_COURSE= 15;
     public static final String TYPE_PDF="PDF";
     public static final String TYPE_VIDEO="Video";
+    public static final String TYPE_FILTER_PRICE="PRICE";
+    public static final String TYPE_FILTER_RATE="RATE";
+    public static final String TYPE_FILTER_SALE="SALE";
+    public static final String TYPE_FILTER_CATEGORY="CATEGORY";
 
 }

@@ -9,6 +9,7 @@ import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
 import com.elearning.elearning.adapter.NavAdapter;
 import com.elearning.elearning.fragment.AboutFragment;
+import com.elearning.elearning.fragment.AllCourseFragment;
 import com.elearning.elearning.fragment.ExamFragment;
 import com.elearning.elearning.fragment.HistoryExamFragment;
 import com.elearning.elearning.fragment.HistoryFragment;
@@ -19,6 +20,7 @@ import com.elearning.elearning.fragment.NotificationFragment;
 import com.elearning.elearning.fragment.UserInfoFragment;
 import com.elearning.elearning.helper.FragmentNavigator;
 import com.elearning.elearning.mvp.model.Course;
+import com.elearning.elearning.mvp.model.HistoryExam;
 import com.elearning.elearning.mvp.view.MainView;
 import com.elearning.elearning.network.API;
 
@@ -79,9 +81,21 @@ public class MainPresenter {
         if (fragment instanceof ListLessonFragment) {
             backRoot = true;
         }
-//        if (fragment instanceof ExamFragment) {
-//            backRoot = true;
-//        }
+        if (fragment instanceof AboutFragment) {
+            backRoot = true;
+        }
+        if (fragment instanceof HistoryExamFragment) {
+            backRoot = true;
+        }
+        if (fragment instanceof HistoryFragment) {
+            backRoot = true;
+        }
+        if (fragment instanceof NotificationFragment) {
+            backRoot = true;
+        }
+        if (fragment instanceof AllCourseFragment) {
+            backRoot = true;
+        }
         if (backRoot) {
             fragmentNavigator.goToRoot();
         }
@@ -92,7 +106,11 @@ public class MainPresenter {
         if (id.equals(context.getString(R.string.nav_home))) {
             fragmentNavigator.goToRoot();
             mainView.updateToolbar(false, false, id);
-        } else if (id.equals(context.getString(R.string.nav_exam))) {
+        } else if (id.equals(context.getString(R.string.menu_all_course))) {
+            mainView.updateToolbar(true, false, id);
+            switchFragment(new AllCourseFragment());
+        }
+        else if (id.equals(context.getString(R.string.nav_exam))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new ExamFragment());
         } else if (id.equals(context.getString(R.string.nav_history_exam))) {

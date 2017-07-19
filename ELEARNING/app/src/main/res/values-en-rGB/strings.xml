@@ -28,6 +28,7 @@
     <string name="nav_support">Support</string>
     <string name="menu_listlesson">List lesson</string>
     <string name="menu_lesson">Lesson</string>
+    <string name="menu_all_course">All Course</string>
     <string name="home_course_new">New</string>
     <string name="home_course_most">Top Most</string>
     <string name="home_course_top_view">Top View</string>
@@ -55,7 +56,11 @@
     <string name="cap_no_data">No data</string>
     <string name="cap_upload_avatar_succes">Uplaod avatar success</string>
     <string name="cap_upload_avatar_fail">Upload avatar fail</string>
-
+    <string name="cap_apply">Apply</string>
+    <string name="cap_price">Price</string>
+    <string name="cap_rate">Rates</string>
+    <string name="cap_sale">Sales</string>
+    <string name="cap_category">Categorys</string>
     <!--validate_input-->
     <string name="validate_email">Please input email</string>
     <string name="validate_firstName">Please input first name</string>

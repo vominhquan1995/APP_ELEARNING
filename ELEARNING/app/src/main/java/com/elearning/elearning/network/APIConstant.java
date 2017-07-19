@@ -63,6 +63,12 @@ public interface APIConstant {
     String PROGRESS_LEARN_URL=HOST_NAME+ "/students/";
     //get information lesson
     String LESSON_INFORMATION_URL=HOST_NAME+ "/lesson/";
+    //filter rate
+    String FILTER_RATE_HEADER_URL=HOST_NAME+ "/courses/";
+    String FILTER_RATE_FOOTER_URL="/filter-rate";
+    //filter price
+    String FILTER_PRICE_HEADER_URL=HOST_NAME+ "/courses/";
+    String FILTER_PRICE_FOOTER_URL="/filter-price";
     //Header
     String BEARER = "Bearer ";
     String AUTHORIZATION = "Authorization";

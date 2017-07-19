@@ -5,6 +5,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.adapter.CourseAdapter;
@@ -33,6 +35,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     private CourseAdapter mostCourseAdapter;
     private CourseAdapter topReviewCourseAdapter;
     private HomePresenter homePresenter;
+    private TextView txtViewMore1,txtViewMore2,txtViewMore3;
     //list Course
     private List<Course> listNewCourse = new ArrayList<>();
     private List<Course> listMostCourse = new ArrayList<>();
@@ -53,6 +56,9 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     public void initView() {
+        txtViewMore1 =(TextView) view.findViewById(R.id.txtViewMore);
+        txtViewMore2 =(TextView) view.findViewById(R.id.txtViewMore2);
+        txtViewMore3 =(TextView) view.findViewById(R.id.txtViewMore3);
         mRecyclerNew = (RecyclerView) view.findViewById(R.id.recyclerNew);
         mRecyclerNew.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         //most
@@ -83,6 +89,24 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     public void initAction() {
+        txtViewMore1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getMainActivity().gotoFragment(getResources().getString(R.string.menu_all_course));
+            }
+        });
+        txtViewMore2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        txtViewMore3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         pageSwitcher(3);
         homePresenter.getListNewCourse(NUMBER_ITEM_SLIDE);
         getMainActivity().showProgressDialog();

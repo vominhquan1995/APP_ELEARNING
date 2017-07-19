@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:alpha="0.7"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/dialog_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8">
+
+        <FrameLayout
+            android:id="@+id/frPrice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:layout_weight="0.3"
+                    android:text="Chọn mức giá:"
+                    android:textColor="@color/color_blue"
+                    android:textSize="@dimen/text_size_18"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:layout_weight="0.3"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtPriceFrom"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center|left"
+                        android:layout_weight="0.5"
+                        android:text="100.000 vnđ"
+                        android:textColor="@color/colorBlack" />
+
+                    <TextView
+                        android:id="@+id/txtPriceTo"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center|right"
+                        android:layout_weight="0.5"
+                        android:text="1.000.000 vnđ"
+                        android:textColor="@color/colorBlack" />
+                </LinearLayout>
+
+                <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                    android:id="@+id/rangeSeekbarPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.4"
+                    app:bar_color="@color/color_brown"
+                    app:bar_highlight_color="@color/color_blue"
+                    app:corner_radius="5"
+                    app:data_type="_integer"
+                    app:left_thumb_color="@color/color_blue"
+                    app:left_thumb_color_pressed="@color/colorBlack"
+                    app:max_value="10000000"
+                    app:min_value="100000"
+                    app:right_thumb_color="@color/color_blue"
+                    app:right_thumb_color_pressed="@color/colorBlack"
+                    app:steps="100000" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frRate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_3dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.1"
+                    android:textSize="@dimen/text_size_15"
+                    android:layout_margin="@dimen/margin_3dp"
+                    android:text="Số sao thấp nhất:"/>
+                <RatingBar
+                    android:id="@+id/rtMin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:progressBackgroundTint="@color/color_brown"
+                    android:progressTint="@color/colorYellow600"
+                    android:layout_margin="@dimen/margin_3dp"
+                    android:stepSize="1"
+                    android:numStars="5"
+                    android:rating="1"
+                    android:layout_gravity="center_horizontal"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/margin_3dp"
+                    android:layout_weight="0.1"
+                    android:textSize="@dimen/text_size_15"
+                    android:text="Số sao cao nhất:"/>
+                <RatingBar
+                    android:id="@+id/rtMax"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:progressBackgroundTint="@color/color_brown"
+                    android:progressTint="@color/colorYellow600"
+                    android:layout_margin="@dimen/margin_3dp"
+                    android:stepSize="1"
+                    android:numStars="5"
+                    android:rating="5"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_3dp"
+            android:layout_weight="0.5"
+            android:background="@color/color_background_main_blue"
+            android:padding="@dimen/padding_3dp"
+            android:text="@string/cancle"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/btnApply"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_3dp"
+            android:layout_weight="0.5"
+            android:background="@color/color_background_main_blue"
+            android:padding="@dimen/padding_3dp"
+            android:text="@string/cap_apply"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+</LinearLayout>

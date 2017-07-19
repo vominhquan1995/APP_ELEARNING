@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_3dp"
+        android:layout_weight="0.1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_3dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.333"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgSort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sort_icon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.333"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/filter_icon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.333"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgGird"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/grid_type" />
+        </LinearLayout>
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9">
+        <FrameLayout
+            android:id="@+id/frListCourse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvCourse"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/frFilter"
+            android:layout_gravity="center|top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:visibility="gone"
+            android:background="@android:color/transparent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/color_tab_selected"
+                android:gravity="center"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.25"
+                    android:padding="@dimen/padding_3dp"
+                    android:gravity="center|left"
+                    android:layout_margin="@dimen/margin_5dp">
+                    <TextView
+                        android:id="@+id/txtFilterPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/cap_price"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_18" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.25"
+                    android:padding="@dimen/padding_3dp"
+                    android:gravity="center|left"
+                    android:layout_margin="@dimen/margin_5dp">
+                    <TextView
+                        android:id="@+id/txtFilterRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_18"
+                        android:text="@string/cap_rate"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.25"
+                    android:padding="@dimen/padding_3dp"
+                    android:gravity="center|left"
+                    android:layout_margin="@dimen/margin_5dp">
+
+                    <TextView
+                        android:id="@+id/txtFilterSale"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/cap_sale"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_18" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.25"
+                    android:padding="@dimen/padding_3dp"
+                    android:gravity="center|left"
+                    android:layout_margin="@dimen/margin_5dp">
+                    <TextView
+                        android:id="@+id/txtFilterCategory"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_18"
+                        android:text="@string/cap_category"/>
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </FrameLayout>
+
+</LinearLayout>
