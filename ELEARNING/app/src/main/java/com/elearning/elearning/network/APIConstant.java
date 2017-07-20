@@ -74,6 +74,9 @@ public interface APIConstant {
     String FILTER_CATEGORY_FOOTER_URL="/filter-category";
     //get list category
     String LIST_CATEGORY_URL = HOST_NAME + "/categorys";
+    //get item page
+    String GET_ITEM_PAGE_HEADER_URL=HOST_NAME+ "/courses/";
+    String GET_ITEM_PAGE_FOOTER_URL="/get-page";
     //Header
     String BEARER = "Bearer ";
     String AUTHORIZATION = "Authorization";

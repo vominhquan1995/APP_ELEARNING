@@ -44,10 +44,15 @@ public class HistoryLearnAdapter extends BaseRecyclerAdapter<HistoryLearnExam> {
         courseViewHolder.name.setText(item.getNameCourse());
     }
 
+//    @Override
+//    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//        View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
+//        return new HistoryLearnViewHolder(rootView);
+//    }
+
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
-        return new HistoryLearnViewHolder(rootView);
+    protected RecyclerView.ViewHolder onCreateViewHolder(View view) {
+        return new HistoryLearnViewHolder(view);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

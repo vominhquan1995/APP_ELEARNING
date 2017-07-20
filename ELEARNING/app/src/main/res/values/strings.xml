@@ -70,7 +70,10 @@
     <string name="cap_price">Giá</string>
     <string name="cap_rate">Đánh Giá</string>
     <string name="cap_sale">Khuyến mãi</string>
+    <string name="cap_all">Tất cả</string>
     <string name="cap_category">Danh mục</string>
+    <string name="cap_select_category">Chọn danh mục muốn tìm :</string>
+    <string name="cap_not_found">Không tìm thấy</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>

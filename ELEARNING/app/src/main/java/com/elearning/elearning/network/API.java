@@ -555,6 +555,7 @@ public class API {
                             e.printStackTrace();
                         }
                     }
+
                     @Override
                     public void onError(ANError anError) {
                         listener.onError(anError.getMessage());
@@ -578,6 +579,7 @@ public class API {
                             e.printStackTrace();
                         }
                     }
+
                     @Override
                     public void onError(ANError anError) {
                         listener.onError(anError.getMessage());
@@ -601,6 +603,7 @@ public class API {
                             e.printStackTrace();
                         }
                     }
+
                     @Override
                     public void onError(ANError anError) {
                         listener.onError(anError.getMessage());
@@ -609,7 +612,6 @@ public class API {
     }
 
     //get list category
-    //filter price
     public static void listCategory(OnAPIListener onAPIListener) {
         listener = onAPIListener;
         AndroidNetworking.get(APIConstant.LIST_CATEGORY_URL)
@@ -625,6 +627,31 @@ public class API {
                             e.printStackTrace();
                         }
                     }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        listener.onError(anError.getMessage());
+                    }
+                });
+    }
+
+    //get item page
+    public static void getItemPage(String numberItem, String indexPage, OnAPIListener onAPIListener) {
+        listener = onAPIListener;
+        AndroidNetworking.get(APIConstant.GET_ITEM_PAGE_HEADER_URL + numberItem + '/' + indexPage + APIConstant.GET_ITEM_PAGE_FOOTER_URL)
+                .addHeaders(APIConstant.AUTHORIZATION, APIConstant.BEARER + User.get().getToken())
+                .setOkHttpClient(NetworkUtil.createDefaultOkHttpClient())
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            listener.onSuccessArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     @Override
                     public void onError(ANError anError) {
                         listener.onError(anError.getMessage());

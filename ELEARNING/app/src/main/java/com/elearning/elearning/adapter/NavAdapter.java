@@ -79,10 +79,15 @@ public class NavAdapter extends BaseRecyclerAdapter<NavAdapter.Item> {
         }
     }
 
+//    @Override
+//    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//        View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
+//        return new NavViewHolder(rootView);
+//    }
+
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
-        return new NavViewHolder(rootView);
+    protected RecyclerView.ViewHolder onCreateViewHolder(View view) {
+        return new NavViewHolder(view);
     }
 
     private class NavViewHolder extends RecyclerView.ViewHolder {

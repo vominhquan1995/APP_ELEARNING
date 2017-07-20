@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class DialogFilter {
         private List<String> listTitleCategory;
         private List<Category> categoryList;
         private int posCategorySelected;
+        private LinearLayout lnButton;
 
         public Build(final Activity activity, final String typeFilter) {
             this.activity = activity;
@@ -59,6 +61,7 @@ public class DialogFilter {
             LayoutInflater inflater = activity.getLayoutInflater();
             View view = inflater.inflate(R.layout.dialog_filter, null);
             //get view
+            lnButton = (LinearLayout) view.findViewById(R.id.lnButton);
             btnCancel = (Button) view.findViewById(R.id.btnCancel);
             btnApply = (Button) view.findViewById(R.id.btnApply);
             txtPriceFrom = (TextView) view.findViewById(R.id.txtPriceFrom);
@@ -76,10 +79,12 @@ public class DialogFilter {
             allCoursePresenter = new AllCoursePresenter(this);
             //set type filter
             if (typeFilter == TYPE_FILTER_PRICE) {
+                lnButton.setVisibility(View.VISIBLE);
                 frPrice.setVisibility(View.VISIBLE);
                 frCategory.setVisibility(View.VISIBLE);
                 frRate.setVisibility(View.GONE);
             } else if (typeFilter == TYPE_FILTER_RATE) {
+                lnButton.setVisibility(View.VISIBLE);
                 frPrice.setVisibility(View.GONE);
                 frCategory.setVisibility(View.GONE);
                 frRate.setVisibility(View.VISIBLE);
@@ -106,8 +111,10 @@ public class DialogFilter {
                             break;
                         case TYPE_FILTER_RATE:
                             onFilterListener.onApplyRate((int) ratingBarMin.getRating(), (int) ratingBarMax.getRating());
+                            break;
                         case TYPE_FILTER_CATEGORY:
                             onFilterListener.onApplyCategor(categoryList.get(posCategorySelected).getId());
+                            break;
                     }
                     dismiss();
                 }
@@ -161,6 +168,7 @@ public class DialogFilter {
                 categoryList.add(item);
                 listTitleCategory.add(item.getNameCategory());
             }
+            lnButton.setVisibility(View.VISIBLE);
             frCategory.setVisibility(View.VISIBLE);
             frPrice.setVisibility(View.GONE);
             frRate.setVisibility(View.GONE);
@@ -179,6 +187,11 @@ public class DialogFilter {
 
                 }
             });
+        }
+
+        @Override
+        public void onGetItemPage(List<Course> courseArray) {
+
         }
 
         @Override

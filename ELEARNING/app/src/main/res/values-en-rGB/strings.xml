@@ -61,6 +61,7 @@
     <string name="cap_rate">Rates</string>
     <string name="cap_sale">Sales</string>
     <string name="cap_category">Categorys</string>
+    <string name="cap_select_category">Select category :</string>
     <!--validate_input-->
     <string name="validate_email">Please input email</string>
     <string name="validate_firstName">Please input first name</string>
@@ -76,6 +77,8 @@
     <string name="cap_loading">Loading...</string>
     <string name="cap_history_studing">Course Sutding</string>
     <string name="cap_history_done">Course Done</string>
+    <string name="cap_not_found">Not Found</string>
+    <string name="cap_all">All</string>
 
     <!--item course-->
     <string name="course_creadits">Number Creadits: %s</string>

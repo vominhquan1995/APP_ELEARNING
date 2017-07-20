@@ -43,19 +43,19 @@
                 android:background="@drawable/boder_custom"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_margin="7sp"
-                    android:layout_weight="0.1"
-                    android:background="@drawable/searching" />
+                <!--<ImageView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_margin="7sp"-->
+                    <!--android:layout_weight="0.1"-->
+                    <!--android:background="@drawable/searching" />-->
                 <SearchView
                     android:id="@+id/edtSearch"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:queryHint="@string/title_search"
-                    android:layout_weight="0.8"></SearchView>
+                    android:layout_weight="0.9"></SearchView>
 
                 <ImageView
                     android:layout_width="0dp"
@@ -146,6 +146,7 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/txtResultSearch"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.1"

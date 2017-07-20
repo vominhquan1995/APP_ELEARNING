@@ -35,11 +35,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     private CourseAdapter mostCourseAdapter;
     private CourseAdapter topReviewCourseAdapter;
     private HomePresenter homePresenter;
-    private TextView txtViewMore1,txtViewMore2,txtViewMore3;
-    //list Course
-    private List<Course> listNewCourse = new ArrayList<>();
-    private List<Course> listMostCourse = new ArrayList<>();
-    private List<Course> listTopReview = new ArrayList<>();
+    private TextView txtViewMore1, txtViewMore2, txtViewMore3;
     private ViewPager slide;
     private SlideAdapter slideAdapter;
     private Timer timer;
@@ -56,9 +52,9 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     public void initView() {
-        txtViewMore1 =(TextView) view.findViewById(R.id.txtViewMore);
-        txtViewMore2 =(TextView) view.findViewById(R.id.txtViewMore2);
-        txtViewMore3 =(TextView) view.findViewById(R.id.txtViewMore3);
+        txtViewMore1 = (TextView) view.findViewById(R.id.txtViewMore);
+        txtViewMore2 = (TextView) view.findViewById(R.id.txtViewMore2);
+        txtViewMore3 = (TextView) view.findViewById(R.id.txtViewMore3);
         mRecyclerNew = (RecyclerView) view.findViewById(R.id.recyclerNew);
         mRecyclerNew.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         //most
@@ -76,9 +72,9 @@ public class HomeFragment extends BaseFragment implements HomeView {
     public void initValue() {
         //init presenter home
         homePresenter = new HomePresenter(this);
-        newCourseAdapter = new CourseAdapter(context, listNewCourse, R.layout.item_course);
-        mostCourseAdapter = new CourseAdapter(context, listMostCourse, R.layout.item_course);
-        topReviewCourseAdapter = new CourseAdapter(context, listTopReview, R.layout.item_course);
+        newCourseAdapter = new CourseAdapter(context, R.layout.item_course);
+        mostCourseAdapter = new CourseAdapter(context, R.layout.item_course);
+        topReviewCourseAdapter = new CourseAdapter(context, R.layout.item_course);
         mRecyclerNew.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerNew.setAdapter(newCourseAdapter);
         mRecyclerMost.setAdapter(mostCourseAdapter);
@@ -115,7 +111,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
             public void onItemClick(int position) {
                 getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
                 if (onSendCourseID != null) {
-                    onSendCourseID.onSend(listNewCourse.get(position).getId());
+                    onSendCourseID.onSend(newCourseAdapter.getItem(position).getId());
                 }
             }
         });
@@ -124,7 +120,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
             public void onItemClick(int position) {
                 getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
                 if (onSendCourseID != null) {
-                    onSendCourseID.onSend(listMostCourse.get(position).getId());
+                    onSendCourseID.onSend(mostCourseAdapter.getItem(position).getId());
                 }
             }
         });
@@ -133,7 +129,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
             public void onItemClick(int position) {
                 getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
                 if (onSendCourseID != null) {
-                    onSendCourseID.onSend(listTopReview.get(position).getId());
+                    onSendCourseID.onSend(topReviewCourseAdapter.getItem(position).getId());
                 }
             }
         });
@@ -141,11 +137,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     public void onGetNewCourseSuccess(List<Course> courseArray) {
-        //don't set this.listNewCourse=courseArray cuz notifyDataSetChanged will not working
-        for (Course itemCourse : courseArray) {
-            this.listNewCourse.add(itemCourse);
-        }
-        newCourseAdapter.notifyDataSetChanged();
+        newCourseAdapter.insertLoadmoreItems(courseArray);
         homePresenter.getListMostCourse(NUMBER_ITEM_SLIDE);
     }
 
@@ -156,12 +148,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
     @Override
     public void onGetMostCourseSuccess(List<Course> courseArray) {
-        Log.d("Home", "most");
-        getMainActivity().dismissProgressDialog();
-        for (Course itemCourse : courseArray) {
-            this.listMostCourse.add(itemCourse);
-        }
-        mostCourseAdapter.notifyDataSetChanged();
+        mostCourseAdapter.insertLoadmoreItems(courseArray);
         homePresenter.getListTopReviewCourse(NUMBER_ITEM_SLIDE);
     }
 
@@ -173,10 +160,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void onGetTopReviewCourseSuccess(List<Course> courseArray) {
         getMainActivity().dismissProgressDialog();
-        for (Course itemCourse : courseArray) {
-            this.listTopReview.add(itemCourse);
-        }
-        topReviewCourseAdapter.notifyDataSetChanged();
+        topReviewCourseAdapter.insertLoadmoreItems(courseArray);
     }
 
     @Override

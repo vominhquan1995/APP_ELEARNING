@@ -41,13 +41,12 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     private MainPresenter mainPresenter;
     //information for navigation
     private ImageView avatarUser;
-    private TextView txtUserName, txtTitle;
+    private TextView txtUserName, txtTitle, txtResultSearch;
     private LinearLayout lnActivity, lnFragment, lnSearch, lnMenu, lnSearchContainer, lnFragmentContainer;
     private android.widget.SearchView searchView;
     //search result
     private RecyclerView mRecyclerSearchResult;
     private CourseAdapter mCourseAdapter;
-    private List<Course> listCourse;
     private static MainActivity.onSendCourseID onSendCourseID;
     private static MainActivity.onExitExam onExitExam;
     private static Sound sound;
@@ -63,6 +62,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     public void initView() {
         avatarUser = (ImageView) findViewById(R.id.avatarUser);
         txtUserName = (TextView) findViewById(R.id.txtUserName);
+        txtResultSearch = (TextView) findViewById(R.id.txtResultSearch);
         mainPresenter = new MainPresenter(this);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         lnNav = (LinearLayout) findViewById(R.id.lnNav);
@@ -96,8 +96,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         lnActivity = (LinearLayout) findViewById(R.id.lnActivity);
         lnFragment = (LinearLayout) findViewById(R.id.lnFragment);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
-        listCourse = new ArrayList();
-        mCourseAdapter = new CourseAdapter(context, listCourse, R.layout.item_course_search);
+        mCourseAdapter = new CourseAdapter(context, R.layout.item_course_search);
         mRecyclerSearchResult.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         mRecyclerSearchResult.setAdapter(mCourseAdapter);
         // subscribe to topic
@@ -136,6 +135,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
             @Override
             public boolean onQueryTextSubmit(String s) {
                 mainPresenter.search(s);
+                showProgressDialog();
                 return false;
             }
 
@@ -154,11 +154,12 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
                 lnSearchContainer.setVisibility(View.GONE);
                 gotoFragment(getResources().getString(R.string.menu_listlesson));
                 if (onSendCourseID != null) {
-                    onSendCourseID.onSend(listCourse.get(position).getId());
+                    onSendCourseID.onSend(mCourseAdapter.getItem(position).getId());
                 }
             }
         });
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -223,11 +224,14 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
 
     @Override
     public void onSearchResult(List<Course> courseList) {
-        this.listCourse.clear();
-        for (Course itemCourse : courseList) {
-            this.listCourse.add(itemCourse);
+        mCourseAdapter.removeAllItems();
+        dismissProgressDialog();
+        if (courseList.size() == 0) {
+            txtResultSearch.setText(getResources().getString(R.string.cap_not_found));
+        } else {
+            txtResultSearch.setText(getResources().getString(R.string.cap_search_result));
+            mCourseAdapter.insertItems(courseList);
         }
-        mCourseAdapter.notifyDataSetChanged();
     }
 
     @Override

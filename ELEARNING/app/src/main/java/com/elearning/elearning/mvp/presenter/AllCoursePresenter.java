@@ -1,5 +1,7 @@
 package com.elearning.elearning.mvp.presenter;
 
+import android.support.v7.widget.RecyclerView;
+
 import com.elearning.elearning.mvp.model.Category;
 import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.mvp.view.AllCourseView;
@@ -102,6 +104,31 @@ public class AllCoursePresenter {
             @Override
             public void onSuccessArray(JSONArray response) throws JSONException {
                 allCourseView.onGetListCategory(Category.pareListCategory(response));
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                allCourseView.onFilterFail(errorMessage);
+            }
+        });
+    }
+
+
+    public void getItemPage(int numberItem, int indexPage) {
+        API.getItemPage(String.valueOf(numberItem), String.valueOf(indexPage), new API.OnAPIListener() {
+            @Override
+            public void onSuccessObject(JSONObject response) throws JSONException {
+
+            }
+
+            @Override
+            public void onSuccessArray(JSONArray response) throws JSONException {
+                allCourseView.onGetItemPage(Course.getListCourse(response));
             }
 
             @Override

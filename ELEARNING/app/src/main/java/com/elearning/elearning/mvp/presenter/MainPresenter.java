@@ -150,7 +150,8 @@ public class MainPresenter {
                 || fragmentNavigator.getActiveFragment() instanceof HistoryFragment
                 || fragmentNavigator.getActiveFragment() instanceof NotificationFragment
                 || fragmentNavigator.getActiveFragment() instanceof HistoryExamFragment
-                || fragmentNavigator.getActiveFragment() instanceof AboutFragment) {
+                || fragmentNavigator.getActiveFragment() instanceof AboutFragment
+                || fragmentNavigator.getActiveFragment() instanceof AllCourseFragment) {
             mainView.updateToolbar(false, false, context.getString(R.string.nav_home));
             fragmentNavigator.goToRoot();
             mainView.setItemSelected(context.getString(R.string.nav_home));

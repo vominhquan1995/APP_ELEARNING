@@ -49,10 +49,15 @@ public class LessonAdapter extends BaseRecyclerAdapter<Lesson> {
         LessonViewHolder.description.setText(String.format(context.getResources().getString(R.string.lesson_description), item.getDescription()));
     }
 
+//    @Override
+//    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//        View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
+//        return new LessonViewHolder(rootView);
+//    }
+
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
-        return new LessonViewHolder(rootView);
+    protected RecyclerView.ViewHolder onCreateViewHolder(View view) {
+        return new LessonViewHolder(view);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

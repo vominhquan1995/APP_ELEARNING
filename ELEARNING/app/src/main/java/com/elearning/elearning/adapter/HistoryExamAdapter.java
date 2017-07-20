@@ -43,10 +43,15 @@ public class HistoryExamAdapter extends BaseRecyclerAdapter<HistoryExam> {
         historyExamViewholder.status.setText(item.getStatus());
     }
 
+//    @Override
+//    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//        View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
+//        return new HistoryExamAdapter.HistoryExamViewholder(rootView);
+//    }
+
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
-        return new HistoryExamAdapter.HistoryExamViewholder(rootView);
+    protected RecyclerView.ViewHolder onCreateViewHolder(View view) {
+        return new HistoryExamViewholder(view);
     }
 
 

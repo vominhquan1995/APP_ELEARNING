@@ -18,5 +18,7 @@ public interface AllCourseView {
 
     void onGetListCategory(List<Category> listCategory);
 
+    void onGetItemPage(List<Course> courseArray);
+
     void onFilterFail(String mess);
 }

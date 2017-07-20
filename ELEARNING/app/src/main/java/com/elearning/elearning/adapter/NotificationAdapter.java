@@ -48,10 +48,15 @@ public class NotificationAdapter extends BaseRecyclerAdapter<Notification> {
         courseViewHolder.dateEnd.setText(String.format(context.getResources().getString(R.string.cap_notification_end),DatetimeFomat.DATE_FORMAT.format(item.getDateEnd())));
     }
 
+//    @Override
+//    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//        View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
+//        return new NotificationViewHolder(rootView);
+//    }
+
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(context).inflate(getItemLayout(), parent, false);
-        return new NotificationViewHolder(rootView);
+    protected RecyclerView.ViewHolder onCreateViewHolder(View view) {
+        return new NotificationViewHolder(view);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
