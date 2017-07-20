@@ -119,6 +119,11 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
                 allCoursePresenter.filterRate(minStar, maxStar);
                 Log.d("Filter Apply Rate", String.valueOf(minStar) + "--->" + String.valueOf(maxStar));
             }
+
+            @Override
+            public void onApplyCategor(int idCategory) {
+                Log.d("Filter Apply Category", String.valueOf(idCategory));
+            }
         }).show();
     }
 

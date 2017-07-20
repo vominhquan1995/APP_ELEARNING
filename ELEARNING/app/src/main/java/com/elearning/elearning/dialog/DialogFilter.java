@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.elearning.elearning.R;
-import com.elearning.elearning.adapter.CategoryAdapter;
 import com.elearning.elearning.mvp.model.Category;
 import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.mvp.presenter.AllCoursePresenter;
@@ -37,6 +36,7 @@ import static com.elearning.elearning.prefs.Constant.TYPE_FILTER_RATE;
 public class DialogFilter {
     public static class Build implements AllCourseView {
         ArrayAdapter<String> spinnerAdapter;
+        private Activity activity;
         private AlertDialog.Builder builder;
         private AlertDialog dialog;
         private TextView txtPriceFrom, txtPriceTo;
@@ -48,11 +48,12 @@ public class DialogFilter {
         private AllCoursePresenter allCoursePresenter;
         private Spinner spinnerCategory;
         private String typeFilter;
-        private CategoryAdapter categoryAdapter;
         private List<String> listTitleCategory;
         private List<Category> categoryList;
+        private int posCategorySelected;
 
         public Build(final Activity activity, final String typeFilter) {
+            this.activity = activity;
             this.typeFilter = typeFilter;
             builder = new AlertDialog.Builder(activity);
             LayoutInflater inflater = activity.getLayoutInflater();
@@ -72,23 +73,6 @@ public class DialogFilter {
             //init value
             categoryList = new ArrayList<>();
             listTitleCategory = new ArrayList<>();
-//            categoryAdapter = new CategoryAdapter(activity.getBaseContext(), categoryList);
-            spinnerAdapter = new ArrayAdapter<String>
-                    (activity.getBaseContext(), android.R.layout.simple_spinner_item, listTitleCategory);
-            spinnerCategory.setAdapter(spinnerAdapter);
-            spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    ((TextView) spinnerCategory.getSelectedView()).setTextColor(ContextCompat.getColor(activity.getBaseContext(), R.color.colorBlack));
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
-
             allCoursePresenter = new AllCoursePresenter(this);
             //set type filter
             if (typeFilter == TYPE_FILTER_PRICE) {
@@ -100,9 +84,6 @@ public class DialogFilter {
                 frCategory.setVisibility(View.GONE);
                 frRate.setVisibility(View.VISIBLE);
             } else if (typeFilter == TYPE_FILTER_CATEGORY) {
-                frCategory.setVisibility(View.VISIBLE);
-                frPrice.setVisibility(View.GONE);
-                frRate.setVisibility(View.GONE);
                 allCoursePresenter.getListCategory();
             } else {
 
@@ -125,6 +106,8 @@ public class DialogFilter {
                             break;
                         case TYPE_FILTER_RATE:
                             onFilterListener.onApplyRate((int) ratingBarMin.getRating(), (int) ratingBarMax.getRating());
+                        case TYPE_FILTER_CATEGORY:
+                            onFilterListener.onApplyCategor(categoryList.get(posCategorySelected).getId());
                     }
                     dismiss();
                 }
@@ -178,6 +161,24 @@ public class DialogFilter {
                 categoryList.add(item);
                 listTitleCategory.add(item.getNameCategory());
             }
+            frCategory.setVisibility(View.VISIBLE);
+            frPrice.setVisibility(View.GONE);
+            frRate.setVisibility(View.GONE);
+            spinnerAdapter = new ArrayAdapter<String>
+                    (activity.getBaseContext(), android.R.layout.simple_dropdown_item_1line, listTitleCategory);
+            spinnerCategory.setAdapter(spinnerAdapter);
+            spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    posCategorySelected = i;
+                    ((TextView) spinnerCategory.getSelectedView()).setTextColor(ContextCompat.getColor(activity.getBaseContext(), R.color.color_background_main_blue));
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
         }
 
         @Override
@@ -191,6 +192,8 @@ public class DialogFilter {
             void onApplyPrice(String from, String to);
 
             void onApplyRate(int minStar, int maxStar);
+
+            void onApplyCategor(int idCategory);
         }
     }
 }
