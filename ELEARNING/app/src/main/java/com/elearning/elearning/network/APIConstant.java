@@ -69,12 +69,18 @@ public interface APIConstant {
     //filter price
     String FILTER_PRICE_HEADER_URL=HOST_NAME+ "/courses/";
     String FILTER_PRICE_FOOTER_URL="/filter-price";
+    //filter category
+    String FILTER_CATEGORY_HEADER_URL=HOST_NAME+ "/courses/";
+    String FILTER_CATEGORY_FOOTER_URL="/filter-category";
+    //get list category
+    String LIST_CATEGORY_URL = HOST_NAME + "/categorys";
     //Header
     String BEARER = "Bearer ";
     String AUTHORIZATION = "Authorization";
     String CONTENTTYPE = "Content-Type";
     String HEADERJSON = "application/json";
     String HEADERFORM = "application/x-www-form-urlencoded";
+    String ID="id";
     /**
      * User params
      */

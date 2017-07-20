@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/margin_3dp"
+    android:background="@color/colorWhite"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imgCategory"
+        android:layout_width="128px"
+        android:layout_height="128px"
+        android:background="@drawable/course_default_image"/>
+
+    <TextView
+        android:id="@+id/txtTitleCategory"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/text_size_18"
+        android:gravity="center"
+        android:text="dsdsdsdsdsdssdasdadsadsadas"
+        android:layout_weight="0.8"/>
+</LinearLayout>

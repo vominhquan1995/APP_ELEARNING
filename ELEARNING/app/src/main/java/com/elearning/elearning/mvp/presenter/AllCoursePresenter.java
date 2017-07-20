@@ -1,5 +1,6 @@
 package com.elearning.elearning.mvp.presenter;
 
+import com.elearning.elearning.mvp.model.Category;
 import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.mvp.view.AllCourseView;
 import com.elearning.elearning.network.API;
@@ -25,6 +26,7 @@ public class AllCoursePresenter {
             public void onSuccessObject(JSONObject response) throws JSONException {
 
             }
+
             @Override
             public void onSuccessArray(JSONArray response) throws JSONException {
                 allCourseView.onFilterRate(Course.getListCourse(response));
@@ -34,6 +36,7 @@ public class AllCoursePresenter {
             public void onString(String response) throws JSONException {
 
             }
+
             @Override
             public void onError(String errorMessage) {
                 allCourseView.onFilterFail(errorMessage);
@@ -47,6 +50,7 @@ public class AllCoursePresenter {
             public void onSuccessObject(JSONObject response) throws JSONException {
 
             }
+
             @Override
             public void onSuccessArray(JSONArray response) throws JSONException {
                 allCourseView.onFilterPrice(Course.getListCourse(response));
@@ -56,6 +60,55 @@ public class AllCoursePresenter {
             public void onString(String response) throws JSONException {
 
             }
+
+            @Override
+            public void onError(String errorMessage) {
+                allCourseView.onFilterFail(errorMessage);
+            }
+        });
+    }
+
+    public void filterCategory(int idCategory) {
+        API.filterCategory(String.valueOf(idCategory), new API.OnAPIListener() {
+            @Override
+            public void onSuccessObject(JSONObject response) throws JSONException {
+
+            }
+
+            @Override
+            public void onSuccessArray(JSONArray response) throws JSONException {
+                allCourseView.onFilterCategory(Course.getListCourse(response));
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                allCourseView.onFilterFail(errorMessage);
+            }
+        });
+    }
+
+    public void getListCategory() {
+        API.listCategory(new API.OnAPIListener() {
+            @Override
+            public void onSuccessObject(JSONObject response) throws JSONException {
+
+            }
+
+            @Override
+            public void onSuccessArray(JSONArray response) throws JSONException {
+                allCourseView.onGetListCategory(Category.pareListCategory(response));
+            }
+
+            @Override
+            public void onString(String response) throws JSONException {
+
+            }
+
             @Override
             public void onError(String errorMessage) {
                 allCourseView.onFilterFail(errorMessage);

@@ -12,6 +12,7 @@ import com.elearning.elearning.R;
 import com.elearning.elearning.adapter.CourseAdapter;
 import com.elearning.elearning.base.BaseFragment;
 import com.elearning.elearning.dialog.DialogFilter;
+import com.elearning.elearning.mvp.model.Category;
 import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.mvp.presenter.AllCoursePresenter;
 import com.elearning.elearning.mvp.view.AllCourseView;
@@ -139,6 +140,16 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
         }
         listCourseAdapter.notifyDataSetChanged();
         dismissProgressDialog();
+    }
+
+    @Override
+    public void onFilterCategory(List<Course> courseArray) {
+
+    }
+
+    @Override
+    public void onGetListCategory(List<Category> listCategory) {
+
     }
 
     @Override

@@ -84,7 +84,8 @@
         <FrameLayout
             android:id="@+id/frRate"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -128,6 +129,25 @@
                     android:numStars="5"
                     android:rating="5"
                     android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/margin_3dp"
+                android:orientation="vertical">
+                <Spinner
+                    android:id="@+id/spCategory"
+                    android:backgroundTint="@color/color_blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </Spinner>
             </LinearLayout>
 
         </FrameLayout>
