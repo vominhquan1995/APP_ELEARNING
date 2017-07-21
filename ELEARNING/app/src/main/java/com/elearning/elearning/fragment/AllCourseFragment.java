@@ -166,9 +166,11 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onGetItemPage(List<Course> courseArray) {
-//        if (courseArray.size() == 0 || courseArray.size() < NUMBER_ITEM_SLIDE) {
-//            listCourseAdapter.setEndlessLoadingEnable(false);
-//        }
+        if (courseArray.size() < NUMBER_ITEM_SLIDE) {
+            listCourseAdapter.setEndlessLoadingEnable(false);
+        }else{
+            listCourseAdapter.setEndlessLoadingEnable(true);
+        }
         listCourseAdapter.insertLoadmoreItems(courseArray);
 
     }
