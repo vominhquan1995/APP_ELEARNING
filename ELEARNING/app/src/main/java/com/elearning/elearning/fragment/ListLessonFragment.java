@@ -49,21 +49,6 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
         listLessonPresenter = new ListLessonPresenter(this);
         lessonAdapter = new LessonAdapter(context, listLesson, R.layout.item_lesson);
         rvListLesson.setAdapter(lessonAdapter);
-        HomeFragment.setSendCourseID(new HomeFragment.onSendCourseID() {
-            @Override
-            public void onSend(int CourseId) {
-                showProgressDialog();
-                listLessonPresenter.getListLesson(CourseId);
-            }
-        });
-        HistoryFragment.setSendCourseID(new HistoryFragment.onSendCourseID() {
-            @Override
-            public void onSend(int CourseId) {
-                Log.d("List lesson",String.valueOf(CourseId));
-                showProgressDialog();
-                listLessonPresenter.getListLesson(CourseId);
-            }
-        });
         MainActivity.setSendCourseID(new MainActivity.onSendCourseID() {
             @Override
             public void onSend(int CourseId) {
@@ -71,6 +56,7 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
                 listLessonPresenter.getListLesson(CourseId);
             }
         });
+
     }
 
     @Override

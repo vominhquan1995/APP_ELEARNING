@@ -25,7 +25,7 @@ import com.elearning.elearning.prefs.Number;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import static com.elearning.elearning.prefs.Constant.STEP_VALUES_PRICE;
 import static com.elearning.elearning.prefs.Constant.TYPE_FILTER_CATEGORY;
 import static com.elearning.elearning.prefs.Constant.TYPE_FILTER_PRICE;
 import static com.elearning.elearning.prefs.Constant.TYPE_FILTER_RATE;

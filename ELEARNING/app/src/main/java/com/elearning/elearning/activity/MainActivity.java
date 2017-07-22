@@ -1,5 +1,6 @@
 package com.elearning.elearning.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -47,11 +48,11 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     //search result
     private RecyclerView mRecyclerSearchResult;
     private CourseAdapter mCourseAdapter;
+    private onSendCourseID getOnSendCourseID;
     private static MainActivity.onSendCourseID onSendCourseID;
     private static MainActivity.onExitExam onExitExam;
     private static Sound sound;
     public static int IdLesson = 0;
-
 
     @Override
     public int getView() {
@@ -82,7 +83,12 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     public static void setOnExitExam(MainActivity.onExitExam onExitExam) {
         MainActivity.onExitExam = onExitExam;
     }
-
+    public  void  goToListLesson(int idCourse){
+        gotoFragment(getResources().getString(R.string.menu_listlesson));
+        if(onSendCourseID!=null){
+            MainActivity.onSendCourseID.onSend(idCourse);
+        }
+    }
     @Override
     public void initValue() {
         rlNav.setLayoutManager(new LinearLayoutManager(context));
@@ -134,6 +140,11 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                //case don't change text
+                updateToolbar(false, true, null);
+                lnFragmentContainer.setVisibility(View.GONE);
+                lnSearchContainer.setVisibility(View.VISIBLE);
+                //
                 mainPresenter.search(s);
                 showProgressDialog();
                 return false;

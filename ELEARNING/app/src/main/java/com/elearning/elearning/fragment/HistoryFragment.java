@@ -28,7 +28,6 @@ public class HistoryFragment extends BaseFragment implements HistoryLearnView {
     private List<HistoryLearnExam> listCourseStuding = new ArrayList<>();
     private List<HistoryLearnExam> listCourseDone = new ArrayList<>();
     private HistoryLearnPresenter historyLearnPresenter;
-    private static HistoryFragment.onSendCourseID onSendCourseID;
 
     @Override
     public void initView() {
@@ -54,16 +53,13 @@ public class HistoryFragment extends BaseFragment implements HistoryLearnView {
         adapterCourseStuding.setOnItemClickListener(new HistoryLearnAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
-                Log.d("History",String.valueOf(listCourseStuding.get(position).getIdCourse()));
-                onSendCourseID.onSend(listCourseStuding.get(position).getIdCourse());
+                getMainActivity().goToListLesson(listCourseStuding.get(position).getIdCourse());
             }
         });
         adapterCourseDone.setOnItemClickListener(new HistoryLearnAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
-                onSendCourseID.onSend(listCourseDone.get(position).getIdCourse());
+                getMainActivity().goToListLesson(listCourseDone.get(position).getIdCourse());
             }
         });
     }
@@ -90,11 +86,4 @@ public class HistoryFragment extends BaseFragment implements HistoryLearnView {
     public void onGetHistoryFail(String message) {
         Log.d("History", message);
     }
-    public static void setSendCourseID(HistoryFragment.onSendCourseID onSendCourseID) {
-        HistoryFragment.onSendCourseID = onSendCourseID;
-    }
-    public interface onSendCourseID {
-        void onSend(int CourseId);
-    }
-
 }

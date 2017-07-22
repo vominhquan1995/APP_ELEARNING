@@ -17,6 +17,7 @@
         android:padding="@dimen/padding_3dp">
 
         <LinearLayout
+            android:id="@+id/lnSort"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -38,7 +39,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="@dimen/margin_3dp"
-            android:layout_weight="0.333"
+            android:layout_weight="0.31"
             android:background="@color/color_background_main"
             android:gravity="center">
 
@@ -50,6 +51,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lnGrid"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -59,10 +61,17 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/imgGird"
+                android:id="@+id/imgColumn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/grid_type" />
+                android:background="@drawable/two_columns"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imgOneColumns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/one_columns" />
         </LinearLayout>
     </LinearLayout>
 
@@ -80,6 +89,15 @@
                 android:id="@+id/rvCourse"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/txtNotFound"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/cap_not_found"
+                android:textSize="@dimen/txt_size_24sp"
+                android:textStyle="bold" />
         </FrameLayout>
 
         <FrameLayout
@@ -98,6 +116,23 @@
                 android:background="@color/color_tab_selected"
                 android:gravity="center"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:layout_weight="0.25"
+                    android:gravity="center|left"
+                    android:padding="@dimen/padding_3dp">
+
+                    <TextView
+                        android:id="@+id/txtFilterAll"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/cap_all"
+                        android:textColor="@color/color_bright_orange"
+                        android:textSize="@dimen/text_size_18" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -150,6 +185,27 @@
                         android:textSize="@dimen/text_size_18" />
                 </LinearLayout>
 
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frSort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin_6dp"
+                android:background="@color/color_tab_selected"
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -159,13 +215,65 @@
                     android:padding="@dimen/padding_3dp">
 
                     <TextView
-                        android:id="@+id/txtAll"
+                        android:id="@+id/txtSortDefault"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@string/cap_all"
+                        android:text="@string/cap_sort_default"
+                        android:textColor="@color/color_bright_orange"
+                        android:textSize="@dimen/text_size_18" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:layout_weight="0.25"
+                    android:gravity="center|left"
+                    android:padding="@dimen/padding_3dp">
+
+                    <TextView
+                        android:id="@+id/txtSortName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/cap_sort_name"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/text_size_18" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:layout_weight="0.25"
+                    android:gravity="center|left"
+                    android:padding="@dimen/padding_3dp">
+
+                    <TextView
+                        android:id="@+id/txtSortPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/cap_sort_price"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_18" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/margin_5dp"
+                    android:layout_weight="0.25"
+                    android:gravity="center|left"
+                    android:padding="@dimen/padding_3dp">
+
+                    <TextView
+                        android:id="@+id/txtSortCredits"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/cap_sort_number_credits"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_18" />
+                </LinearLayout>
+
             </LinearLayout>
         </FrameLayout>
     </FrameLayout>

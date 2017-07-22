@@ -60,6 +60,10 @@
     <string name="cap_price">Price</string>
     <string name="cap_rate">Rates</string>
     <string name="cap_sale">Sales</string>
+    <string name="cap_sort_default">Default</string>
+    <string name="cap_sort_name">Sort name</string>
+    <string name="cap_sort_price">Sort price</string>
+    <string name="cap_sort_number_credits">Sort number credits</string>
     <string name="cap_category">Categorys</string>
     <string name="cap_select_category">Select category :</string>
     <!--validate_input-->
@@ -79,6 +83,9 @@
     <string name="cap_history_done">Course Done</string>
     <string name="cap_not_found">Not Found</string>
     <string name="cap_all">All</string>
+    <string name="cap_not_support">Not support in mode filter all</string>
+    <string name="cap_error_data">Error data</string>
+
 
     <!--item course-->
     <string name="course_creadits">Number Creadits: %s</string>

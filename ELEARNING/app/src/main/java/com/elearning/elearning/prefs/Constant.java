@@ -23,11 +23,16 @@ public class Constant {
     public static final int NUMBER_ITEM_SLIDE= 8;
     public static final int MAX_LENGTH_NAME_COURSE= 20;
     public static final int MAX_LENGTH_DONOR_COURSE= 15;
+    public static final int STEP_VALUES_PRICE= 100000;
     public static final String TYPE_PDF="PDF";
     public static final String TYPE_VIDEO="Video";
     public static final String TYPE_FILTER_PRICE="PRICE";
     public static final String TYPE_FILTER_RATE="RATE";
-    public static final String TYPE_FILTER_SALE="SALE";
+    public static final String TYPE_FILTER_DEFAULT="FILTER_DEFAULT";
     public static final String TYPE_FILTER_CATEGORY="CATEGORY";
+    public static final String TYPE_SORT_NAME="SORT_NAME";
+    public static final String TYPE_SORT_PRICE="SORT_PRICE";
+    public static final String TYPE_SORT_CREDITS="SORT_CREDITS";
+    public static final String TYPE_SORT_DEFAULT="SORT_DEFAULT";
 
 }

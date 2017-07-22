@@ -5,18 +5,25 @@ import com.elearning.elearning.network.APIConstant;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import static com.elearning.elearning.prefs.Constant.TYPE_SORT_CREDITS;
+import static com.elearning.elearning.prefs.Constant.TYPE_SORT_DEFAULT;
+import static com.elearning.elearning.prefs.Constant.TYPE_SORT_NAME;
+import static com.elearning.elearning.prefs.Constant.TYPE_SORT_PRICE;
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT_YYYYMMDD;
 
 /**
  * Created by MinhQuan on 01/07/2017.
  */
 
-public class Course {
+public class Course implements Comparator<Course> {
     private String nameCourses;
     private String donors;
     private int numberCredits;
@@ -34,8 +41,14 @@ public class Course {
     private int id;
     private Date addTime;
     private Date editTime;
+    private String typeSort;
+
+    public Course(String typeSort) {
+        this.typeSort = typeSort;
+    }
 
     public Course() {
+
     }
 
     public Course(String nameCourses, String donors, int numberCredits, Date dateStart, Date dateEnd, double price, String description, String urlImage, String teacher, String category, String cetificate, int idTeacher, int idCategory, int idCetificate, int id, Date addTime, Date editTime) {
@@ -229,4 +242,21 @@ public class Course {
     public void setCetificate(String cetificate) {
         this.cetificate = cetificate;
     }
+
+    @Override
+    public int compare(Course course, Course t1) {
+        switch (typeSort) {
+            case TYPE_SORT_NAME:
+                return course.getNameCourses().compareTo(t1.getNameCourses());
+            case TYPE_SORT_PRICE:
+                return String.valueOf(course.getPrice()).compareTo(String.valueOf(t1.getPrice()));
+            case TYPE_SORT_CREDITS:
+                return String.valueOf(course.getNumberCredits()).compareTo(String.valueOf(t1.getNumberCredits()));
+            case TYPE_SORT_DEFAULT:
+                return course.getAddTime().compareTo(t1.getAddTime());
+            default:
+                return course.getAddTime().compareTo(t1.getAddTime());
+        }
+    }
+
 }

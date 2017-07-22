@@ -49,6 +49,10 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
             return null;
     }
 
+    public List<T> getItems() {
+        return items;
+    }
+
     public void insertItem(T newItem) {
         items.add(newItem);
         notifyDataSetChanged();

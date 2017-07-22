@@ -37,6 +37,12 @@ public class CourseAdapter extends BaseEndlessRecyclerAdapter<Course> {
         this.layout = layout;
     }
 
+    public CourseAdapter(Context context, int layout, List<Course> courseList) {
+        this.context = context;
+        this.items = courseList;
+        this.layout = layout;
+    }
+
     @Override
     protected int getItemLayout() {
         return layout;
@@ -51,10 +57,10 @@ public class CourseAdapter extends BaseEndlessRecyclerAdapter<Course> {
                 .into(courseViewHolder.image);
 //        courseViewHolder.image.setBackground(context.getResources().getDrawable(R.drawable.default_course));
         courseViewHolder.name.setText((item.getNameCourses().length() > MAX_LENGTH_NAME_COURSE)
-                ? item.getNameCourses().substring(0, MAX_LENGTH_NAME_COURSE)+context.getResources().getString(R.string.cap_tree_dot)
+                ? item.getNameCourses().substring(0, MAX_LENGTH_NAME_COURSE) + context.getResources().getString(R.string.cap_tree_dot)
                 : item.getNameCourses());
-        courseViewHolder.donor.setText((item.getDonors().length() >MAX_LENGTH_DONOR_COURSE)
-                ?  String.format(context.getResources().getString(R.string.course_donor), item.getDonors().substring(0,MAX_LENGTH_DONOR_COURSE))+context.getResources().getString(R.string.cap_tree_dot)
+        courseViewHolder.donor.setText((item.getDonors().length() > MAX_LENGTH_DONOR_COURSE)
+                ? String.format(context.getResources().getString(R.string.course_donor), item.getDonors().substring(0, MAX_LENGTH_DONOR_COURSE)) + context.getResources().getString(R.string.cap_tree_dot)
                 : String.format(context.getResources().getString(R.string.course_donor), item.getDonors()));
         courseViewHolder.credits.setText(String.format(context.getResources().getString(R.string.course_creadits), String.valueOf(item.getNumberCredits())));
 //        courseViewHolder.donor.setText(String.format(context.getResources().getString(R.string.course_donor), item.getDonors()));
@@ -82,6 +88,7 @@ public class CourseAdapter extends BaseEndlessRecyclerAdapter<Course> {
         private TextView donor;
         private TextView dateStart;
         private TextView dateEnd;
+
         public CourseViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.imageCourse);

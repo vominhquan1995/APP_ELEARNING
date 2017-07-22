@@ -71,9 +71,15 @@
     <string name="cap_rate">Đánh Giá</string>
     <string name="cap_sale">Khuyến mãi</string>
     <string name="cap_all">Tất cả</string>
+    <string name="cap_sort_default">Mặc Định</string>
+    <string name="cap_sort_name">Theo Tên</string>
+    <string name="cap_sort_price">Theo Giá</string>
+    <string name="cap_sort_number_credits">Theo Tín Chỉ</string>
     <string name="cap_category">Danh mục</string>
     <string name="cap_select_category">Chọn danh mục muốn tìm :</string>
     <string name="cap_not_found">Không tìm thấy</string>
+    <string name="cap_not_support">Không hỗ trợ ở chế độ tất cả</string>
+    <string name="cap_error_data">Không nhận được dữ liệu</string>
 
     <!--validate_input-->
     <string name="validate_email">Vui lòng nhập email</string>

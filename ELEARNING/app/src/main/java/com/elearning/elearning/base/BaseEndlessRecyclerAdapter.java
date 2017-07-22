@@ -33,6 +33,10 @@ public abstract class BaseEndlessRecyclerAdapter<T> extends BaseRecyclerAdapter<
         this.endlessLoadingEnable = endlessLoadingEnable;
     }
 
+    public boolean isEndlessLoadingEnable() {
+        return endlessLoadingEnable;
+    }
+
     private int page = 1;
 
     public void resetPage() {
@@ -97,8 +101,11 @@ public abstract class BaseEndlessRecyclerAdapter<T> extends BaseRecyclerAdapter<
         }
         isLoading = false;
     }
-
+    public  void reloadList(){
+        notifyDataSetChanged();
+    }
     public void insertLoadmoreItems(List<T> loadmoreItems) {
+
         hideFootLoading();
         insertItems(loadmoreItems);
     }

@@ -28,8 +28,6 @@ import static com.elearning.elearning.prefs.Constant.NUMBER_ITEM_SLIDE;
  */
 
 public class HomeFragment extends BaseFragment implements HomeView {
-    //send id course to list lesson
-    private static HomeFragment.onSendCourseID onSendCourseID;
     private RecyclerView mRecyclerNew, mRecyclerMost, mRecyclerTopView;
     private CourseAdapter newCourseAdapter;
     private CourseAdapter mostCourseAdapter;
@@ -41,9 +39,6 @@ public class HomeFragment extends BaseFragment implements HomeView {
     private Timer timer;
     private int page = 0;
 
-    public static void setSendCourseID(HomeFragment.onSendCourseID onSendCourseID) {
-        HomeFragment.onSendCourseID = onSendCourseID;
-    }
 
     @Override
     public int setFragmentView() {
@@ -109,28 +104,19 @@ public class HomeFragment extends BaseFragment implements HomeView {
         newCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
-                if (onSendCourseID != null) {
-                    onSendCourseID.onSend(newCourseAdapter.getItem(position).getId());
-                }
+                getMainActivity().goToListLesson(newCourseAdapter.getItem(position).getId());
             }
         });
         mostCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
-                if (onSendCourseID != null) {
-                    onSendCourseID.onSend(mostCourseAdapter.getItem(position).getId());
-                }
+                getMainActivity().goToListLesson(mostCourseAdapter.getItem(position).getId());
             }
         });
         topReviewCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().gotoFragment(getResources().getString(R.string.menu_listlesson));
-                if (onSendCourseID != null) {
-                    onSendCourseID.onSend(topReviewCourseAdapter.getItem(position).getId());
-                }
+                getMainActivity().goToListLesson(topReviewCourseAdapter.getItem(position).getId());
             }
         });
     }
@@ -166,10 +152,6 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void onGetTopReviewCourseFail(String message) {
         Log.d("Home", "Fail");
-    }
-
-    public interface onSendCourseID {
-        void onSend(int CourseId);
     }
 
     public void pageSwitcher(int seconds) {
