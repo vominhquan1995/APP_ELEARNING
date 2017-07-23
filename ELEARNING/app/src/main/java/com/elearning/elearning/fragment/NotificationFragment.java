@@ -2,6 +2,7 @@ package com.elearning.elearning.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.adapter.NotificationAdapter;
@@ -51,14 +52,17 @@ public class NotificationFragment extends BaseFragment implements NotificationVi
     @Override
     public void onGetListNotification(List<Notification> notificationList) {
         dismissProgressDialog();
-        for (Notification itemNotification : notificationList) {
-            this.notificationList.add(itemNotification);
+        if(notificationList != null){
+            for (Notification itemNotification : notificationList) {
+                this.notificationList.add(itemNotification);
+            }
+            notificationAdapter.notifyDataSetChanged();
         }
-        notificationAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onGetListNotificationFail(String error) {
-
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 }

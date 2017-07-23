@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
@@ -57,6 +58,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     private ProgressBar prTimeCountdown;
     private ArrayAnswer arrayAnswer;
     private TimeCountdownAsyncTask timeCountdownAsyncTask;
+    private  int idLessonSave;
 
     @Override
     public void initView() {
@@ -92,6 +94,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
             @Override
             public void onDoExam(int idLesson) {
                 examPresenter.getInfoExam(idLesson);
+                idLessonSave=idLesson;
                 showProgressDialog();
             }
         });
@@ -172,40 +175,44 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     @Override
     public void onGetInfoSuccess(Exam exam) {
         examInfo = exam;
-        txtNameExam.setText(String.format(getResources().getString(R.string.exam_name), examInfo.getNameExam()));
-        txtNumberQuestion.setText(String.format(getResources().getString(R.string.exam_number_question), String.valueOf(examInfo.getNumberQuesion())));
-        txtTime.setText(String.format(getResources().getString(R.string.exam_time), String.valueOf(examInfo.getTimeExam())));
-        txtRequest.setText(String.format(getResources().getString(R.string.exam_request_question), String.valueOf(Math.round(examInfo.getNumberQuesion() * (0.75))), String.valueOf(exam.getNumberQuesion())));
-        examPresenter.getHistoryExam(examInfo.getIdExam(), new ExamPresenter.onGetHistory() {
-            @Override
-            public void onGetHistorySuccess(HistoryExam historyExam) {
-                if (historyExam != null) {
-                    dismissProgressDialog();
-                    txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), DATE_FORMAT.format(historyExam.getDateExam())));
-                    txtLastPoint.setText(String.format(getResources().getString(R.string.exam_history_point), String.valueOf(historyExam.getPoint())));
-                    txtLastStatus.setText(String.format(getResources().getString(R.string.exam_history_result), historyExam.getStatus()));
-                } else {
+        //isadded Rreturn true if the fragment is currently added to its activity.
+        if(isAdded()){
+            txtNameExam.setText(String.format(getResources().getString(R.string.exam_name), examInfo.getNameExam()));
+            txtNumberQuestion.setText(String.format(getResources().getString(R.string.exam_number_question), String.valueOf(examInfo.getNumberQuesion())));
+            txtTime.setText(String.format(getResources().getString(R.string.exam_time), String.valueOf(examInfo.getTimeExam())));
+            txtRequest.setText(String.format(getResources().getString(R.string.exam_request_question), String.valueOf(Math.round(examInfo.getNumberQuesion() * (0.75))), String.valueOf(exam.getNumberQuesion())));
+            examPresenter.getHistoryExam(examInfo.getIdExam(), new ExamPresenter.onGetHistory() {
+                @Override
+                public void onGetHistorySuccess(HistoryExam historyExam) {
+                    if (historyExam != null) {
+                        dismissProgressDialog();
+                        txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), DATE_FORMAT.format(historyExam.getDateExam())));
+                        txtLastPoint.setText(String.format(getResources().getString(R.string.exam_history_point), String.valueOf(historyExam.getPoint())));
+                        txtLastStatus.setText(String.format(getResources().getString(R.string.exam_history_result), historyExam.getStatus()));
+                    } else {
+                        dismissProgressDialog();
+                        txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), getResources().getString(R.string.cap_no_data)));
+                        txtLastPoint.setText(String.format(getResources().getString(R.string.exam_history_point), getResources().getString(R.string.cap_no_data)));
+                        txtLastStatus.setText(String.format(getResources().getString(R.string.exam_history_result), getResources().getString(R.string.cap_no_data)));
+                    }
+                }
+
+                @Override
+                public void onGetHistoryFail(String mess) {
                     dismissProgressDialog();
                     txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), getResources().getString(R.string.cap_no_data)));
                     txtLastPoint.setText(String.format(getResources().getString(R.string.exam_history_point), getResources().getString(R.string.cap_no_data)));
                     txtLastStatus.setText(String.format(getResources().getString(R.string.exam_history_result), getResources().getString(R.string.cap_no_data)));
                 }
-            }
-
-            @Override
-            public void onGetHistoryFail(String mess) {
-                dismissProgressDialog();
-                txtLastTime.setText(String.format(getResources().getString(R.string.exam_history_time), getResources().getString(R.string.cap_no_data)));
-                txtLastPoint.setText(String.format(getResources().getString(R.string.exam_history_point), getResources().getString(R.string.cap_no_data)));
-                txtLastStatus.setText(String.format(getResources().getString(R.string.exam_history_result), getResources().getString(R.string.cap_no_data)));
-            }
-        });
+            });
+        }
     }
 
     @Override
     public void onGetInfoFail(String mess) {
         //handle show dialong warning in there
-        Log.d(TAG, mess);
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -225,6 +232,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
                 .setOnLogoutListener(new DialogResult.Build.OnLogoutListener() {
                     @Override
                     public void onOk() {
+                        examPresenter.getInfoExam(idLessonSave);
                         init();
                     }
                 }).show();
@@ -233,7 +241,8 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
 
     @Override
     public void onReceiveReusltFail(String mess) {
-
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 
     private void setChoice() {

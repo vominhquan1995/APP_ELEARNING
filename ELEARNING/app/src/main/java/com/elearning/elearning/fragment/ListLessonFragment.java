@@ -3,6 +3,7 @@ package com.elearning.elearning.fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
@@ -85,7 +86,8 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
 
     @Override
     public void onGetListFail(String errorMessafe) {
-
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -47,7 +47,9 @@ public abstract class BaseFragment extends Fragment implements Init {
 
     protected void onBackPressed() {
 //        SystemHelper.hideKeyboard(context);
-        getMainActivity().onBackPressed();
+        if(getMainActivity()!=null){
+            getMainActivity().onBackPressed();
+        }
     }
 
     protected void showProgressDialog() {

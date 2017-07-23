@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.adapter.CourseAdapter;
@@ -76,6 +77,10 @@ public class HomeFragment extends BaseFragment implements HomeView {
         mRecyclerTopView.setAdapter(topReviewCourseAdapter);
         slideAdapter = new SlideAdapter(getMainActivity());
         slide.setAdapter(slideAdapter);
+        newCourseAdapter.setEndlessLoadingEnable(false);
+        mostCourseAdapter.setEndlessLoadingEnable(false);
+        topReviewCourseAdapter.setEndlessLoadingEnable(false);
+
     }
 
     @Override
@@ -99,8 +104,9 @@ public class HomeFragment extends BaseFragment implements HomeView {
             }
         });
         pageSwitcher(3);
-        homePresenter.getListNewCourse(NUMBER_ITEM_SLIDE);
-        getMainActivity().showProgressDialog();
+        load();
+//        homePresenter.getListNewCourse(NUMBER_ITEM_SLIDE);
+//        getMainActivity().showProgressDialog();
         newCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -120,38 +126,47 @@ public class HomeFragment extends BaseFragment implements HomeView {
             }
         });
     }
-
+    public void load() {
+        showProgressDialog();
+        homePresenter.getListNewCourse(NUMBER_ITEM_SLIDE);
+    }
     @Override
     public void onGetNewCourseSuccess(List<Course> courseArray) {
+        newCourseAdapter.removeAllItems();
         newCourseAdapter.insertLoadmoreItems(courseArray);
         homePresenter.getListMostCourse(NUMBER_ITEM_SLIDE);
     }
 
     @Override
     public void onGetNewCourseFail(String message) {
-        Log.d("Home", "Fail");
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onGetMostCourseSuccess(List<Course> courseArray) {
+        mostCourseAdapter.removeAllItems();
         mostCourseAdapter.insertLoadmoreItems(courseArray);
         homePresenter.getListTopReviewCourse(NUMBER_ITEM_SLIDE);
     }
 
     @Override
     public void onGetMostCourseFail(String message) {
-        Log.d("Home", "Fail");
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onGetTopReviewCourseSuccess(List<Course> courseArray) {
         getMainActivity().dismissProgressDialog();
+        topReviewCourseAdapter.removeAllItems();
         topReviewCourseAdapter.insertLoadmoreItems(courseArray);
     }
 
     @Override
     public void onGetTopReviewCourseFail(String message) {
-        Log.d("Home", "Fail");
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 
     public void pageSwitcher(int seconds) {

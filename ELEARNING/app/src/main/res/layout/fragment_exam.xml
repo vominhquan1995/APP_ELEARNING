@@ -257,7 +257,6 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="0.2"
                                 android:gravity="center|right|top"
-                                android:text="Câu 1 :"
                                 android:textSize="@dimen/text_size_18"
                                 android:textStyle="bold" />
 
@@ -268,7 +267,6 @@
                                 android:layout_marginLeft="@dimen/margin_5dp"
                                 android:layout_weight="0.8"
                                 android:gravity="center|left|top"
-                                android:text="hai cộng ba"
                                 android:textSize="@dimen/text_size_18" />
                         </LinearLayout>
 

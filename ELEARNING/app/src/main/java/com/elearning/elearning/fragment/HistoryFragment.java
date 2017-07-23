@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.adapter.HistoryLearnAdapter;
@@ -84,6 +85,7 @@ public class HistoryFragment extends BaseFragment implements HistoryLearnView {
     }
     @Override
     public void onGetHistoryFail(String message) {
-        Log.d("History", message);
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 }

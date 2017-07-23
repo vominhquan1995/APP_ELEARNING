@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.adapter.HistoryExamAdapter;
@@ -92,7 +93,8 @@ public class HistoryExamFragment extends BaseFragment implements HistoryExamView
 
     @Override
     public void onGetListHistoryFail(String mess) {
-
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
     public static void setSendIdLesson(HistoryExamFragment.onSendLessonID onSendLessonID) {
         HistoryExamFragment.onSendLessonID = onSendLessonID;

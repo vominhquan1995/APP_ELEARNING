@@ -134,7 +134,8 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
 
     @Override
     public void getInfoFail(String messError) {
-        Log.d("Fragment User", messError);
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elearning.elearning.R;
 import com.elearning.elearning.activity.MainActivity;
@@ -96,7 +97,8 @@ public class LessonFragment extends BaseFragment implements LessonView {
 
                     @Override
                     public void getInfoFail(String mess) {
-
+                        dismissProgressDialog();
+                        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -167,7 +169,8 @@ public class LessonFragment extends BaseFragment implements LessonView {
 
     @Override
     public void onGetProgressFail(String mess) {
-
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 
     class ReadFilePdf extends AsyncTask<String, Void, InputStream> {

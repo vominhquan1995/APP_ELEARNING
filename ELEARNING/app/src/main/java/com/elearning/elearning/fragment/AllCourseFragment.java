@@ -237,7 +237,8 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onGetListCategory(List<Category> listCategory) {
-
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -261,7 +262,8 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onFilterFail(String mess) {
-
+        dismissProgressDialog();
+        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
     }
 
     public void setPageView() {
