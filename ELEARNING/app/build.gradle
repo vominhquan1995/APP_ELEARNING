@@ -36,6 +36,8 @@ dependencies {
     compile 'com.google.firebase:firebase-core:10.0.0'
     compile 'com.google.firebase:firebase-messaging:10.0.0'
     compile 'com.crystal:crystalrangeseekbar:1.1.1'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

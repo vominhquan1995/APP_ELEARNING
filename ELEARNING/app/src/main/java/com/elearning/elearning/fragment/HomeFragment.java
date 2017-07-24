@@ -1,26 +1,22 @@
 package com.elearning.elearning.fragment;
 
-import android.app.Activity;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.elearning.elearning.R;
 import com.elearning.elearning.adapter.CourseAdapter;
 import com.elearning.elearning.base.BaseFragment;
 import com.elearning.elearning.mvp.model.Course;
 import com.elearning.elearning.mvp.presenter.HomePresenter;
 import com.elearning.elearning.mvp.view.HomeView;
-import com.elearning.elearning.adapter.SlideAdapter;
+import com.elearning.elearning.widget.CustomSliderView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.elearning.elearning.prefs.Constant.NUMBER_ITEM_SLIDE;
 
@@ -35,10 +31,8 @@ public class HomeFragment extends BaseFragment implements HomeView {
     private CourseAdapter topReviewCourseAdapter;
     private HomePresenter homePresenter;
     private TextView txtViewMore1, txtViewMore2, txtViewMore3;
-    private ViewPager slide;
-    private SlideAdapter slideAdapter;
-    private Timer timer;
-    private int page = 0;
+    private SliderLayout sliderLayout;
+    private String[] urlSlide = new String[]{"http://apiyduoctructuyen.azurewebsites.net/FilesUploaded/slide_1.png", "http://apiyduoctructuyen.azurewebsites.net/FilesUploaded/slide_2.png", "http://apiyduoctructuyen.azurewebsites.net/FilesUploaded/slide_3.png", "http://apiyduoctructuyen.azurewebsites.net/FilesUploaded/slide_4.png"};
 
 
     @Override
@@ -60,8 +54,9 @@ public class HomeFragment extends BaseFragment implements HomeView {
         mRecyclerTopView = (RecyclerView) view.findViewById(R.id.recyclerTopView);
         mRecyclerTopView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         int deviceHeightInPixels = context.getResources().getDisplayMetrics().heightPixels;
-        slide = (ViewPager) view.findViewById(R.id.vpSlide);
-        slide.getLayoutParams().height = deviceHeightInPixels / 4;
+//        slide = (ViewPager) view.findViewById(R.id.vpSlide);
+        sliderLayout = (SliderLayout) view.findViewById(R.id.vpSlide);
+        sliderLayout.getLayoutParams().height = deviceHeightInPixels / 4;
     }
 
     @Override
@@ -75,12 +70,10 @@ public class HomeFragment extends BaseFragment implements HomeView {
         mRecyclerNew.setAdapter(newCourseAdapter);
         mRecyclerMost.setAdapter(mostCourseAdapter);
         mRecyclerTopView.setAdapter(topReviewCourseAdapter);
-        slideAdapter = new SlideAdapter(getMainActivity());
-        slide.setAdapter(slideAdapter);
         newCourseAdapter.setEndlessLoadingEnable(false);
         mostCourseAdapter.setEndlessLoadingEnable(false);
         topReviewCourseAdapter.setEndlessLoadingEnable(false);
-
+        initSlider(sliderLayout, urlSlide);
     }
 
     @Override
@@ -103,7 +96,6 @@ public class HomeFragment extends BaseFragment implements HomeView {
 
             }
         });
-        pageSwitcher(3);
         load();
 //        homePresenter.getListNewCourse(NUMBER_ITEM_SLIDE);
 //        getMainActivity().showProgressDialog();
@@ -126,10 +118,12 @@ public class HomeFragment extends BaseFragment implements HomeView {
             }
         });
     }
+
     public void load() {
         showProgressDialog();
         homePresenter.getListNewCourse(NUMBER_ITEM_SLIDE);
     }
+
     @Override
     public void onGetNewCourseSuccess(List<Course> courseArray) {
         newCourseAdapter.removeAllItems();
@@ -140,7 +134,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void onGetNewCourseFail(String message) {
         dismissProgressDialog();
-        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, getResources().getString(R.string.cap_error_data), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -153,7 +147,7 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void onGetMostCourseFail(String message) {
         dismissProgressDialog();
-        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, getResources().getString(R.string.cap_error_data), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -166,30 +160,27 @@ public class HomeFragment extends BaseFragment implements HomeView {
     @Override
     public void onGetTopReviewCourseFail(String message) {
         dismissProgressDialog();
-        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, getResources().getString(R.string.cap_error_data), Toast.LENGTH_SHORT).show();
     }
 
-    public void pageSwitcher(int seconds) {
-        timer = new Timer(); // At this line a new Thread will be created
-        timer.scheduleAtFixedRate(new RemindTask(), 0, seconds * 1000); // delay
-    }
-
-    class RemindTask extends TimerTask {
-        @Override
-        public void run() {
-            // As the TimerTask run on a seprate thread from UI thread we have
-            // to call runOnUiThread to do work on UI thread.
-            ((Activity) context).runOnUiThread(new Runnable() {
-                public void run() {
-                    if (page > 3) { // In my case the number of pages are 4
-                        page = 0;
-//                        timer.cancel();
-                    } else {
-                        slide.setCurrentItem(page++);
-                    }
-                }
-            });
-
+    public void initSlider(SliderLayout sliderLayout, final String[] url) {
+        for (String item : url) {
+            CustomSliderView customSliderView = new CustomSliderView(context);
+            // initialize a SliderLayout
+            customSliderView
+                    .image(item)
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                        @Override
+                        public void onSliderClick(BaseSliderView slider) {
+//                            Toast.makeText(context, slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+            //add your extra information
+            sliderLayout.addSlider(customSliderView);
         }
+        sliderLayout.setPresetTransformer(SliderLayout.Transformer.Default);
+        sliderLayout.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        sliderLayout.setDuration(3000);
     }
 }

@@ -57,7 +57,9 @@ public abstract class BaseFragment extends Fragment implements Init {
     }
 
     protected void dismissProgressDialog() {
-        getMainActivity().dismissProgressDialog();
+        if(getMainActivity()!=null){
+            getMainActivity().dismissProgressDialog();
+        }
     }
 
     protected void playSound() {

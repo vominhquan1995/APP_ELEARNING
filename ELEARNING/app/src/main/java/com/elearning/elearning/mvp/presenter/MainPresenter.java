@@ -60,7 +60,7 @@ public class MainPresenter {
             public void onChanged(Fragment fragment) {
                 if (fragment instanceof HomeFragment) {
                     ((HomeFragment) fragmentNavigator.getActiveFragment()).load();
-                     mainView.updateToolbar(true, false, context.getResources().getString(R.string.nav_home));
+                     mainView.updateToolbar(false, false, context.getResources().getString(R.string.nav_home));
                 }
                 if (fragment instanceof ListLessonFragment) {
                     mainView.updateToolbar(true, false, context.getResources().getString(R.string.menu_listlesson));

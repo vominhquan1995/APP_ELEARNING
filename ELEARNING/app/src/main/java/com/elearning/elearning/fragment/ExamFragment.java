@@ -260,7 +260,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
             posHeaderAnswerCurrent = 0;
             for (Question.Answer answer : currentQuestion.getAnswerList()) {
                 RadioButton radioButton = new RadioButton(context);
-                radioButton.setButtonDrawable(R.drawable.custom_answer_choice);
+                radioButton.setButtonDrawable(R.drawable.custom_radio);
                 radioButton.setText(String.format(getResources().getString(R.string.cap_struct_answer), listHeaderQuestion[posHeaderAnswerCurrent], answer.getContentAnswer()));
                 radioButton.setPadding(10, 0, 0, 0);
                 rg.addView(radioButton);
