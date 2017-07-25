@@ -1,6 +1,5 @@
 package com.elearning.elearning.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -27,7 +26,6 @@ import com.elearning.elearning.prefs.Constant;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +33,10 @@ import java.util.List;
  */
 
 public class MainActivity extends BaseActivity implements MainView, View.OnClickListener {
+    public static int IdLesson = 0;
+    private static MainActivity.onSendCourseID onSendCourseID;
+    private static MainActivity.onExitExam onExitExam;
+    private static Sound sound;
     private DrawerLayout drawerLayout;
     private LinearLayout lnNav;
     private RecyclerView rlNav;
@@ -49,10 +51,22 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     private RecyclerView mRecyclerSearchResult;
     private CourseAdapter mCourseAdapter;
     private onSendCourseID getOnSendCourseID;
-    private static MainActivity.onSendCourseID onSendCourseID;
-    private static MainActivity.onExitExam onExitExam;
-    private static Sound sound;
-    public static int IdLesson = 0;
+
+    public static void setSendCourseID(MainActivity.onSendCourseID onSendCourseID) {
+        MainActivity.onSendCourseID = onSendCourseID;
+    }
+
+    public static void setOnExitExam(MainActivity.onExitExam onExitExam) {
+        MainActivity.onExitExam = onExitExam;
+    }
+
+    public static int getIdLesson() {
+        return IdLesson;
+    }
+
+    public static void setIdLesson(int idLesson) {
+        IdLesson = idLesson;
+    }
 
     @Override
     public int getView() {
@@ -76,19 +90,13 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         mRecyclerSearchResult = (RecyclerView) findViewById(R.id.recyclerSearchResult);
     }
 
-    public static void setSendCourseID(MainActivity.onSendCourseID onSendCourseID) {
-        MainActivity.onSendCourseID = onSendCourseID;
-    }
-
-    public static void setOnExitExam(MainActivity.onExitExam onExitExam) {
-        MainActivity.onExitExam = onExitExam;
-    }
-    public  void  goToListLesson(int idCourse){
+    public void goToListLesson(int idCourse) {
         gotoFragment(getResources().getString(R.string.menu_listlesson));
-        if(onSendCourseID!=null){
+        if (onSendCourseID != null) {
             MainActivity.onSendCourseID.onSend(idCourse);
         }
     }
+
     @Override
     public void initValue() {
         rlNav.setLayoutManager(new LinearLayoutManager(context));
@@ -98,7 +106,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         navAdapter.setOnItemClickListener(mainPresenter.getOnItemMenuListener());
         //set value for information user
         txtUserName.setText(User.get().getUserName());
-        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE + User.get().getUrlAvatar()).resize(350, 350).into(avatarUser);
+        loadAvatar();
         lnActivity = (LinearLayout) findViewById(R.id.lnActivity);
         lnFragment = (LinearLayout) findViewById(R.id.lnFragment);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
@@ -282,31 +290,27 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         mainPresenter.goToFragment(id);
     }
 
+    public void playSound() {
+        sound.playRingtone();
+    }
+
+    public void loadAvatar() {
+        Picasso.with(context)
+                .load(APIConstant.HOST_NAME_IMAGE + User.get().getUrlAvatar())
+                .centerCrop()
+                .fit()
+                .into(avatarUser);
+    }
+
+    public void backOnePage() {
+        mainPresenter.backOnePage();
+    }
+
     public interface onSendCourseID {
         void onSend(int CourseId);
     }
 
     public interface onExitExam {
         void onExitExam();
-    }
-
-    public static int getIdLesson() {
-        return IdLesson;
-    }
-
-    public static void setIdLesson(int idLesson) {
-        IdLesson = idLesson;
-    }
-
-    public void playSound() {
-        sound.playRingtone();
-    }
-
-    public void loadAvatar() {
-        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE + User.get().getUrlAvatar()).resize(350, 350).into(avatarUser);
-    }
-
-    public void backOnePage() {
-        mainPresenter.backOnePage();
     }
 }
