@@ -68,6 +68,8 @@ public abstract class BaseFragment extends Fragment implements Init {
     protected void loadAvatar() {
         getMainActivity().loadAvatar();
     }
-
+    protected void loadName() {
+        getMainActivity().loadName();
+    }
     public abstract int setFragmentView();
 }

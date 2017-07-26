@@ -92,11 +92,24 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
         txtSortPrice.setOnClickListener(this);
         txtSortCredits.setOnClickListener(this);
         txtSortDefault.setOnClickListener(this);
+        lnFilter.setOnClickListener(this);
+        lnSort.setOnClickListener(this);
+        lnGrid.setOnClickListener(this);
         initCourseAdapter(false);
         setPageView();
-        lnFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
+
+    @Override
+    public int setFragmentView() {
+        return R.layout.fragment_all_course;
+    }
+
+    @Override
+    public void onClick(View view) {
+        lnFilter.setBackgroundColor(getResources().getColor(R.color.color_background_main));
+        lnSort.setBackgroundColor(getResources().getColor(R.color.color_background_main));
+        switch (view.getId()) {
+            case R.id.lnFilter:
                 frSort.setVisibility(View.GONE);
                 if (frFilter.getVisibility() == View.VISIBLE) {
                     lnFilter.setBackgroundColor(getResources().getColor(R.color.color_background_main));
@@ -105,12 +118,8 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
                     lnFilter.setBackgroundColor(getResources().getColor(R.color.color_tab_selected));
                     frFilter.setVisibility(View.VISIBLE);
                 }
-
-            }
-        });
-        lnSort.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                break;
+            case R.id.lnSort:
                 frFilter.setVisibility(View.GONE);
                 if (frSort.getVisibility() == View.VISIBLE) {
                     lnSort.setBackgroundColor(getResources().getColor(R.color.color_background_main));
@@ -119,12 +128,8 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
                     lnSort.setBackgroundColor(getResources().getColor(R.color.color_tab_selected));
                     frSort.setVisibility(View.VISIBLE);
                 }
-
-            }
-        });
-        lnGrid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                break;
+            case R.id.lnGrid:
                 if (typeFilter == TYPE_FILTER_DEFAULT) {
                     Toast.makeText(context, getResources().getString(R.string.cap_not_support), Toast.LENGTH_LONG).show();
                 } else {
@@ -137,57 +142,51 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
                         imgColumn.setVisibility(View.GONE);
                         initCourseAdapter(false);
                     }
-
                 }
-            }
-        });
-    }
-
-    @Override
-    public int setFragmentView() {
-        return R.layout.fragment_all_course;
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
+                break;
             case R.id.txtFilterPrice:
                 typeFilter = TYPE_FILTER_PRICE;
                 filter();
+                setUI(false, false);
                 break;
             case R.id.txtFilterRate:
                 typeFilter = TYPE_FILTER_RATE;
                 filter();
+                setUI(false, false);
                 break;
             case R.id.txtFilterAll:
                 listCourseAdapter.removeAllItems();
                 setPageView();
                 typeFilter = TYPE_FILTER_DEFAULT;
                 updateUIFilter();
+                setUI(false, false);
                 break;
             case R.id.txtFilterCategory:
                 typeFilter = TYPE_FILTER_CATEGORY;
                 filter();
+                setUI(false, false);
                 break;
             case R.id.txtSortName:
                 typeSort = TYPE_SORT_NAME;
                 sort();
+                setUI(false, false);
                 break;
             case R.id.txtSortPrice:
                 typeSort = TYPE_SORT_PRICE;
                 sort();
+                setUI(false, false);
                 break;
             case R.id.txtSortCredits:
                 typeSort = TYPE_SORT_CREDITS;
                 sort();
+                setUI(false, false);
                 break;
             case R.id.txtSortDefault:
                 typeSort = TYPE_SORT_DEFAULT;
                 sort();
+                setUI(false, false);
                 break;
         }
-        frFilter.setVisibility(View.GONE);
-        frSort.setVisibility(View.GONE);
     }
 
     @Override
@@ -238,7 +237,7 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onGetListCategory(List<Category> listCategory) {
         dismissProgressDialog();
-        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, getResources().getString(R.string.cap_error_data), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -263,7 +262,7 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onFilterFail(String mess) {
         dismissProgressDialog();
-        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, getResources().getString(R.string.cap_error_data), Toast.LENGTH_SHORT).show();
     }
 
     public void setPageView() {
@@ -320,22 +319,22 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
 
     private void updateUISort() {
         if (typeSort.equals(TYPE_SORT_NAME)) {
-            txtSortName.setTextColor(getResources().getColor(R.color.color_bright_orange));
+            txtSortName.setTextColor(getResources().getColor(R.color.color_background_main_blue));
             txtSortDefault.setTextColor(getResources().getColor(R.color.colorBlack));
             txtSortPrice.setTextColor(getResources().getColor(R.color.colorBlack));
             txtSortCredits.setTextColor(getResources().getColor(R.color.colorBlack));
         } else if (typeSort.equals(TYPE_SORT_PRICE)) {
-            txtSortPrice.setTextColor(getResources().getColor(R.color.color_bright_orange));
+            txtSortPrice.setTextColor(getResources().getColor(R.color.color_background_main_blue));
             txtSortDefault.setTextColor(getResources().getColor(R.color.colorBlack));
             txtSortName.setTextColor(getResources().getColor(R.color.colorBlack));
             txtSortCredits.setTextColor(getResources().getColor(R.color.colorBlack));
         } else if (typeSort.equals(TYPE_SORT_CREDITS)) {
-            txtSortCredits.setTextColor(getResources().getColor(R.color.color_bright_orange));
+            txtSortCredits.setTextColor(getResources().getColor(R.color.color_background_main_blue));
             txtSortDefault.setTextColor(getResources().getColor(R.color.colorBlack));
             txtSortPrice.setTextColor(getResources().getColor(R.color.colorBlack));
             txtSortName.setTextColor(getResources().getColor(R.color.colorBlack));
         } else {
-            txtSortDefault.setTextColor(getResources().getColor(R.color.color_bright_orange));
+            txtSortDefault.setTextColor(getResources().getColor(R.color.color_background_main_blue));
             txtSortCredits.setTextColor(getResources().getColor(R.color.colorBlack));
             txtSortPrice.setTextColor(getResources().getColor(R.color.colorBlack));
             txtSortName.setTextColor(getResources().getColor(R.color.colorBlack));
@@ -344,22 +343,22 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
 
     private void updateUIFilter() {
         if (typeFilter.equals(TYPE_FILTER_PRICE)) {
-            txtFilterPrice.setTextColor(getResources().getColor(R.color.color_bright_orange));
+            txtFilterPrice.setTextColor(getResources().getColor(R.color.color_background_main_blue));
             txtFilterRate.setTextColor(getResources().getColor(R.color.colorBlack));
             txtFilterCategory.setTextColor(getResources().getColor(R.color.colorBlack));
             txtFilterAll.setTextColor(getResources().getColor(R.color.colorBlack));
         } else if (typeFilter.equals(TYPE_FILTER_RATE)) {
-            txtFilterRate.setTextColor(getResources().getColor(R.color.color_bright_orange));
+            txtFilterRate.setTextColor(getResources().getColor(R.color.color_background_main_blue));
             txtFilterPrice.setTextColor(getResources().getColor(R.color.colorBlack));
             txtFilterCategory.setTextColor(getResources().getColor(R.color.colorBlack));
             txtFilterAll.setTextColor(getResources().getColor(R.color.colorBlack));
         } else if (typeFilter.equals(TYPE_FILTER_CATEGORY)) {
-            txtFilterCategory.setTextColor(getResources().getColor(R.color.color_bright_orange));
+            txtFilterCategory.setTextColor(getResources().getColor(R.color.color_background_main_blue));
             txtFilterPrice.setTextColor(getResources().getColor(R.color.colorBlack));
             txtFilterRate.setTextColor(getResources().getColor(R.color.colorBlack));
             txtFilterAll.setTextColor(getResources().getColor(R.color.colorBlack));
         } else {
-            txtFilterAll.setTextColor(getResources().getColor(R.color.color_bright_orange));
+            txtFilterAll.setTextColor(getResources().getColor(R.color.color_background_main_blue));
             txtFilterPrice.setTextColor(getResources().getColor(R.color.colorBlack));
             txtFilterRate.setTextColor(getResources().getColor(R.color.colorBlack));
             txtFilterCategory.setTextColor(getResources().getColor(R.color.colorBlack));
@@ -382,5 +381,19 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
                 getMainActivity().goToListLesson(listCourseAdapter.getItem(position).getId());
             }
         });
+    }
+
+    public void setUI(boolean isShowSort, boolean isShowFilter) {
+        if (isShowSort) {
+            frSort.setVisibility(View.VISIBLE);
+        } else {
+            frSort.setVisibility(View.GONE);
+        }
+        if (isShowFilter) {
+            frFilter.setVisibility(View.VISIBLE);
+        } else {
+            frFilter.setVisibility(View.GONE);
+        }
+
     }
 }

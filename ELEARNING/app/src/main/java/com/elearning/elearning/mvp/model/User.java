@@ -183,6 +183,7 @@ public class User {
 
     public User setInformation(JSONObject response) {
         try {
+            setUserName(response.getString(APIConstant.LASTNAME)+"  "+ response.getString(APIConstant.FIRSTNAME));
             setFirstName(response.getString(APIConstant.FIRSTNAME));
             setLastName(response.getString(APIConstant.LASTNAME));
             setPassword(response.getString(APIConstant.PASSWORD));

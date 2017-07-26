@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -82,7 +81,11 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
         iconInformation.setBackground(context.getResources().getDrawable(R.drawable.profile_info));
         iconBirthday.setBackground(context.getResources().getDrawable(R.drawable.profile_birthday));
         //set avatar
-        Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE+User.get().getUrlAvatar()).into(avatarUser);
+        Picasso.with(context)
+                .load(APIConstant.HOST_NAME_IMAGE + User.get().getUrlAvatar())
+                .centerCrop()
+                .fit()
+                .into(avatarUser);
         //validate type input
         edtEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         edtPhone.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -130,22 +133,25 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
         edtPhone.setText(user.getPhone());
         edtInformation.setText(user.getInfomation());
         edtBirthday.setText(DATE_FORMAT.format(user.getDateOfBirth()));
+        loadName();
     }
 
     @Override
     public void getInfoFail(String messError) {
         dismissProgressDialog();
-        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, getResources().getString(R.string.cap_error_data), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void editSuccess() {
+        dismissProgressDialog();
         userInfoPresenter.getUserInfo(User.get().getUserId());
         Toast.makeText(context, "Lưu thành công", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void editFail() {
+        dismissProgressDialog();
         Toast.makeText(context, "Không thành công", Toast.LENGTH_LONG).show();
     }
 
@@ -157,6 +163,7 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
                 break;
             }
             case R.id.btnSave: {
+                showProgressDialog();
                 try {
                     User.get().setEmail(edtEmail.getText().toString());
                     User.get().setFirstName(edtFirstName.getText().toString());
@@ -183,17 +190,24 @@ public class UserInfoFragment extends BaseFragment implements UserInfoView, View
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE) {
+            showProgressDialog();
             userInfoPresenter.uploadAvatar(new File(getPath(data.getData())), new UserInfoPresenter.onUploadAvatar() {
                 @Override
                 public void onUploadSuccess(String url) {
                     User.get().setUrlAvatar(url);
-                    Picasso.with(context).load(APIConstant.HOST_NAME_IMAGE+User.get().getUrlAvatar()).resize(300, 300).into(avatarUser);
+                    Picasso.with(context)
+                            .load(APIConstant.HOST_NAME_IMAGE + User.get().getUrlAvatar())
+                            .centerCrop()
+                            .fit()
+                            .into(avatarUser);
                     loadAvatar();
+                    dismissProgressDialog();
                     Toast.makeText(context, getResources().getString(R.string.cap_upload_avatar_succes), Toast.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onUploadFail(String mess) {
+                    dismissProgressDialog();
                     Toast.makeText(context, getResources().getString(R.string.cap_upload_avatar_fail), Toast.LENGTH_LONG).show();
                 }
             });

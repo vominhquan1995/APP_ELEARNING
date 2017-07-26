@@ -301,6 +301,9 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
                 .fit()
                 .into(avatarUser);
     }
+    public void  loadName(){
+        txtUserName.setText(User.get().getUserName());
+    }
 
     public void backOnePage() {
         mainPresenter.backOnePage();

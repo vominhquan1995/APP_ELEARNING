@@ -5,12 +5,14 @@
     android:background="@color/colorWhite"
     android:clickable="true"
     android:orientation="vertical">
+
     <FrameLayout
         android:id="@+id/frInfoExam"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:visibility="gone">
+
         <android.support.v7.widget.CardView
             style="@style/BCCardView"
             android:layout_width="match_parent"
@@ -137,16 +139,17 @@
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/text_size_15" />
                 </LinearLayout>
+
                 <Button
                     android:id="@+id/btnStart"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_3dp"
-                    android:padding="@dimen/padding_3dp"
                     android:layout_weight="0.1"
                     android:background="@color/color_blue"
                     android:gravity="center"
+                    android:padding="@dimen/padding_3dp"
                     android:text="@string/cap_start"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/text_size_15" />
@@ -212,15 +215,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.18"
-                        android:text="@string/cap_loading"/>
+                        android:text="@string/cap_loading" />
 
                     <Button
                         android:id="@+id/btnDone"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
+                        android:layout_margin="@dimen/margin_3dp"
                         android:layout_weight="0.3"
                         android:background="@color/color_blue"
-                        android:layout_margin="@dimen/margin_3dp"
                         android:text="@string/cap_done_exam"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/text_size_15" />
@@ -237,48 +240,50 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
-                    <LinearLayout
+                    <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.8"
-                        android:gravity="center|top"
-                        android:orientation="vertical">
-
+                        android:layout_weight="0.8">
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.3"
-                            android:orientation="horizontal">
+                            android:layout_height="match_parent"
+                            android:gravity="center|top"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="0.3"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/txtIndexQuestion"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.2"
+                                    android:gravity="center|right|top"
+                                    android:textSize="@dimen/text_size_18"
+                                    android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/txtIndexQuestion"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.2"
-                                android:gravity="center|right|top"
-                                android:textSize="@dimen/text_size_18"
-                                android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/txtContentQuestion"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="@dimen/margin_5dp"
+                                    android:layout_weight="0.8"
+                                    android:gravity="center|left|top"
+                                    android:textSize="@dimen/text_size_18" />
+                            </LinearLayout>
 
-                            <TextView
-                                android:id="@+id/txtContentQuestion"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginLeft="@dimen/margin_5dp"
-                                android:layout_weight="0.8"
-                                android:gravity="center|left|top"
-                                android:textSize="@dimen/text_size_18" />
+                            <RadioGroup
+                                android:id="@+id/rg"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginLeft="@dimen/margin_3dp"
+                                android:layout_marginRight="@dimen/margin_3dp"
+                                android:layout_weight="0.7"
+                                android:orientation="vertical" />
                         </LinearLayout>
 
-                        <RadioGroup
-                            android:id="@+id/rg"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_marginLeft="@dimen/margin_3dp"
-                            android:layout_marginRight="@dimen/margin_3dp"
-                            android:layout_weight="0.7"
-                            android:orientation="vertical" />
-                    </LinearLayout>
+                    </ScrollView>
 
                     <LinearLayout
                         android:layout_width="wrap_content"

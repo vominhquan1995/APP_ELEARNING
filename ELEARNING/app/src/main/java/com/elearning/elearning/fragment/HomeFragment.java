@@ -87,13 +87,13 @@ public class HomeFragment extends BaseFragment implements HomeView {
         txtViewMore2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getMainActivity().gotoFragment(getResources().getString(R.string.menu_all_course));
             }
         });
         txtViewMore3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                getMainActivity().gotoFragment(getResources().getString(R.string.menu_all_course));
             }
         });
         load();

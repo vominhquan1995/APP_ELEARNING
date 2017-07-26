@@ -10,6 +10,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -105,6 +106,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     public void initAction() {
         //examPresenter.getInfoExam(lessonId);
         showProgressDialog();
+
         view.findViewById(R.id.btnStart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

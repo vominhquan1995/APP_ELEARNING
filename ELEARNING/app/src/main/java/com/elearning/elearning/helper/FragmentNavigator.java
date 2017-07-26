@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.elearning.elearning.R;
+
 /**
  * Created by MinhQuan on 30/06/2017.
  */
@@ -62,6 +64,7 @@ public class FragmentNavigator {
     public void goTo(final Fragment fragment) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         transaction.addToBackStack(getTag(fragment));
+        transaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_in_right);
         transaction.add(mDefaultContainer, fragment, getTag(fragment));
         transaction.commit();
         mFragmentManager.executePendingTransactions();

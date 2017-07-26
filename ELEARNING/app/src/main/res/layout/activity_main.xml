@@ -224,7 +224,7 @@
                         android:layout_margin="5dp"
                         android:layout_marginLeft="10dp"
                         android:text="Võ Minh Quân"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/colorWhite"
                         android:textSize="20sp" />
                 </LinearLayout>
 
