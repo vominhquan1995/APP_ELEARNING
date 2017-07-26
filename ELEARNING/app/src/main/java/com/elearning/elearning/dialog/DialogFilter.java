@@ -25,6 +25,7 @@ import com.elearning.elearning.prefs.Number;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static com.elearning.elearning.prefs.Constant.STEP_VALUES_PRICE;
 import static com.elearning.elearning.prefs.Constant.TYPE_FILTER_CATEGORY;
 import static com.elearning.elearning.prefs.Constant.TYPE_FILTER_PRICE;
@@ -40,7 +41,7 @@ public class DialogFilter {
         private Activity activity;
         private AlertDialog.Builder builder;
         private AlertDialog dialog;
-        private TextView txtPriceFrom, txtPriceTo;
+        private TextView txtPriceFrom, txtPriceTo,txtLoading;
         private Button btnCancel, btnApply;
         private CrystalRangeSeekbar rangeSeekbarPrice;
         private RatingBar ratingBarMin, ratingBarMax;
@@ -52,7 +53,7 @@ public class DialogFilter {
         private List<String> listTitleCategory;
         private List<Category> categoryList;
         private int posCategorySelected;
-        private LinearLayout lnButton;
+        private LinearLayout lnButton, lnBody;
 
         public Build(final Activity activity, final String typeFilter) {
             this.activity = activity;
@@ -62,9 +63,11 @@ public class DialogFilter {
             View view = inflater.inflate(R.layout.dialog_filter, null);
             //get view
             lnButton = (LinearLayout) view.findViewById(R.id.lnButton);
+            lnBody = (LinearLayout) view.findViewById(R.id.lnBody);
             btnCancel = (Button) view.findViewById(R.id.btnCancel);
             btnApply = (Button) view.findViewById(R.id.btnApply);
             txtPriceFrom = (TextView) view.findViewById(R.id.txtPriceFrom);
+            txtLoading = (TextView) view.findViewById(R.id.txtLoading);
             txtPriceTo = (TextView) view.findViewById(R.id.txtPriceTo);
             rangeSeekbarPrice = (CrystalRangeSeekbar) view.findViewById(R.id.rangeSeekbarPrice);
             frPrice = (FrameLayout) view.findViewById(R.id.frPrice);
@@ -81,7 +84,7 @@ public class DialogFilter {
             if (typeFilter == TYPE_FILTER_PRICE) {
                 lnButton.setVisibility(View.VISIBLE);
                 frPrice.setVisibility(View.VISIBLE);
-                frCategory.setVisibility(View.VISIBLE);
+                frCategory.setVisibility(View.GONE);
                 frRate.setVisibility(View.GONE);
             } else if (typeFilter == TYPE_FILTER_RATE) {
                 lnButton.setVisibility(View.VISIBLE);
@@ -89,6 +92,9 @@ public class DialogFilter {
                 frCategory.setVisibility(View.GONE);
                 frRate.setVisibility(View.VISIBLE);
             } else if (typeFilter == TYPE_FILTER_CATEGORY) {
+                frCategory.setVisibility(View.VISIBLE);
+                frPrice.setVisibility(View.GONE);
+                frRate.setVisibility(View.GONE);
                 allCoursePresenter.getListCategory();
             } else {
 
@@ -168,10 +174,9 @@ public class DialogFilter {
                 categoryList.add(item);
                 listTitleCategory.add(item.getNameCategory());
             }
+            txtLoading.setVisibility(View.GONE);
             lnButton.setVisibility(View.VISIBLE);
-            frCategory.setVisibility(View.VISIBLE);
-            frPrice.setVisibility(View.GONE);
-            frRate.setVisibility(View.GONE);
+            lnBody.setVisibility(View.VISIBLE);
             spinnerAdapter = new ArrayAdapter<String>
                     (activity.getBaseContext(), android.R.layout.simple_dropdown_item_1line, listTitleCategory);
             spinnerCategory.setAdapter(spinnerAdapter);

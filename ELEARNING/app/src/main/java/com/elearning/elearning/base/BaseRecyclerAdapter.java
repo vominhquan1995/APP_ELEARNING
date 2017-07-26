@@ -59,8 +59,10 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     public void insertItems(List<T> newItems) {
-        items.addAll(newItems);
-        notifyDataSetChanged();
+        if(newItems.size()!=0){
+            items.addAll(newItems);
+            notifyDataSetChanged();
+        }
     }
 
     public void removeItem(T itemToRemove) {

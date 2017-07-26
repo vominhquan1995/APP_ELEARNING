@@ -58,10 +58,10 @@ public class MainPresenter {
         fragmentNavigator.setOnStackChanged(new FragmentNavigator.onStackChanged() {
             @Override
             public void onChanged(Fragment fragment) {
-                if (fragment instanceof HomeFragment) {
-                    ((HomeFragment) fragmentNavigator.getActiveFragment()).load();
-                     mainView.updateToolbar(false, false, context.getResources().getString(R.string.nav_home));
-                }
+//                if (fragment instanceof HomeFragment) {
+//                    ((HomeFragment) fragmentNavigator.getActiveFragment()).load();
+//                     mainView.updateToolbar(false, false, context.getResources().getString(R.string.nav_home));
+//                }
                 if (fragment instanceof ListLessonFragment) {
                     mainView.updateToolbar(true, false, context.getResources().getString(R.string.menu_listlesson));
                 } else if (fragment instanceof LessonFragment) {
@@ -114,8 +114,7 @@ public class MainPresenter {
         } else if (id.equals(context.getString(R.string.menu_all_course))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new AllCourseFragment());
-        }
-        else if (id.equals(context.getString(R.string.nav_exam))) {
+        } else if (id.equals(context.getString(R.string.nav_exam))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new ExamFragment());
         } else if (id.equals(context.getString(R.string.nav_history_exam))) {
@@ -159,6 +158,7 @@ public class MainPresenter {
                 || fragmentNavigator.getActiveFragment() instanceof AllCourseFragment) {
             mainView.updateToolbar(false, false, context.getString(R.string.nav_home));
             fragmentNavigator.goToRoot();
+            ((HomeFragment) fragmentNavigator.getActiveFragment()).load();
             mainView.setItemSelected(context.getString(R.string.nav_home));
         } else {
             doubleBackToExit();

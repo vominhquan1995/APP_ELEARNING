@@ -12,7 +12,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8">
+        android:layout_weight="0.8"
+        android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/frPrice"
@@ -31,7 +32,7 @@
                     android:layout_margin="@dimen/margin_5dp"
                     android:layout_weight="0.3"
                     android:text="Chọn mức giá:"
-                    android:textColor="@color/color_blue"
+                    android:textColor="@color/colorBlack"
                     android:textSize="@dimen/text_size_18"
                     android:textStyle="bold" />
 
@@ -66,15 +67,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.4"
-                    app:bar_color="@color/color_brown"
-                    app:bar_highlight_color="@color/color_blue"
+                    app:bar_color="@color/colorBlack"
+                    app:bar_highlight_color="@color/color_background_main_blue"
                     app:corner_radius="5"
                     app:data_type="_integer"
-                    app:left_thumb_color="@color/color_blue"
+                    app:left_thumb_color="@color/color_background_main_blue"
                     app:left_thumb_color_pressed="@color/colorBlack"
                     app:max_value="@integer/maxPrice"
                     app:min_value="@integer/minPrice"
-                    app:right_thumb_color="@color/color_blue"
+                    app:right_thumb_color="@color/color_background_main_blue"
                     app:right_thumb_color_pressed="@color/colorBlack"
                     app:steps="@integer/minPrice" />
             </LinearLayout>
@@ -86,49 +87,56 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_3dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.1"
-                    android:textSize="@dimen/text_size_15"
                     android:layout_margin="@dimen/margin_3dp"
-                    android:text="Số sao thấp nhất:"/>
+                    android:layout_weight="0.1"
+                    android:text="Số sao thấp nhất:"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_15" />
+
                 <RatingBar
                     android:id="@+id/rtMin"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="0.3"
-                    android:progressBackgroundTint="@color/color_brown"
-                    android:progressTint="@color/colorYellow600"
+                    android:layout_gravity="center_horizontal"
                     android:layout_margin="@dimen/margin_3dp"
-                    android:stepSize="1"
+                    android:layout_weight="0.3"
                     android:numStars="5"
+                    android:progressBackgroundTint="@color/color_background_main_blue"
+                    android:progressTint="@color/colorYellow600"
                     android:rating="1"
-                    android:layout_gravity="center_horizontal"/>
+                    android:stepSize="1" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_margin="@dimen/margin_3dp"
                     android:layout_weight="0.1"
-                    android:textSize="@dimen/text_size_15"
-                    android:text="Số sao cao nhất:"/>
+                    android:text="Số sao cao nhất:"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_15" />
+
                 <RatingBar
                     android:id="@+id/rtMax"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="0.3"
-                    android:progressBackgroundTint="@color/color_brown"
-                    android:progressTint="@color/colorYellow600"
+                    android:layout_gravity="center_horizontal"
                     android:layout_margin="@dimen/margin_3dp"
-                    android:stepSize="1"
+                    android:layout_weight="0.3"
                     android:numStars="5"
+                    android:progressBackgroundTint="@color/color_background_main_blue"
+                    android:progressTint="@color/colorYellow600"
                     android:rating="5"
-                    android:layout_gravity="center_horizontal"/>
+                    android:stepSize="1" />
             </LinearLayout>
 
         </FrameLayout>
@@ -138,29 +146,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone">
+
             <LinearLayout
+                android:id="@+id/lnBody"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.5"
-                    android:textSize="@dimen/text_size_18"
-                    android:textColor="@color/color_blue"
-                    android:textStyle="bold"
                     android:text="@string/cap_select_category"
-                    />
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_18"
+                    android:textStyle="bold" />
+
                 <Spinner
                     android:id="@+id/spCategory"
-                    android:backgroundTint="@color/color_blue"
-                    android:spinnerMode="dropdown"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_margin="@dimen/margin_5dp"
                     android:layout_weight="0.5"
-                    android:layout_margin="@dimen/margin_5dp">
-                </Spinner>
+                    android:backgroundTint="@color/color_blue"
+                    android:spinnerMode="dropdown"></Spinner>
             </LinearLayout>
+            <TextView
+                android:id="@+id/txtLoading"
+                android:textSize="@dimen/text_size_18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cap_loading"/>
 
         </FrameLayout>
     </LinearLayout>
@@ -170,8 +187,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
-        android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <Button
             android:id="@+id/btnCancel"
