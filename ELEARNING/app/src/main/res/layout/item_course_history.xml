@@ -25,11 +25,11 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:background="@color/colorGrey"
+            android:background="@color/color_blue"
             android:maxLines="1"
             android:padding="@dimen/padding_3dp"
             android:text="Khóa học 1"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/color_white"
             android:textSize="@dimen/text_size_12"
             android:textStyle="bold" />
     </LinearLayout>

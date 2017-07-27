@@ -1,0 +1,17 @@
+1. npm install
+2. npm install -g typescript
+3. npm install --save-dev webpack
+4. webpack --config webpack.config.vendor.js (create file vendor.js)
+5.npm install @angular/forms
+6. npm install angular2-jwt
+7. npm install -g webpack
+8. install bootstrap : npm install bootstrap@4.0.0-alpha.6
+	npm install bootstrap@3.3.7
+9.install jqueyr :npm install jquery
+10.npm install ng2-cookies
+11.npm install d3 --save
+Install-Package EPPlus.Core
+
+dotnet restore
+
+///delele file vender 

@@ -34,5 +34,6 @@ public class Constant {
     public static final String TYPE_SORT_PRICE="SORT_PRICE";
     public static final String TYPE_SORT_CREDITS="SORT_CREDITS";
     public static final String TYPE_SORT_DEFAULT="SORT_DEFAULT";
+    public static final String CHAR_SPLIT_SCAN="-";
 
 }

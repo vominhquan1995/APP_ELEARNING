@@ -34,9 +34,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_3dp"
-                    android:background="@color/color_blue"
+                    android:background="@color/color_blue_light"
                     android:text="@string/signIn"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/color_white" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_5dp"
                     android:text="@string/forgotPassword"
-                    android:textColor="@color/color_background_main_blue"
+                    android:textColor="@color/color_blue"
                     android:textStyle="italic" />
             </LinearLayout>
             <LinearLayout
@@ -102,14 +102,14 @@
                         android:background="@color/colorFBBackground"
                         android:drawableLeft="@drawable/icon_login_fb"
                         android:text="@string/loginFB"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/color_white" />
 
                     <Button
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/margin_5dp"
                         android:layout_weight="0.5"
-                        android:background="@color/colorWhite"
+                        android:background="@color/color_white"
                         android:drawableLeft="@drawable/icon_login_gg"
                         android:drawablePadding="@dimen/margin_3dp"
                         android:text="@string/loginGG"

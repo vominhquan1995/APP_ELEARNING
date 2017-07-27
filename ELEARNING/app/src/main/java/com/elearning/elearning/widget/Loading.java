@@ -37,7 +37,7 @@ public class Loading extends RelativeLayout {
         lnChild2.setAlpha(1f);
         //Dialog
         ProgressBar progressBar = new ProgressBar(context);
-        progressBar.setIndeterminateTintList(ColorStateList.valueOf(getResources().getColor(R.color.color_background_main_blue)));
+        progressBar.setIndeterminateTintList(ColorStateList.valueOf(getResources().getColor(R.color.color_blue)));
         progressBar.setBackground(getResources().getDrawable(R.drawable.logo_300_300));
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminate(true);

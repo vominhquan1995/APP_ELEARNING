@@ -52,9 +52,10 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
         rvListLesson.setAdapter(lessonAdapter);
         MainActivity.setSendCourseID(new MainActivity.onSendCourseID() {
             @Override
-            public void onSend(int CourseId) {
+            public void onSend(int CourseId, String title) {
                 showProgressDialog();
                 listLessonPresenter.getListLesson(CourseId);
+                setTitle(title);
             }
         });
 
@@ -87,7 +88,7 @@ public class ListLessonFragment extends BaseFragment implements ListLessonView {
     @Override
     public void onGetListFail(String errorMessafe) {
         dismissProgressDialog();
-        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, getResources().getString(R.string.cap_error_data), Toast.LENGTH_SHORT).show();
     }
 
     @Override

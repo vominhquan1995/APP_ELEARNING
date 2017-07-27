@@ -36,7 +36,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="Bài kiểm tra 1"
-                android:textColor="@color/color_blue"
+                android:textColor="@color/color_blue_light"
                 android:textSize="@dimen/text_size_12"
                 android:textStyle="bold" />
             <TextView
@@ -48,7 +48,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="Bài kiểm tra 1"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/text_size_12" />
             <TextView
                 android:id="@+id/txtDate"
@@ -59,7 +59,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="Bài kiểm tra 1"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/text_size_12" />
             <TextView
                 android:id="@+id/txtStatus"
@@ -70,7 +70,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="Đã hoàn thành"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/text_size_12" />
         </LinearLayout>
     </LinearLayout>

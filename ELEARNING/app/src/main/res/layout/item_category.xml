@@ -3,7 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_margin="@dimen/margin_3dp"
-    android:background="@color/colorWhite"
+    android:background="@color/color_white"
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/imgCategory"

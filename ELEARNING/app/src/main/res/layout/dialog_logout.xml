@@ -56,7 +56,7 @@
                 android:layout_margin="@dimen/margin_3dp"
                 android:layout_weight="5"
                 android:background="@color/color_no"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/color_white"
                 android:text="@string/cap_no"
                 tools:ignore="NestedWeights" />
 
@@ -67,7 +67,7 @@
                 android:layout_margin="@dimen/margin_3dp"
                 android:layout_weight="5"
                 android:background="@color/color_yes"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/color_white"
                 android:text="@string/cap_yes" />
         </LinearLayout>
 

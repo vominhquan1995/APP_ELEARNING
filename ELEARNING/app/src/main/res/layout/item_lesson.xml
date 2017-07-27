@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:maxLines="1"
             android:padding="@dimen/padding_3dp"
-            android:textColor="@color/color_blue"
+            android:textColor="@color/color_blue_light"
             android:textStyle="bold"
             android:text="Android Basic"
             android:textSize="@dimen/text_size_12" />

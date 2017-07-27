@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:clickable="true"
-    android:background="@color/colorWhite"
+    android:background="@color/color_white"
     android:layout_height="match_parent">
     <ImageView
         android:layout_width="match_parent"
@@ -20,39 +20,36 @@
             android:id="@+id/txtDescription"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/color_black"
             android:gravity="center"
             android:layout_weight="0.5"
             android:layout_margin="@dimen/margin_5dp"
             android:text="@string/about_description"/>
 
         <TextView
-            android:id="@+id/txtAddress"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="@dimen/margin_5dp"
             android:layout_weight="0.1"
             android:gravity="center"
             android:text="@string/about_address"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/color_black" />
 
         <TextView
-            android:id="@+id/txtHotline"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1"
             android:gravity="center"
             android:layout_margin="@dimen/margin_5dp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/color_black"
             android:text="@string/about_hotline"/>
         <TextView
-            android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.1"
             android:gravity="center"
             android:layout_margin="@dimen/margin_5dp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/color_black"
             android:text="@string/about_email"/>
         <TextView
             android:id="@+id/txtVersion"
@@ -61,7 +58,7 @@
             android:layout_weight="0.1"
             android:gravity="center"
             android:layout_margin="@dimen/margin_5dp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/color_black"
             android:text="Phiên bản : 1.0.0.0"/>
         <TextView
             android:layout_width="match_parent"
@@ -69,7 +66,7 @@
             android:layout_weight="0.1"
             android:layout_margin="@dimen/margin_5dp"
             android:gravity="center"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/color_black"
             android:text="Thiết kế và phát triển bởi : Võ Minh Quân"/>
     </LinearLayout>
 </LinearLayout>

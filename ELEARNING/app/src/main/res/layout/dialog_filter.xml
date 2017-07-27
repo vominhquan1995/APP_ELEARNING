@@ -32,7 +32,7 @@
                     android:layout_margin="@dimen/margin_5dp"
                     android:layout_weight="0.3"
                     android:text="Chọn mức giá:"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/color_black"
                     android:textSize="@dimen/text_size_18"
                     android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
                         android:layout_gravity="center|left"
                         android:layout_weight="0.5"
                         android:text="100.000 vnđ"
-                        android:textColor="@color/colorBlack" />
+                        android:textColor="@color/color_black" />
 
                     <TextView
                         android:id="@+id/txtPriceTo"
@@ -59,7 +59,7 @@
                         android:layout_gravity="center|right"
                         android:layout_weight="0.5"
                         android:text="1.000.000 vnđ"
-                        android:textColor="@color/colorBlack" />
+                        android:textColor="@color/color_black" />
                 </LinearLayout>
 
                 <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
@@ -67,16 +67,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.4"
-                    app:bar_color="@color/colorBlack"
-                    app:bar_highlight_color="@color/color_background_main_blue"
+                    app:bar_color="@color/color_black"
+                    app:bar_highlight_color="@color/color_blue"
                     app:corner_radius="5"
                     app:data_type="_integer"
-                    app:left_thumb_color="@color/color_background_main_blue"
-                    app:left_thumb_color_pressed="@color/colorBlack"
+                    app:left_thumb_color="@color/color_blue"
+                    app:left_thumb_color_pressed="@color/color_black"
                     app:max_value="@integer/maxPrice"
                     app:min_value="@integer/minPrice"
-                    app:right_thumb_color="@color/color_background_main_blue"
-                    app:right_thumb_color_pressed="@color/colorBlack"
+                    app:right_thumb_color="@color/color_blue"
+                    app:right_thumb_color_pressed="@color/color_black"
                     app:steps="@integer/minPrice" />
             </LinearLayout>
 
@@ -100,7 +100,7 @@
                     android:layout_margin="@dimen/margin_3dp"
                     android:layout_weight="0.1"
                     android:text="Số sao thấp nhất:"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/color_black"
                     android:textSize="@dimen/text_size_15" />
 
                 <RatingBar
@@ -111,7 +111,7 @@
                     android:layout_margin="@dimen/margin_3dp"
                     android:layout_weight="0.3"
                     android:numStars="5"
-                    android:progressBackgroundTint="@color/color_background_main_blue"
+                    android:progressBackgroundTint="@color/color_blue"
                     android:progressTint="@color/colorYellow600"
                     android:rating="1"
                     android:stepSize="1" />
@@ -122,7 +122,7 @@
                     android:layout_margin="@dimen/margin_3dp"
                     android:layout_weight="0.1"
                     android:text="Số sao cao nhất:"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/color_black"
                     android:textSize="@dimen/text_size_15" />
 
                 <RatingBar
@@ -133,7 +133,7 @@
                     android:layout_margin="@dimen/margin_3dp"
                     android:layout_weight="0.3"
                     android:numStars="5"
-                    android:progressBackgroundTint="@color/color_background_main_blue"
+                    android:progressBackgroundTint="@color/color_blue"
                     android:progressTint="@color/colorYellow600"
                     android:rating="5"
                     android:stepSize="1" />
@@ -159,7 +159,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.5"
                     android:text="@string/cap_select_category"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/color_black"
                     android:textSize="@dimen/text_size_18"
                     android:textStyle="bold" />
 
@@ -169,7 +169,7 @@
                     android:layout_height="0dp"
                     android:layout_margin="@dimen/margin_5dp"
                     android:layout_weight="0.5"
-                    android:backgroundTint="@color/color_blue"
+                    android:backgroundTint="@color/color_blue_light"
                     android:spinnerMode="dropdown"></Spinner>
             </LinearLayout>
             <TextView
@@ -196,10 +196,10 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_3dp"
             android:layout_weight="0.5"
-            android:background="@color/color_background_main_blue"
+            android:background="@color/color_blue"
             android:padding="@dimen/padding_3dp"
             android:text="@string/cancle"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/color_white" />
 
         <Button
             android:id="@+id/btnApply"
@@ -207,9 +207,9 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/margin_3dp"
             android:layout_weight="0.5"
-            android:background="@color/color_background_main_blue"
+            android:background="@color/color_blue"
             android:padding="@dimen/padding_3dp"
             android:text="@string/cap_apply"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/color_white" />
     </LinearLayout>
 </LinearLayout>

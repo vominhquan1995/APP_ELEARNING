@@ -28,6 +28,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import static com.elearning.elearning.prefs.Constant.MAX_LENGTH_NAME_COURSE;
+
 /**
  * Created by vomin on 30/06/2017.
  */
@@ -43,7 +45,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     private NavAdapter navAdapter;
     private MainPresenter mainPresenter;
     //information for navigation
-    private ImageView avatarUser;
+    private ImageView avatarUser, imgQR;
     private TextView txtUserName, txtTitle, txtResultSearch;
     private LinearLayout lnActivity, lnFragment, lnSearch, lnMenu, lnSearchContainer, lnFragmentContainer;
     private android.widget.SearchView searchView;
@@ -76,6 +78,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     @Override
     public void initView() {
         avatarUser = (ImageView) findViewById(R.id.avatarUser);
+        imgQR = (ImageView) findViewById(R.id.imgQR);
         txtUserName = (TextView) findViewById(R.id.txtUserName);
         txtResultSearch = (TextView) findViewById(R.id.txtResultSearch);
         mainPresenter = new MainPresenter(this);
@@ -90,10 +93,10 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         mRecyclerSearchResult = (RecyclerView) findViewById(R.id.recyclerSearchResult);
     }
 
-    public void goToListLesson(int idCourse) {
+    public void goToListLesson(int idCourse,String nameCoure) {
         gotoFragment(getResources().getString(R.string.menu_listlesson));
         if (onSendCourseID != null) {
-            MainActivity.onSendCourseID.onSend(idCourse);
+            MainActivity.onSendCourseID.onSend(idCourse,nameCoure);
         }
     }
 
@@ -121,6 +124,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     @Override
     public void initAction() {
         lnMenu.setOnClickListener(this);
+        imgQR.setOnClickListener(this);
         findViewById(R.id.btnBack).setOnClickListener(this);
         searchView.setOnClickListener(this);
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
@@ -173,7 +177,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
                 lnSearchContainer.setVisibility(View.GONE);
                 gotoFragment(getResources().getString(R.string.menu_listlesson));
                 if (onSendCourseID != null) {
-                    onSendCourseID.onSend(mCourseAdapter.getItem(position).getId());
+                    onSendCourseID.onSend(mCourseAdapter.getItem(position).getId(),mCourseAdapter.getItem(position).getNameCourses());
                 }
             }
         });
@@ -186,10 +190,8 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
                 drawerLayout.openDrawer(lnNav);
                 findViewById(R.id.lnHide).setVisibility(View.VISIBLE);
                 break;
-            case R.id.edtSearch:
-//                updateToolbar(false, true, null);
-//                findViewById(R.id.lnContainer).setVisibility(View.GONE);
-//                lnSearchContainer.setVisibility(View.VISIBLE);
+            case R.id.imgQR:
+                gotoFragment(getResources().getString(R.string.menu_qr_scan));
                 break;
             case R.id.btnBack:
 //                updateToolbar(false, false, null);
@@ -272,6 +274,10 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
         finish();
     }
 
+    public void  setTitleNav(String titleNav){
+        txtTitle.setText((titleNav.length()>MAX_LENGTH_NAME_COURSE ? titleNav.substring(0,MAX_LENGTH_NAME_COURSE)+getResources().getString(R.string.cap_tree_dot) : titleNav));
+    }
+
     @Override
     public void onBackPressed() {
         onCloseDrawer();
@@ -293,6 +299,9 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     public void playSound() {
         sound.playRingtone();
     }
+    public void playBeep() {
+        sound.playBeep();
+    }
 
     public void loadAvatar() {
         Picasso.with(context)
@@ -301,7 +310,8 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
                 .fit()
                 .into(avatarUser);
     }
-    public void  loadName(){
+
+    public void loadName() {
         txtUserName.setText(User.get().getUserName());
     }
 
@@ -310,7 +320,7 @@ public class MainActivity extends BaseActivity implements MainView, View.OnClick
     }
 
     public interface onSendCourseID {
-        void onSend(int CourseId);
+        void onSend(int CourseId,String nameCourse);
     }
 
     public interface onExitExam {

@@ -17,10 +17,10 @@ import com.elearning.elearning.fragment.HomeFragment;
 import com.elearning.elearning.fragment.LessonFragment;
 import com.elearning.elearning.fragment.ListLessonFragment;
 import com.elearning.elearning.fragment.NotificationFragment;
+import com.elearning.elearning.fragment.QRScanFragment;
 import com.elearning.elearning.fragment.UserInfoFragment;
 import com.elearning.elearning.helper.FragmentNavigator;
 import com.elearning.elearning.mvp.model.Course;
-import com.elearning.elearning.mvp.model.HistoryExam;
 import com.elearning.elearning.mvp.view.MainView;
 import com.elearning.elearning.network.API;
 
@@ -34,10 +34,10 @@ import org.json.JSONObject;
 
 public class MainPresenter {
     public FragmentNavigator fragmentNavigator;
-    private Context context;
-    private MainView mainView;
     // click back 2 times to exit app
     boolean doubleBackToExit = false;
+    private Context context;
+    private MainView mainView;
     private NavAdapter.OnItemMenuListener onItemMenuListener;
 
     public MainPresenter(final MainView mainView) {
@@ -100,6 +100,9 @@ public class MainPresenter {
         if (fragment instanceof AllCourseFragment) {
             backRoot = true;
         }
+        if (fragment instanceof QRScanFragment) {
+            backRoot = true;
+        }
         if (backRoot) {
             fragmentNavigator.goToRoot();
         }
@@ -135,12 +138,16 @@ public class MainPresenter {
         } else if (id.equals(context.getString(R.string.menu_lesson))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new LessonFragment());
+        } else if (id.equals(context.getString(R.string.menu_qr_scan))) {
+            mainView.updateToolbar(true, false, id);
+            switchFragment(new QRScanFragment());
         } else if (id.equals(context.getString(R.string.nav_about_us))) {
             mainView.updateToolbar(true, false, id);
             switchFragment(new AboutFragment());
         } else if (id.equals(context.getString(R.string.nav_logout))) {
             mainView.onLogout();
         }
+
     }
 
     public void onBackPressed() {
@@ -155,7 +162,8 @@ public class MainPresenter {
                 || fragmentNavigator.getActiveFragment() instanceof NotificationFragment
                 || fragmentNavigator.getActiveFragment() instanceof HistoryExamFragment
                 || fragmentNavigator.getActiveFragment() instanceof AboutFragment
-                || fragmentNavigator.getActiveFragment() instanceof AllCourseFragment) {
+                || fragmentNavigator.getActiveFragment() instanceof AllCourseFragment
+                || fragmentNavigator.getActiveFragment() instanceof QRScanFragment) {
             mainView.updateToolbar(false, false, context.getString(R.string.nav_home));
             fragmentNavigator.goToRoot();
             ((HomeFragment) fragmentNavigator.getActiveFragment()).load();

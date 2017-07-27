@@ -11,8 +11,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.5"
-        android:background="@color/colorBlack"
-        android:textColor="@color/colorWhite"
+        android:background="@color/color_black"
+        android:textColor="@color/color_white"
         android:layout_margin="@dimen/margin_5dp"
         android:text="@string/title_cancel"/>
     <Button
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.5"
         android:background="@color/color_yes"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/color_white"
         android:layout_margin="@dimen/margin_5dp"
         android:text="@string/title_yes" />
 </LinearLayout>

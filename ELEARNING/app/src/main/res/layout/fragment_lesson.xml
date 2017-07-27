@@ -80,8 +80,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:layout_weight="0.5"
-                    android:progressBackgroundTint="@color/colorBlack"
-                    android:progressTint="@color/color_background_main_blue" />
+                    android:progressBackgroundTint="@color/color_black"
+                    android:progressTint="@color/color_blue" />
             </LinearLayout>
 
             <TextView
@@ -126,9 +126,9 @@
                 android:id="@+id/btnDoExam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/color_blue"
+                android:background="@color/color_blue_light"
                 android:text="@string/cap_do_exam"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/color_white" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/color_white"
     android:clickable="true"
     android:orientation="vertical">
 
@@ -10,7 +10,7 @@
         android:id="@+id/frInfoExam"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
+        android:background="@color/color_white"
         android:visibility="gone">
 
         <android.support.v7.widget.CardView
@@ -38,7 +38,7 @@
                         android:layout_weight="0.2"
                         android:gravity="center"
                         android:text="@string/cap_info_exam"
-                        android:textColor="@color/color_blue"
+                        android:textColor="@color/color_blue_light"
                         android:textSize="@dimen/text_size_18"
                         android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
                         android:layout_weight="0.2"
                         android:gravity="center|left"
                         android:text="@string/cap_loading"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_15" />
 
                     <TextView
@@ -61,7 +61,7 @@
                         android:layout_weight="0.2"
                         android:gravity="center|left"
                         android:text="@string/cap_loading"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_15" />
 
                     <TextView
@@ -72,7 +72,7 @@
                         android:layout_weight="0.2"
                         android:gravity="center|left"
                         android:text="@string/cap_loading"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_15" />
 
                     <TextView
@@ -83,7 +83,7 @@
                         android:layout_weight="0.2"
                         android:gravity="center|left"
                         android:text="@string/cap_loading"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_15" />
                 </LinearLayout>
 
@@ -102,7 +102,7 @@
                         android:layout_weight="0.25"
                         android:gravity="center"
                         android:text="@string/cap_info_last_exam"
-                        android:textColor="@color/color_blue"
+                        android:textColor="@color/color_blue_light"
                         android:textSize="@dimen/text_size_18"
                         android:textStyle="bold" />
 
@@ -114,7 +114,7 @@
                         android:layout_weight="0.25"
                         android:gravity="center|left"
                         android:text="@string/cap_loading"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_15" />
 
                     <TextView
@@ -125,7 +125,7 @@
                         android:layout_weight="0.25"
                         android:gravity="center|left"
                         android:text="@string/cap_loading"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_15" />
 
                     <TextView
@@ -136,7 +136,7 @@
                         android:layout_weight="0.25"
                         android:gravity="center|left"
                         android:text="@string/cap_loading"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_15" />
                 </LinearLayout>
 
@@ -147,11 +147,11 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/margin_3dp"
                     android:layout_weight="0.1"
-                    android:background="@color/color_blue"
+                    android:background="@color/color_blue_light"
                     android:gravity="center"
                     android:padding="@dimen/padding_3dp"
                     android:text="@string/cap_start"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/text_size_15" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -162,7 +162,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/margin_3dp"
-        android:background="@color/colorWhite">
+        android:background="@color/color_white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -188,7 +188,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="0.2"
                         android:text="@string/cap_loading"
-                        android:textColor="@color/colorBlue500"
+                        android:textColor="@color/color_blue"
                         android:textSize="@dimen/text_size_15"
                         android:textStyle="bold" />
 
@@ -200,8 +200,8 @@
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_weight="0.18"
-                        android:progressBackgroundTint="@color/colorBlack"
-                        android:progressTint="@color/color_background_main_blue" />
+                        android:progressBackgroundTint="@color/color_black"
+                        android:progressTint="@color/color_blue" />
 
                     <TextView
                         android:id="@+id/txtTimeCountdown"
@@ -223,9 +223,9 @@
                         android:layout_height="0dp"
                         android:layout_margin="@dimen/margin_3dp"
                         android:layout_weight="0.3"
-                        android:background="@color/color_blue"
+                        android:background="@color/color_blue_light"
                         android:text="@string/cap_done_exam"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/color_white"
                         android:textSize="@dimen/text_size_15" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -302,7 +302,7 @@
                             android:background="@color/color_bright_orange"
                             android:gravity="center"
                             android:text="@string/cap_question_prev"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/color_white"
                             android:textSize="@dimen/text_size_15" />
 
                         <Button
@@ -315,7 +315,7 @@
                             android:background="@color/color_bright_orange"
                             android:gravity="center"
                             android:text="@string/cap_question_next"
-                            android:textColor="@color/colorWhite"
+                            android:textColor="@color/color_white"
                             android:textSize="@dimen/text_size_15" />
                     </LinearLayout>
                 </LinearLayout>

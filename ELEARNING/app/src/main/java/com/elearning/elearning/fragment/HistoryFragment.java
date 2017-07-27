@@ -54,13 +54,13 @@ public class HistoryFragment extends BaseFragment implements HistoryLearnView {
         adapterCourseStuding.setOnItemClickListener(new HistoryLearnAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().goToListLesson(listCourseStuding.get(position).getIdCourse());
+                getMainActivity().goToListLesson(listCourseStuding.get(position).getIdCourse(),listCourseStuding.get(position).getNameCourse());
             }
         });
         adapterCourseDone.setOnItemClickListener(new HistoryLearnAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().goToListLesson(listCourseDone.get(position).getIdCourse());
+                getMainActivity().goToListLesson(listCourseDone.get(position).getIdCourse(),listCourseStuding.get(position).getNameCourse());
             }
         });
     }

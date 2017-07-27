@@ -102,19 +102,19 @@ public class HomeFragment extends BaseFragment implements HomeView {
         newCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().goToListLesson(newCourseAdapter.getItem(position).getId());
+                getMainActivity().goToListLesson(newCourseAdapter.getItem(position).getId(),newCourseAdapter.getItem(position).getNameCourses());
             }
         });
         mostCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().goToListLesson(mostCourseAdapter.getItem(position).getId());
+                getMainActivity().goToListLesson(mostCourseAdapter.getItem(position).getId(),mostCourseAdapter.getItem(position).getNameCourses());
             }
         });
         topReviewCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().goToListLesson(topReviewCourseAdapter.getItem(position).getId());
+                getMainActivity().goToListLesson(topReviewCourseAdapter.getItem(position).getId(),topReviewCourseAdapter.getItem(position).getNameCourses());
             }
         });
     }

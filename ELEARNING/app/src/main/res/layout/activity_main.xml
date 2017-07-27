@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.08"
-            android:background="@color/color_background_main_blue"
+            android:background="@color/color_blue"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -58,6 +58,7 @@
                     android:layout_weight="0.9"></SearchView>
 
                 <ImageView
+                    android:id="@+id/imgQR"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -72,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.08"
-            android:background="@color/color_background_main_blue"
+            android:background="@color/color_blue"
             android:orientation="horizontal"
             android:visibility="gone">
 
@@ -106,7 +107,7 @@
                     android:layout_weight="0.8"
                     android:gravity="center"
                     android:text="Cài đặt"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/text_size_18"
                     android:textStyle="bold" />
 
@@ -152,7 +153,7 @@
                 android:layout_weight="0.1"
                 android:gravity="center|top"
                 android:text="@string/cap_search_result"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/txt_size_24sp" />
 
             <android.support.v7.widget.RecyclerView
@@ -224,7 +225,7 @@
                         android:layout_margin="5dp"
                         android:layout_marginLeft="10dp"
                         android:text="Võ Minh Quân"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/color_white"
                         android:textSize="20sp" />
                 </LinearLayout>
 

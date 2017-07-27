@@ -44,9 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20dp"
-                android:background="@color/color_blue"
+                android:background="@color/color_blue_light"
                 android:text="@string/signUp"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/color_white" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

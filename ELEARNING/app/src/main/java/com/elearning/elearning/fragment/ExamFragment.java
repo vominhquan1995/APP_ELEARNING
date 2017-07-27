@@ -10,7 +10,6 @@ import android.support.annotation.IdRes;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -38,7 +37,6 @@ import static com.elearning.elearning.prefs.Constant.MSG_FAIL;
 import static com.elearning.elearning.prefs.Constant.POS_DOWN;
 import static com.elearning.elearning.prefs.Constant.POS_UP;
 import static com.elearning.elearning.prefs.DatetimeFomat.DATE_FORMAT;
-import static com.google.android.gms.internal.zzs.TAG;
 
 /**
  * Created by MinhQuan on 05/07/2017.
@@ -330,7 +328,7 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
     private void initDoExam(List<Question> listQuestion) {
         dismissProgressDialog();
         txtNameExam_Do.setText(examInfo.getNameExam());
-        prTimeCountdown.setIndeterminateTintList(ColorStateList.valueOf(getResources().getColor(R.color.color_background_main_blue)));
+        prTimeCountdown.setIndeterminateTintList(ColorStateList.valueOf(getResources().getColor(R.color.color_blue)));
         txtNumberAnswer.setText(String.format(getResources().getString(R.string.cap_number_answered), "0", String.valueOf(examInfo.getNumberQuesion())));
         listQuestionData = listQuestion;
         prTimeCountdown.setMax(examInfo.getTimeExam() * 60);

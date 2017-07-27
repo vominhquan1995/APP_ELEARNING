@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#222222</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#fff07837</color>
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="color_white">#FFFFFF</color>
     <color name="colorYellow600">#FDD835</color>
-
     <!-- primary color from old project -->
-    <color name="color_ffffff">#ffffffff</color>
     <color name="color_bright_orange">#fff07837</color>
-    <color name="color_blue">#00BFFF</color>
+    <color name="color_blue_light">#00BFFF</color>
     <color name="color_green">#ff808a43</color>
     <color name="color_brown">#ff8f7a66</color>
-    <color name="colorGrey">#9E9E9E</color>>
-
-    <color name="colorBlack">#000000</color>
-
-
+    <color name="color_black">#000000</color>
     <!-- Custom theme -->
-    <color name="colorBlue500">#0F75BD</color>
-
-
-    <color name="color_background_main_blue">#1565C0</color>
+    <color name="color_blue">#1565C0</color>
     <color name="colorFBBackground">#3c5A96</color>
     <color name="colorGGBackground">#D80027</color>
     <color name="color_selected_menu">#EEEEEE</color>
@@ -30,7 +18,5 @@
     <color name="color_yes">#1565C0</color>
     <color name="color_no">#1565C0</color>
     <color name="color_tab_selected">#c4def9</color>
-
-
 </resources>
 

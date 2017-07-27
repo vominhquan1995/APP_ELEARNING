@@ -3,9 +3,7 @@ package com.elearning.elearning.adapter;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -75,7 +73,7 @@ public class NavAdapter extends BaseRecyclerAdapter<NavAdapter.Item> {
         if (selectedId.equals(item.getTitle())) {
             viewHolder.menuRow.setBackgroundColor(context.getResources().getColor(R.color.color_selected_menu));
         } else {
-            viewHolder.menuRow.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
+            viewHolder.menuRow.setBackgroundColor(context.getResources().getColor(R.color.color_white));
         }
     }
 

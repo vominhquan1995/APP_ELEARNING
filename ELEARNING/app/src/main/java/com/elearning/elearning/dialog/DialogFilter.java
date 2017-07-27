@@ -184,7 +184,7 @@ public class DialogFilter {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     posCategorySelected = i;
-                    ((TextView) spinnerCategory.getSelectedView()).setTextColor(ContextCompat.getColor(activity.getBaseContext(), R.color.color_background_main_blue));
+//                    ((TextView) spinnerCategory.getSelectedView()).setTextColor(ContextCompat.getColor(activity.getBaseContext(), R.color.color_background_main_blue));
                 }
 
                 @Override

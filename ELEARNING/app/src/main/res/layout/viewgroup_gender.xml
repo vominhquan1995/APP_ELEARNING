@@ -20,7 +20,7 @@ android:orientation="horizontal">
     android:layout_width="1dp"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/margin_3dp"
-    android:background="@color/color_blue"></View>
+    android:background="@color/color_blue_light"></View>
 <RadioGroup
     android:id="@+id/rgChoice"
     android:layout_width="0dp"

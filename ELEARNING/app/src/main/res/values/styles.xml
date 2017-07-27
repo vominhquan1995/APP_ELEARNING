@@ -5,9 +5,9 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:screenOrientation">portrait</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/color_black</item>
+        <item name="colorPrimaryDark">@color/color_black</item>
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
         <!--<item name="android:textColorSecondary">@color/colorWhite</item>-->
         <item name="android:datePickerStyle">@style/SpinnerDatepicker</item>
         <!--<item name="android:windowFullscreen">true</item>-->
@@ -45,7 +45,7 @@
 
     <style name="radio">
         <item name="android:button">@drawable/custom_radio</item>
-        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColor">@color/color_black</item>
         <item name="android:padding">@dimen/margin_3dp</item>
     </style>
 

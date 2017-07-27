@@ -41,13 +41,14 @@ public abstract class BaseFragment extends Fragment implements Init {
     protected MainActivity getMainActivity() {
         return ((MainActivity) getActivity());
     }
+
     protected SharedPreferences getSharePreferences() {
         return getMainActivity().sharedPreferences;
     }
 
     protected void onBackPressed() {
 //        SystemHelper.hideKeyboard(context);
-        if(getMainActivity()!=null){
+        if (getMainActivity() != null) {
             getMainActivity().onBackPressed();
         }
     }
@@ -57,7 +58,7 @@ public abstract class BaseFragment extends Fragment implements Init {
     }
 
     protected void dismissProgressDialog() {
-        if(getMainActivity()!=null){
+        if (getMainActivity() != null) {
             getMainActivity().dismissProgressDialog();
         }
     }
@@ -65,11 +66,21 @@ public abstract class BaseFragment extends Fragment implements Init {
     protected void playSound() {
         getMainActivity().playSound();
     }
+    protected void playBeep() {
+        getMainActivity().playBeep();
+    }
+
+    protected void setTitle(String title) {
+        getMainActivity().setTitleNav(title);
+    }
+
     protected void loadAvatar() {
         getMainActivity().loadAvatar();
     }
+
     protected void loadName() {
         getMainActivity().loadName();
     }
+
     public abstract int setFragmentView();
 }

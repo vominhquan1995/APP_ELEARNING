@@ -27,6 +27,6 @@
             android:layout_weight="0.9"
             android:textSize="@dimen/text_size_18"
             android:text="Example"
-            android:textColor="@color/colorBlack" />
+            android:textColor="@color/color_black" />
     </LinearLayout>
 </FrameLayout>

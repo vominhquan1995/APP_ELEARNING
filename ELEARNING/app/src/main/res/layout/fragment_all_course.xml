@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/color_white"
     android:clickable="true"
     android:orientation="vertical">
 
@@ -27,7 +27,6 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/imgSort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/sort_icon" />
@@ -81,7 +80,6 @@
         android:layout_weight="0.9">
 
         <FrameLayout
-            android:id="@+id/frListCourse"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -130,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/cap_all"
-                        android:textColor="@color/color_background_main_blue"
+                        android:textColor="@color/color_blue"
                         android:textSize="@dimen/text_size_18" />
                 </LinearLayout>
 
@@ -147,7 +145,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/cap_price"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_18" />
                 </LinearLayout>
 
@@ -164,7 +162,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/cap_rate"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_18" />
                 </LinearLayout>
 
@@ -181,7 +179,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/cap_category"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_18" />
                 </LinearLayout>
 
@@ -236,7 +234,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/cap_sort_name"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_18" />
                 </LinearLayout>
 
@@ -253,7 +251,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/cap_sort_price"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_18" />
                 </LinearLayout>
 
@@ -270,7 +268,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/cap_sort_number_credits"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/color_black"
                         android:textSize="@dimen/text_size_18" />
                 </LinearLayout>
 

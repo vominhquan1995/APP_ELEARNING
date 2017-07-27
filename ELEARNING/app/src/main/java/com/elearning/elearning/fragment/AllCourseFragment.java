@@ -319,49 +319,49 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
 
     private void updateUISort() {
         if (typeSort.equals(TYPE_SORT_NAME)) {
-            txtSortName.setTextColor(getResources().getColor(R.color.color_background_main_blue));
-            txtSortDefault.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtSortPrice.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtSortCredits.setTextColor(getResources().getColor(R.color.colorBlack));
+            txtSortName.setTextColor(getResources().getColor(R.color.color_blue));
+            txtSortDefault.setTextColor(getResources().getColor(R.color.color_black));
+            txtSortPrice.setTextColor(getResources().getColor(R.color.color_black));
+            txtSortCredits.setTextColor(getResources().getColor(R.color.color_black));
         } else if (typeSort.equals(TYPE_SORT_PRICE)) {
-            txtSortPrice.setTextColor(getResources().getColor(R.color.color_background_main_blue));
-            txtSortDefault.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtSortName.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtSortCredits.setTextColor(getResources().getColor(R.color.colorBlack));
+            txtSortPrice.setTextColor(getResources().getColor(R.color.color_blue));
+            txtSortDefault.setTextColor(getResources().getColor(R.color.color_black));
+            txtSortName.setTextColor(getResources().getColor(R.color.color_black));
+            txtSortCredits.setTextColor(getResources().getColor(R.color.color_black));
         } else if (typeSort.equals(TYPE_SORT_CREDITS)) {
-            txtSortCredits.setTextColor(getResources().getColor(R.color.color_background_main_blue));
-            txtSortDefault.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtSortPrice.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtSortName.setTextColor(getResources().getColor(R.color.colorBlack));
+            txtSortCredits.setTextColor(getResources().getColor(R.color.color_blue));
+            txtSortDefault.setTextColor(getResources().getColor(R.color.color_black));
+            txtSortPrice.setTextColor(getResources().getColor(R.color.color_black));
+            txtSortName.setTextColor(getResources().getColor(R.color.color_black));
         } else {
-            txtSortDefault.setTextColor(getResources().getColor(R.color.color_background_main_blue));
-            txtSortCredits.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtSortPrice.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtSortName.setTextColor(getResources().getColor(R.color.colorBlack));
+            txtSortDefault.setTextColor(getResources().getColor(R.color.color_blue));
+            txtSortCredits.setTextColor(getResources().getColor(R.color.color_black));
+            txtSortPrice.setTextColor(getResources().getColor(R.color.color_black));
+            txtSortName.setTextColor(getResources().getColor(R.color.color_black));
         }
     }
 
     private void updateUIFilter() {
         if (typeFilter.equals(TYPE_FILTER_PRICE)) {
-            txtFilterPrice.setTextColor(getResources().getColor(R.color.color_background_main_blue));
-            txtFilterRate.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtFilterCategory.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtFilterAll.setTextColor(getResources().getColor(R.color.colorBlack));
+            txtFilterPrice.setTextColor(getResources().getColor(R.color.color_blue));
+            txtFilterRate.setTextColor(getResources().getColor(R.color.color_black));
+            txtFilterCategory.setTextColor(getResources().getColor(R.color.color_black));
+            txtFilterAll.setTextColor(getResources().getColor(R.color.color_black));
         } else if (typeFilter.equals(TYPE_FILTER_RATE)) {
-            txtFilterRate.setTextColor(getResources().getColor(R.color.color_background_main_blue));
-            txtFilterPrice.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtFilterCategory.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtFilterAll.setTextColor(getResources().getColor(R.color.colorBlack));
+            txtFilterRate.setTextColor(getResources().getColor(R.color.color_blue));
+            txtFilterPrice.setTextColor(getResources().getColor(R.color.color_black));
+            txtFilterCategory.setTextColor(getResources().getColor(R.color.color_black));
+            txtFilterAll.setTextColor(getResources().getColor(R.color.color_black));
         } else if (typeFilter.equals(TYPE_FILTER_CATEGORY)) {
-            txtFilterCategory.setTextColor(getResources().getColor(R.color.color_background_main_blue));
-            txtFilterPrice.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtFilterRate.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtFilterAll.setTextColor(getResources().getColor(R.color.colorBlack));
+            txtFilterCategory.setTextColor(getResources().getColor(R.color.color_blue));
+            txtFilterPrice.setTextColor(getResources().getColor(R.color.color_black));
+            txtFilterRate.setTextColor(getResources().getColor(R.color.color_black));
+            txtFilterAll.setTextColor(getResources().getColor(R.color.color_black));
         } else {
-            txtFilterAll.setTextColor(getResources().getColor(R.color.color_background_main_blue));
-            txtFilterPrice.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtFilterRate.setTextColor(getResources().getColor(R.color.colorBlack));
-            txtFilterCategory.setTextColor(getResources().getColor(R.color.colorBlack));
+            txtFilterAll.setTextColor(getResources().getColor(R.color.color_blue));
+            txtFilterPrice.setTextColor(getResources().getColor(R.color.color_black));
+            txtFilterRate.setTextColor(getResources().getColor(R.color.color_black));
+            txtFilterCategory.setTextColor(getResources().getColor(R.color.color_black));
         }
     }
 
@@ -378,7 +378,7 @@ public class AllCourseFragment extends BaseFragment implements View.OnClickListe
         listCourseAdapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                getMainActivity().goToListLesson(listCourseAdapter.getItem(position).getId());
+                getMainActivity().goToListLesson(listCourseAdapter.getItem(position).getId(),listCourseAdapter.getItem(position).getNameCourses());
             }
         });
     }

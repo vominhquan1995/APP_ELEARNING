@@ -19,7 +19,7 @@
     <string name="login_fail">Sai thông tin đăng nhập</string>
     <!-- Navigation Drawer menu labels -->
     <string name="nav_home">Trang chủ</string>
-    <string name="nav_history_exam">Lịch sự làm kiểm tra</string>
+    <string name="nav_history_exam">Kết quả kiểm tra</string>
     <string name="nav_exam">Kiểm tra</string>
     <string name="nav_history">Lịch sử học tập</string>
     <string name="nav_notifications">Thông báo</string>
@@ -31,6 +31,7 @@
     <string name="menu_listlesson">Danh sách bài giảng</string>
     <string name="menu_lesson">Nội dung</string>
     <string name="menu_all_course">Toàn bộ khóa học</string>
+    <string name="menu_qr_scan">Quét mã khóa học</string>
     <string name="nav_email">Email : elearning@gmail.com</string>
     <string name="home_course_new">Mới nhất</string>
     <string name="home_course_most">Phổ biến nhất</string>
@@ -69,7 +70,6 @@
     <string name="cap_apply">Áp dụng</string>
     <string name="cap_price">Giá</string>
     <string name="cap_rate">Đánh Giá</string>
-    <string name="cap_sale">Khuyến mãi</string>
     <string name="cap_all">Tất cả</string>
     <string name="cap_sort_default">Mặc Định</string>
     <string name="cap_sort_name">Theo Tên</string>

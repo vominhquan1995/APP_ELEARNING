@@ -29,7 +29,7 @@
                 android:layout_margin="@dimen/margin_5dp"
                 android:layout_weight="0.2"
                 android:text="Thông báo"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/txt_size_24sp"
                 android:textStyle="bold"></TextView>
 
@@ -41,7 +41,7 @@
                 android:layout_margin="@dimen/margin_5dp"
                 android:layout_weight="0.2"
                 android:gravity="center"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/text_size_15"
                 android:textStyle="bold"></TextView>
             <ImageView
@@ -61,11 +61,11 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/margin_5dp"
                     android:layout_weight="0.5"
-                    android:background="@color/color_blue"
+                    android:background="@color/color_blue_light"
                     android:gravity="center"
                     android:padding="@dimen/padding_5dp"
                     android:text="@string/title_cancel"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/color_white"
                     android:textSize="@dimen/text_size_15" />
 
                 <Button
@@ -74,11 +74,11 @@
                     android:layout_height="match_parent"
                     android:layout_margin="@dimen/margin_5dp"
                     android:layout_weight="0.5"
-                    android:background="@color/color_blue"
+                    android:background="@color/color_blue_light"
                     android:gravity="center"
                     android:padding="@dimen/padding_5dp"
                     android:text="@string/cap_view"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/color_white" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
