@@ -126,7 +126,7 @@
                 android:id="@+id/btnDoExam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/color_blue_light"
+                android:background="@color/color_blue"
                 android:text="@string/cap_do_exam"
                 android:textColor="@color/color_white" />
         </LinearLayout>

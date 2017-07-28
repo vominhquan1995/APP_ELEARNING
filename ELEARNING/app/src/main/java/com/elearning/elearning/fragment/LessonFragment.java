@@ -78,6 +78,7 @@ public class LessonFragment extends BaseFragment implements LessonView {
             public void onSend(Lesson lesson) {
                 //set value of lesson
                 lessonItem = lesson;
+                setTitle(lessonItem.getName());
                 setUI();
                 lessonPresenter.getProgressLearn(lessonItem.getCourseId());
             }
@@ -98,7 +99,7 @@ public class LessonFragment extends BaseFragment implements LessonView {
                     @Override
                     public void getInfoFail(String mess) {
                         dismissProgressDialog();
-                        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, getResources().getString(R.string.cap_error_data), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -170,7 +171,7 @@ public class LessonFragment extends BaseFragment implements LessonView {
     @Override
     public void onGetProgressFail(String mess) {
         dismissProgressDialog();
-        Toast.makeText(context,getResources().getString(R.string.cap_error_data),Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, getResources().getString(R.string.cap_error_data), Toast.LENGTH_SHORT).show();
     }
 
     class ReadFilePdf extends AsyncTask<String, Void, InputStream> {
@@ -200,12 +201,6 @@ public class LessonFragment extends BaseFragment implements LessonView {
                     .load();
         }
     }
-
-//    @Override
-//    protected void onBackPressed() {
-//        super.onBackPressed();
-//
-//    }
 
     public static void setOnDoExam(LessonFragment.onDoExam onDoExam) {
         LessonFragment.onDoExam = onDoExam;

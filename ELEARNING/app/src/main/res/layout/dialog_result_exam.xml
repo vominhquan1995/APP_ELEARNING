@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_3dp"
-    android:alpha="1"
     android:padding="@dimen/dialog_margin">
 
     <FrameLayout
@@ -29,7 +28,7 @@
                 android:layout_weight="0.2"
                 android:gravity="center"
                 android:text="Congratulations"
-                android:textColor="@color/colorYellow600"
+                android:textColor="@color/color_blue_light"
                 android:textSize="@dimen/txt_size_24sp"></TextView>
 
             <TextView
@@ -51,7 +50,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="@dimen/margin_5dp"
                 android:layout_weight="0.2"
-                android:background="@color/color_green"
+                android:background="@color/color_blue"
                 android:padding="@dimen/padding_5dp"
                 android:text="@string/cap_continute"
                 android:textColor="@color/color_white" />

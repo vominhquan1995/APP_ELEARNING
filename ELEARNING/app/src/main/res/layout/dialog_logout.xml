@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:alpha="0.7"
     android:background="@android:color/white"
     android:orientation="vertical"
     android:padding="@dimen/dialog_margin">
@@ -23,14 +22,14 @@
             android:layout_gravity="left"
             android:layout_margin="@dimen/dialog_margin"
             android:text="@string/cap_log_out"
-            android:textColor="@color/color_bright_orange"
+            android:textColor="@color/color_blue"
             android:textStyle="bold"
             android:textSize="@dimen/txt_size_24sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/margin_1dp"
-            android:background="@color/color_brown"
+            android:background="@color/color_black"
             tools:ignore="RtlHardcoded" />
 
         <TextView
@@ -40,7 +39,7 @@
             android:layout_gravity="left"
             android:layout_margin="@dimen/dialog_margin"
             android:text="@string/cap_logout_ask"
-            android:textSize="@dimen/text_size_15" />
+            android:textSize="@dimen/text_size_18" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_3dp"
                 android:layout_weight="5"
-                android:background="@color/color_no"
+                android:background="@color/color_blue"
                 android:textColor="@color/color_white"
                 android:text="@string/cap_no"
                 tools:ignore="NestedWeights" />
@@ -66,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_3dp"
                 android:layout_weight="5"
-                android:background="@color/color_yes"
+                android:background="@color/color_blue"
                 android:textColor="@color/color_white"
                 android:text="@string/cap_yes" />
         </LinearLayout>

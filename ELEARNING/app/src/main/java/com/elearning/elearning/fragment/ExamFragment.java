@@ -414,6 +414,8 @@ public class ExamFragment extends BaseFragment implements ExamView, View.OnClick
             //update UI
             if (secondCountdown < 60) {
                 prTimeCountdown.setProgressTintList(ColorStateList.valueOf(Color.RED));
+            }else{
+                prTimeCountdown.setProgressTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.color_blue)));
             }
             prTimeCountdown.setProgress(secondCountdown);
             txtTimeCountdown.setText(String.format(contextParent.getResources().getString(R.string.cap_time_countdown), String.valueOf(minutes), String.valueOf(seconds)));

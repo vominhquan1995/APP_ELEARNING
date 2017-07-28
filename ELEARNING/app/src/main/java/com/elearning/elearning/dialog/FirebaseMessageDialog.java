@@ -48,6 +48,7 @@ public class FirebaseMessageDialog extends AppCompatActivity {
                 .matches()) {
             Picasso.with(this)
                     .load(APIConstant.HOST_NAME_IMAGE + urlImage)
+                    .fit()
                     .into(imgContent);
         } else {
             imgContent.setVisibility(View.GONE);

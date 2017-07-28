@@ -3,11 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -82,7 +80,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2px"
-                            android:background="@color/color_padding"></View>
+                            android:background="@color/color_grey"></View>
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recyclerNew"
@@ -151,7 +149,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2px"
-                            android:background="@color/color_padding"></View>
+                            android:background="@color/color_grey"></View>
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recyclerMost"
@@ -222,7 +220,7 @@
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2px"
-                            android:background="@color/color_padding"></View>
+                            android:background="@color/color_grey"></View>
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recyclerTopView"

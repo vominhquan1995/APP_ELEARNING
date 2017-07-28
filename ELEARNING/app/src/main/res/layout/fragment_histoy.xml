@@ -1,46 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/color_white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_background_main"
     android:clickable="true"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/txtTitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_white"
-                android:background="@color/color_green"
-                android:textStyle="bold"
                 android:layout_margin="@dimen/margin_5dp"
+                android:background="@color/color_white"
+                android:text="@string/cap_history_done"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/txt_size_24sp"
-                android:text="@string/cap_history_done"/>
+                android:textStyle="bold" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
             <TextView
                 android:id="@+id/txtTitle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_white"
-                android:background="@color/color_bright_orange"
-                android:textStyle="bold"
                 android:layout_margin="@dimen/margin_5dp"
+                android:background="@color/color_white"
+                android:text="@string/cap_history_studing"
+                android:textColor="@color/color_black"
                 android:textSize="@dimen/txt_size_24sp"
-                android:text="@string/cap_history_studing"/>
+                android:textStyle="bold" />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
